@@ -1,0 +1,23 @@
+@import './../../styles/main.scss';
+
+.find-message {
+  width: 329px;
+  height: 62px;
+  position: fixed;
+  top: 670px;
+  right: 48px;
+  display: flex;
+  gap: 8px;
+
+  &__text {
+    width: 241px;
+    height: 100%;
+    border-radius: 8px;
+    background-color: $color-white;
+    @extend %secondary-text-regular;
+    color: $color-dark-grey;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+}

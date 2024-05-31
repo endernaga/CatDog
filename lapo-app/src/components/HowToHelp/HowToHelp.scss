@@ -1,0 +1,86 @@
+@import './../../styles/main.scss';
+
+.help {
+  display: grid;
+  gap: 56px;
+  
+  &__content {
+    @include page-grid;
+  }
+
+  &__left {
+    grid-column: span 12;
+  }
+
+  &__meme-text1 {
+    height: 90px;
+    width: 322px;
+    background-image: url('../../../public/img/memeText1.svg');
+  }
+
+  &__meme-cat {
+    height: 474px;
+    width: 326px; 
+    position: relative;
+    left: 56px;
+    top: 23px;
+  }
+
+  &__meme-text2 {
+    background-image: url('../../../public/img/memeText2.svg');
+    width: 216px;
+    height: 61px;
+    position: relative;
+    left: calc(56px + 326px);
+    top: calc(-297px - 31px);
+  }
+
+  &__right {
+    grid-column: 13/-1;  
+    height: 599px;
+    width: 668px;
+    border: 4px solid $color-white;
+    background-color: $color-warm-yellow;
+    padding: 32px 24px;
+    border-radius: 40px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  &__main {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__text {
+      @extend %h3;
+      color: $color-dark-grey;
+      text-align: center;
+    }
+
+    &__select {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    &__options {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 24px;
+      row-gap: 16px;
+    }
+  }
+
+  &__footer {
+    @extend %main-text-regular;
+    color: $color-dark-grey;
+    text-align: center;
+    margin-top: 16px;
+  }
+}

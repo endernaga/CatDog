@@ -1,0 +1,45 @@
+@import './../../styles/main.scss';
+
+.header {
+  background-color: $color-white;
+  height: 72px;
+  margin-top: 24px;
+  border-radius: 100px;
+  margin-inline: 48px;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    margin-inline: 24px;
+  }
+
+  &__logo {
+    width: 223px;
+    height: 19px;
+    background-image: url('../../../public/img/logo.svg');
+  }
+
+  &__left {
+    display: flex;
+    gap: 95px;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    gap: 32px;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__donate {
+    @extend %smallButton;
+    width: 124px;
+    @extend %button-text-medium;
+  }
+}

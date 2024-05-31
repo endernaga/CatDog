@@ -1,0 +1,49 @@
+@import './../../styles/main.scss';
+
+.start {
+  @include page-grid;
+  margin-top: 88px;
+
+  &__left {
+    grid-column: span 11;
+  }
+
+  /* &__circle {
+    position: relative;
+    border-radius: 50%;
+    background-color: $color-warm-yellow;
+    width: 480px;
+    height: 480px;
+    left: 38.35px;
+  } */
+
+
+  &__animals {
+    position: relative;
+    left: 38.35px;
+    width: 518.33px;
+    height: 536px;
+    //object-position: -38.35px 63px;
+    //overflow: visible;
+  }
+
+  &__right {
+    grid-column: 13/-1;
+    padding-top: 60px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  &__title {
+    @extend %h1;
+  }
+
+  &__text {
+    @extend %h5;
+    margin-bottom: 56px;
+  }
+}

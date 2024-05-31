@@ -1,0 +1,41 @@
+.icon {
+  width: 40px;
+  height: 40px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+
+  &-lang {
+    background-image: url('../../../public/img/language.svg');
+  }
+
+  &-like {
+    background-image: url('../../../public/img/like.svg');
+  }
+
+  &-down {
+    background-image: url('../../../public/img/arrowDown.svg');
+    width: 24px;
+    height: 24px;
+  }
+
+  &-right {
+    background-image: url('../../../public/img/arrowRight.svg');
+
+    &:hover {
+      background-image: url('../../../public/img/arrowRightHover.svg');
+    }
+  }
+
+  &-bot {
+    background-image: url('./../../../public/img/botLogo.svg');
+    width: 48px;
+    height: 48px;
+  }
+
+  &-close {
+    background-image: url('../../../public/img/close.svg');
+    width: 24px;
+    height: 24px;
+  }
+}

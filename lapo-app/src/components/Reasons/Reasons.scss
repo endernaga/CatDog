@@ -1,0 +1,47 @@
+@import './../../styles/main.scss';
+
+.reasons {
+  display: grid;
+  gap: 56px;
+
+  &__content {
+    display: grid;
+    @include page-grid;
+  }
+
+  &__wrapper {
+    height: 220px;
+    grid-column: 3/17;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    &--right {
+      flex-direction: row-reverse;
+      grid-column: 9/-3;
+    }
+  }
+
+  &__img {
+    border-radius: 50%;
+    border: 3px solid $color-white;
+    height: 220px;
+    width: 220px;
+    background-size: cover;
+    overflow: hidden;
+  }
+
+  &__block {
+    background-color: $color-warm-yellow;
+    width: 539px;
+    height: 133px;
+    border: 3px solid $color-white;
+    border-radius: 16px;
+  }
+
+  &__text {
+    @extend %main-text-regular;
+    color: $color-dark-grey;
+    margin: 32px 24px;
+  }
+}
