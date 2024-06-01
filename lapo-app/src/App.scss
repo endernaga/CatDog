@@ -12,9 +12,12 @@
   border-bottom-left-radius: 48px;
   border-bottom-right-radius: 48px;
   overflow: hidden;
+  min-height: calc(100vh - 331px);
 }
 
 .container {
+  position: relative;
   padding: 0 48px;
   margin: 0 auto;
+  z-index: 1;
 }

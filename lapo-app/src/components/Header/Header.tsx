@@ -1,12 +1,13 @@
+import { NavLink } from 'react-router-dom';
 import { Navbar } from '../Navbar';
 import './Header.scss';
 
 export const Header = () => {
   return (
-    <div className="header">
+       <div className="header">
       <div className="header__content">
         <div className="header__left">
-          <div className="header__logo"/>
+          <NavLink to='/' className="header__logo"/>
           <Navbar />
         </div>
 
@@ -18,6 +19,6 @@ export const Header = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
   )
 }
