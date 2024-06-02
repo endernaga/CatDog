@@ -20,7 +20,6 @@ export const Navbar = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
-  console.log(isDropdownOpen);
 
   return (
     <nav className="navbar">

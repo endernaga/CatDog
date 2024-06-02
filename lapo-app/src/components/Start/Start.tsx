@@ -1,3 +1,4 @@
+import { BASE_URL } from '../../utils/fetchProducts';
 import './Start.scss';
 
 export const Start = () => {
@@ -15,7 +16,7 @@ export const Start = () => {
 
         
         <img
-            src="../../../img/catDogHero.png"
+          src={`${BASE_URL}/img/catDogHero.png`}
             alt="kitPes"
             className="start__animals"
           />

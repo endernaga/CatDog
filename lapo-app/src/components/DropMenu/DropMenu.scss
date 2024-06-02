@@ -15,6 +15,7 @@
   transition: opacity 0.3s ease;
 
   &-open {
+    height: 251px;
     z-index: 1000;
     margin-inline: 48px;
     position: absolute;
@@ -52,5 +53,6 @@
     width: 262px;
     height: 120px;
     border-radius: 16px;
+    object-fit: cover;
   }
 }

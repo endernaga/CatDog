@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     gap: 72px;
+    margin-bottom: 128px;
   }
 
   &__texts {
@@ -46,6 +47,84 @@
 
     &__smaller-text {
       @extend %secondary-text-regular;
+    }
+  }
+
+  &__team {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 16px;
+    column-gap: 24px;
+
+    &__card {
+      height: 481px;
+      width: 324px;
+      border-radius: 16px;
+      background-color: $color-white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      &:nth-child(1) {
+        grid-column: 2;
+      }
+      &:nth-child(2) {
+        grid-column: span 2;
+      }
+    }
+
+    &__img {
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      padding-top: 4px;
+      width: 316px;
+      height: 386px;
+      object-fit: cover;
+    }
+
+    &__text {
+      align-self: start;
+      padding-inline: 16px;
+    }
+
+    &__name {
+      @extend %h5;
+      color: $color-black;
+    }
+
+    &__position {
+      @extend %button-text-regular;
+      color: $color-middle-grey;
+    }
+  }
+
+  &__help {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1344px;
+    height: 240px;
+    border-radius: 40px;
+    background-color: $color-warm-yellow;
+
+    &__item {
+      margin-inline: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 104px;
+      width: 1280px;
+
+      &:first-child {
+        border-bottom: 0.7px solid $color-dark-grey;
+      }
+    }
+
+    &__text {
+      align-self: center;
+      @extend %h4;
+      color: $color-black;
     }
   }
 }

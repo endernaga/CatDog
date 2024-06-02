@@ -1,6 +1,7 @@
 import { BigSectionsHeader } from '../../components/BigSectionsHeader';
 import { BreadCrumb } from '../../components/BreadCrumb';
 import { PhotoSlider } from '../../components/PhotoSlider';
+import { team } from '../../utils/team';
 import './AboutUsPage.scss';
 
 export const AboutUsPage = () => {
@@ -18,8 +19,6 @@ export const AboutUsPage = () => {
       small: 'Хвостиків знайшли дім',
     },
   ];
-
-
 
   return (
     <div className="about">
@@ -50,15 +49,29 @@ export const AboutUsPage = () => {
       <div className="about__section">
         <BigSectionsHeader text={['Супер', 'Команда']} />
         <div className="about__team">
-          <div className="about__team__card">
-
+          {team.map(member => (
+            <div className="about__team__card">
+              <img src={`../../../${member.photo}`} alt="teamPhoto" className="about__team__img" />
+              <div className="about__team__text">
+              <p className="about__team__name">{member.name}</p>
+              <p className="about__team__position">{member.position}</p>
+              </div>
           </div>
+          ))}
         </div>
       </div>
 
       <div className="about__section">
         <BigSectionsHeader text={['Супер', 'Допомога']} />
         <div className="about__help">
+          <div className="about__help__item">
+            <h4 className="about__help__text">Стати волонтером</h4>
+            <div className="button button-medium">Заповнити анкету</div>
+          </div>
+          <div className="about__help__item">
+            <h4 className="about__help__text">Допомогти фінансово</h4>
+            <div className="button button-medium">Задонатити</div>
+          </div>
         </div>
       </div>
     </div>

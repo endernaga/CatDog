@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { SectionsHeader } from '../SectionsHeader';
 import './Categories.scss';
+import { BASE_URL } from '../../utils/fetchProducts';
 
 export const Categories = () => {
   const categories = [
@@ -23,7 +24,7 @@ export const Categories = () => {
           <div className="categories__category">
             <div className="categories__category__title">{category.title}</div>
             <div className="categories__category__photo">
-              <img src={`../../../${category.img}`} alt="categoryImg" className={`categories__category__${category.class}`} />
+              <img src={`${BASE_URL}/${category.img}`} alt="categoryImg" className={`categories__category__${category.class}`} />
             </div>
           </div>
         ))}

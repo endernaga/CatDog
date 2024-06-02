@@ -6,44 +6,44 @@
   cursor: pointer;
 
   &-lang {
-    background-image: url('../../../public/img/language.svg');
+    background-image: url('../../../public/img/icons/arrowDown.svg');
   }
 
   &-like {
-    background-image: url('../../../public/img/like.svg');
+    background-image: url('../../../public/img/icons/like.svg');
   }
 
   &-down {
-    background-image: url('../../../public/img/arrowDown.svg');
+    background-image: url('../../../public/img/icons/arrowDown.svg');
     width: 24px;
   }
 
   &-right {
-    background-image: url('../../../public/img/arrowRight.svg');
+    background-image: url('../../../public/img/icons/arrowRight.svg');
 
     &:hover {
-      background-image: url('../../../public/img/arrowRightHover.svg');
+      background-image: url('../../../public/img/icons/arrowRightHover.svg');
     }
   }
 
   &-up {
-    background-image: url('../../../public/img/arrowDown.svg');
+    background-image: url('../../../public/img/icons/arrowDown.svg');
     width: 24px;
     transform: rotate(180deg);
   }
 
   &-bot {
-    background-image: url('./../../../public/img/botLogo.svg');
+    background-image: url('./../../../public/img/icons/botLogo.svg');
     width: 48px;
   }
 
   &-close {
-    background-image: url('../../../public/img/close.svg');
+    background-image: url('../../../public/img/icons/close.svg');
     width: 24px;
   }
 
   &-home {
     width: 24px;
-    background-image: url('../../../public/img/home.svg');
+    background-image: url('../../../public/img/icons/home.svg');
   }
 }

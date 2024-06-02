@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import './DropMenu.scss';
 import { DropdownContext } from '../../context/DropdownContext';
 import { NavLink } from 'react-router-dom';
+import { BASE_URL } from '../../utils/fetchProducts';
 
 export const DropMenu = () => {
   const dropdownContent = [
@@ -42,7 +43,7 @@ export const DropMenu = () => {
         >
           <p className="dropdown__text">{item.name}</p>
           <img
-            src={`../../../${item.img}`}
+            src={`${BASE_URL}${item.img}`}
             className='dropdown__img'
             alt={item.name}
           />

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { SectionsHeader } from '../SectionsHeader';
 import './Reasons.scss';
+import { BASE_URL } from '../../utils/fetchProducts';
 
 export const Reasons = () => {
   const reasons = [
@@ -33,7 +34,7 @@ export const Reasons = () => {
           >
             <div
               className="reasons__img"
-              style={{ backgroundImage: `url('../../../../${reason.image}')` }}
+              style={{ backgroundImage: `url('${BASE_URL}/${reason.image}')` }}
             />
             <div className="reasons__block">
               <p className="reasons__text">{reason.text}</p>
