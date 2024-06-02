@@ -27,6 +27,8 @@ jobs:
       working-directory: ./lapo-app
 
     - name: Deploy to GitHub Pages
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: npx gh-pages -d lapo-app/build
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: gh-pages
+        folder: ./lapo-app/build
+        token: ${{ secrets.GITHUB_TOKEN }}
