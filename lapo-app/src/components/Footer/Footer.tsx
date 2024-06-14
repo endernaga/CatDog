@@ -10,13 +10,13 @@ export const Footer = () => {
           <div className="footer__social__logo" />
           <div className="footer__social__medias">
             {socialMedias.map(media => (
-              <NavLink
-                to={`/${media.name}`}
+              <a
+                href={media.url}
                 className="social-media"
                 key={media.name}
               >
                 <div dangerouslySetInnerHTML={{__html: media.svg}} />
-              </NavLink>
+              </a>
             ))}
           </div>
         </div>

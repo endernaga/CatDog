@@ -1,4 +1,5 @@
 import { BASE_URL } from '../../utils/fetchProducts';
+import { LargeButton } from '../Buttons';
 import './Start.scss';
 
 export const Start = () => {
@@ -35,10 +36,7 @@ export const Start = () => {
           </h5>
         </div>
 
-        <div className="button button-large">
-          <p className="">Детальніше про притулок</p>
-          <div className="icon icon-right"></div>
-        </div>
+        <LargeButton to='/about' text='Детальніше про притулок' leftIcon={false} rightIcon={true} />
       </div>
     </div>
   );

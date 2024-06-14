@@ -12,27 +12,20 @@
     grid-column: span 12;
   }
 
-  &__meme-text1 {
-    height: 90px;
-    width: 322px;
-    background-image: url('../../../public/img/memeText1.svg');
-  }
-
   &__meme-cat {
-    height: 474px;
-    width: 326px; 
     position: relative;
-    left: 56px;
-    top: 23px;
+    top: 84px;
+    height: 515px;
+    width: 437px; 
   }
 
-  &__meme-text2 {
-    background-image: url('../../../public/img/memeText2.svg');
-    width: 216px;
-    height: 61px;
+  &__meme-text {
+    background-image: url('../../../public/img/memeText.png');
+    width: 258px;
+    height: 106px;
     position: relative;
-    left: calc(56px + 326px);
-    top: calc(-297px - 31px);
+    left: 300px;
+    top: -406px
   }
 
   &__right {

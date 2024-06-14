@@ -6,7 +6,7 @@
   margin-top: 24px;
   border-radius: 100px;
   margin-inline: 48px;
-  z-index: 1000;
+  z-index: 998;
 
   &__content {
     display: flex;
@@ -26,6 +26,7 @@
     display: flex;
     gap: 95px;
     align-items: center;
+    height: 100%;
   }
 
   &__right {

@@ -1,0 +1,217 @@
+@import "./../../styles/main.scss";
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 128px;
+
+  &__info {
+    align-self: center;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    width: 550px;
+    margin-bottom: 72px;
+  }
+
+  &__text {
+    text-align: center;
+    @extend %h4;
+  }
+
+  &__map {
+    border: 3px solid $color-white;
+    border-radius: 32px;
+    margin-bottom: 56px;
+  }
+
+  &__carts {
+    position: absolute;
+    right: 48px;
+    top: 690px;
+    width: 385px;
+    height: 144px;
+    border-radius: 16px;
+    background-color: $color-warm-yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $color-white;
+
+    &__item {
+      padding-inline: 16px;
+      display: flex;
+      gap: 16px;
+      height: 56px;
+      width: 100%;
+      align-items: center;
+
+      &:first-child {
+        border-bottom: 0.7px solid $color-middle-grey;
+      }
+    }
+
+    &__text {
+      
+      font-family: "Mariupol-Regular", sans-serif;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: 0;
+      color: $color-black;
+    }
+  }
+
+  &__links {
+    width: 685px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+
+    &__item {
+      display: flex;
+      gap: 24px;
+    }
+
+    &__icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    &__circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: $color-white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition:
+        background-color 0.3s,
+        border 0.3s;
+      color: $color-orange-hover;
+    }
+
+    &__text {
+      @extend %h4;
+    }
+  }
+}
+
+
+.contacts2 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 128px;
+
+  &__info {
+    align-self: center;
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+    width: 550px;
+    margin-bottom: 72px;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__text {
+    text-align: start;
+    @extend %h5;
+  }
+
+  &__map {
+    border: 3px solid $color-white;
+    border-radius: 32px;
+    margin-bottom: 56px;
+  }
+
+  &__carts {
+    position: absolute;
+    right: 48px;
+    top: 286px;
+    width: 385px;
+    height: 144px;
+    border-radius: 16px;
+    background-color: $color-warm-yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid $color-white;
+
+    &__item {
+      padding-inline: 16px;
+      display: flex;
+      gap: 16px;
+      height: 56px;
+      width: 100%;
+      align-items: center;
+
+      &:first-child {
+        border-bottom: 0.7px solid $color-middle-grey;
+      }
+    }
+
+    &__text {
+      
+      font-family: "Mariupol-Regular", sans-serif;
+      font-size: 16px;
+      line-height: 120%;
+      letter-spacing: 0;
+      color: $color-black;
+    }
+  }
+
+  &__links {
+    width: 685px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+
+    &__item {
+      display: flex;
+      gap: 24px;
+    }
+
+    &__icons {
+      display: flex;
+      gap: 8px;
+    }
+
+    &__circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: $color-white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition:
+        background-color 0.3s,
+        border 0.3s;
+      color: $color-orange-hover;
+    }
+
+    &__text {
+      @extend %h4;
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}

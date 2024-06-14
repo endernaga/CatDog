@@ -1,0 +1,11 @@
+@import '../../styles/main.scss';
+
+.list {
+  margin-inline: auto;
+  width: 3 * 324px + 2 * 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 14px;
+  row-gap: 24px;
+  margin-bottom: 56px;
+}

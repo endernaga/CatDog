@@ -4,9 +4,10 @@
   background-position: 50% 50%;
   background-repeat: no-repeat;
   cursor: pointer;
+  border-radius: 50%;
 
   &-lang {
-    background-image: url('../../../public/img/icons/arrowDown.svg');
+    background-image: url('../../../public/img/icons/language.svg');
   }
 
   &-like {
@@ -27,9 +28,8 @@
   }
 
   &-up {
-    background-image: url('../../../public/img/icons/arrowDown.svg');
+    background-image: url('../../../public/img/icons/arrowUp.svg');
     width: 24px;
-    transform: rotate(180deg);
   }
 
   &-bot {
@@ -39,11 +39,67 @@
 
   &-close {
     background-image: url('../../../public/img/icons/close.svg');
+    background-size: 16px;
     width: 24px;
+
+    &-form {
+      background-color: $color-white;
+      background-size: 24px;
+      height: 24px;
+    }
+
+    &-filter {
+      width: 32px;
+    }
   }
 
   &-home {
     width: 24px;
     background-image: url('../../../public/img/icons/home.svg');
+  }
+
+  &-phone {
+    width: 56px;
+    border-radius: 50%;
+    background-color: $color-white;
+    background-image: url('../../../public/img/icons/phone.svg');
+  }
+
+  &-viber {
+    width: 56px;
+    border-radius: 50%;
+    background-color: $color-white;
+    background-image: url('../../../public/img/icons/viber.svg');
+  }
+
+  &-mail {
+    width: 56px;
+    background-image: url('../../../public/img/icons/mail.svg');
+  }
+
+  &-share {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: $color-white;
+    background-image: url('./../../../public/img/icons/share.svg');
+  }
+
+  &-heart {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: $color-white;
+    background-image: url('./../../../public/img/icons/heart.svg');
+  }
+
+  &-bus {
+    width: 24px;
+    background-image: url('./../../../public/img/icons/bus.svg');
+  }
+
+  &-car {
+    width: 24px;
+    background-image: url('./../../../public/img/icons/car.svg');
   }
 }

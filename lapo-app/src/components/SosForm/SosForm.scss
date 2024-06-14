@@ -1,0 +1,107 @@
+@import './../../styles/main.scss';
+
+.form {
+    position: fixed;
+    width: 598px;
+    height: 428px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 24px;
+    background-color: $color-white;
+    padding: 24px;
+    color: $color-middle-grey;;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+    border-bottom: 0.7px solid $color-smoke-grey;
+    align-items: start;
+  }
+
+  &__title {
+    @extend %main-text-medium;
+    color: $color-black;
+  }
+
+  &__text {
+    height: 22px;
+    @extend %button-text-regular;
+  }
+
+  &__content {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 43px;
+    margin-bottom: 32px;
+
+    &__top {
+      display: flex;
+      gap: 16px;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 267px;
+      height: 74px;
+    }
+
+    &__big-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      height: 127px;
+    }
+
+    &__input {
+      padding-inline: 16px;
+      @extend %button-text-regular;
+      width: 100%;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid $color-middle-grey;
+
+      &:focus {
+        outline: none;
+        border: 1px solid $color-black;
+      }
+    }
+
+    &__textarea {
+      width: 100%;
+      height: 72px;
+      border-radius: 8px;
+      @extend %button-text-regular;
+      padding-inline: 16px;
+
+      &:focus {
+        outline: none;
+        border: 1px solid $color-black;
+      }
+    }
+  }
+
+  &__input-phone {
+    outline: none;
+    border: none;
+    height: 100%;
+  }
+}
+
+.form__content__big-item--focus .form__text {
+  color: $color-black;
+}
+
+.form__content__item--focus .form__text {
+  color: $color-black;
+}

@@ -1,6 +1,8 @@
 import { BigSectionsHeader } from '../../components/BigSectionsHeader';
 import { BreadCrumb } from '../../components/BreadCrumb';
+import { MediumButton } from '../../components/Buttons';
 import { PhotoSlider } from '../../components/PhotoSlider';
+import { BASE_URL } from '../../utils/fetchProducts';
 import { team } from '../../utils/team';
 import './AboutUsPage.scss';
 
@@ -22,7 +24,7 @@ export const AboutUsPage = () => {
 
   return (
     <div className="about">
-      <BreadCrumb title="Про притулок" />
+      <BreadCrumb title1="Про притулок" />
 
       <div className="about__section">
         <BigSectionsHeader text={['Супер', 'Місія']} />
@@ -51,7 +53,7 @@ export const AboutUsPage = () => {
         <div className="about__team">
           {team.map(member => (
             <div className="about__team__card">
-              <img src={`../../../${member.photo}`} alt="teamPhoto" className="about__team__img" />
+              <img src={`${BASE_URL}/${member.photo}`} alt="teamPhoto" className="about__team__img" />
               <div className="about__team__text">
               <p className="about__team__name">{member.name}</p>
               <p className="about__team__position">{member.position}</p>
@@ -66,11 +68,11 @@ export const AboutUsPage = () => {
         <div className="about__help">
           <div className="about__help__item">
             <h4 className="about__help__text">Стати волонтером</h4>
-            <div className="button button-medium">Заповнити анкету</div>
+            <MediumButton text='Заповнити анкету' leftIcon={false} rightIcon={true} to='/volonteer' />
           </div>
           <div className="about__help__item">
             <h4 className="about__help__text">Допомогти фінансово</h4>
-            <div className="button button-medium">Задонатити</div>
+            <MediumButton text='Задонатити' leftIcon={false} rightIcon={true} to='/donate' />
           </div>
         </div>
       </div>

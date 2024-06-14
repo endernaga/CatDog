@@ -1,0 +1,65 @@
+@import "./../../styles/main.scss";
+
+.card {
+  grid-column: span 1;
+  height: 386px;
+  width: 324px;
+  border-radius: 16px;
+  background-color: $color-white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+
+  &__img {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding: 4px;
+    width: 324px;
+    height: 292px;
+    object-fit: cover;
+  }
+
+  &__icon {
+    width: 56px;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+    background-image: url("../../../public/img/icons/like.svg");
+    background-size: cover;
+  }
+
+  &__info {
+    align-self: flex-start;
+    padding-inline: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__name {
+    @extend %h5;
+    color: $color-black;
+  }
+
+  &__props {
+    display: flex;
+    gap: 4px;
+    height: 30px;
+  }
+
+  &__prop {
+    width: 93px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.7px solid $color-middle-grey;
+    border-radius: 16px;
+    @extend %button-text-regular;
+    color: $color-middle-grey;
+  }
+}

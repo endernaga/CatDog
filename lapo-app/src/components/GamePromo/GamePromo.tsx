@@ -1,3 +1,4 @@
+import { BigButton } from '../Buttons';
 import { SectionsHeader } from '../SectionsHeader';
 import './GamePromo.scss';
 
@@ -9,7 +10,7 @@ export const GamePromo = () => {
         <div className="game-promo__img" />
         <div className="game-promo__img game-promo__img-2" />
       </div>
-      <div className="game-promo__button button button-big">Грати зараз!</div>
+      <BigButton to='/game' leftIcon={false} rightIcon={true} text='Грати зараз!' />
     </div>
   );
 };

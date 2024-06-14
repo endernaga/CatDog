@@ -1,0 +1,169 @@
+@import "./../../styles/main.scss";
+
+.bigButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: $color-orange;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  width: 662px;
+  height: 72px;
+
+  &:hover {
+    background-color: $color-white;
+    border: 2px solid $color-orange;
+
+    svg {
+      color: $color-orange;
+    }
+
+    .text {
+      color: $color-orange;
+    }
+  }
+
+  svg {
+    color: #fcfcfc;
+    transition: fill 0.3s;
+  }
+
+  .text {
+    @extend %h5;
+    color: $color-white;
+  }
+}
+
+.mediumButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: $color-orange;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  width: 321px;
+  height: 56px;
+
+  &:disabled {
+    background-color: $color-light-grey;
+    color: $color-white;
+    cursor:not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background-color: $color-white;
+    border: 1px solid $color-orange;
+
+
+    svg {
+      color: $color-orange;
+    }
+
+    .text {
+      color: $color-orange;
+    }
+  }
+
+  svg {
+    color: #fcfcfc;
+    transition: fill 0.3s;
+  }
+
+  .text {
+    @extend %main-text-medium;
+    color: $color-white;
+  }
+}
+
+.largeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: $color-orange;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  width: 434px;
+  height: 64px;
+
+  &:hover {
+    background-color: $color-white;
+    border: 2px solid $color-orange;
+
+    svg {
+      color: $color-orange;
+    }
+
+    .text {
+      color: $color-orange;
+    }
+  }
+
+  svg {
+    color: #fcfcfc;
+    transition: fill 0.3s;
+  }
+
+  .text {
+    @extend %main-text-medium;
+    color: $color-white;
+  }
+}
+
+.animalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background-color: $color-warm-yellow;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  width: 211px;
+  height: 64px;
+
+  &:hover {
+    background-color: $color-white;
+    border: 1px solid $color-orange;
+
+    svg {
+      color: $color-orange;
+    }
+
+    .text {
+      color: $color-orange;
+    }
+  }
+
+  &__animals {
+    display: flex;
+    gap: 8px;
+  }
+
+  svg {
+    color: $color-dark-grey;
+    transition: fill 0.3s;
+  }
+
+  .text {
+    @extend %h5;
+    color: $color-dark-grey;
+  }
+
+  &--active {
+    background-color: $color-orange;
+
+    svg {
+      color: $color-white;
+    }
+
+    .text {
+      color: $color-white;
+    }
+  }
+}

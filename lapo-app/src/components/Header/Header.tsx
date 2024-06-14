@@ -12,7 +12,7 @@ export const Header = () => {
         </div>
 
         <div className="header__right">
-          <button className="header__donate">Donate</button>
+          <button className="header__donate">Задонатити</button>
           <div className="header__icons">
             <div className="icon icon-lang"></div>
             <div className="icon icon-like"></div>

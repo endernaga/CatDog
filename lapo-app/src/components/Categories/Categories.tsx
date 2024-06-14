@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { SectionsHeader } from '../SectionsHeader';
 import './Categories.scss';
 import { BASE_URL } from '../../utils/fetchProducts';
+import { BigButton } from '../Buttons';
 
 export const Categories = () => {
   const categories = [
@@ -30,7 +31,7 @@ export const Categories = () => {
         ))}
       </div>
       <div className="categories__footer">
-        <NavLink to='/pets' className="button button-big">Переглянути всіх котиків притулку</NavLink>
+        <BigButton to='/pets' leftIcon={false} rightIcon={true} text='Переглянути всіх хвостиків притулку' />
       </div>
     </div>
   )

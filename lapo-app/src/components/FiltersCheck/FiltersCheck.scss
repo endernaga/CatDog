@@ -1,0 +1,99 @@
+@import "./../../styles/main.scss";
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: $color-light-yellow;
+  height: 46px;
+  border-radius: 8px;
+  padding-inline: 16px;
+  @extend %button-text-regular;
+
+  &--checked {
+    background-color: $color-light-orange;
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .checkmark {
+    width: 18px;
+    height: 18px;
+    background-color: $color-white;
+    border: 1px solid $color-middle-grey;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 8px;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 1px;
+      left: 6px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  input[type="checkbox"]:checked + .checkmark {
+    background-color: $color-orange;
+    border: none;
+
+    &::after {
+      display: block;
+    }
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 51px;
+  height: 31px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $color-light-grey;
+    transition: 0.4s;
+    border-radius: 34px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 27px;
+      width: 27px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+
+  input[type="checkbox"]:checked + .switch__slider {
+    background-color: $color-orange;
+    border: none;
+
+    &::before {
+      transform: translateX(20px);
+    }
+  }
+}

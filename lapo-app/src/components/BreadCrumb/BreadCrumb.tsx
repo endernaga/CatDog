@@ -4,23 +4,39 @@ import React from 'react';
 import classNames from 'classnames';
 
 type Props = {
-  title: string,
+  title1: string,
+  title2?: string,
 }
 
-export const BreadCrumb:React.FC<Props> = ({title}) => {
+export const BreadCrumb: React.FC<Props> = ({ title1, title2 }) => {
+  let link1 = '';
+  if (title1 === 'Знайти друга') {
+    link1 = '/pets'
+  }
   return (
     <div className="breadcrumb">
       <Link to="/" className="icon icon-home" />
       
         <div className="icon icon-right" />
-        <div className="navigation-link">
+        <Link to='/pets' className="breadcrumb__link">
           <p
-            className={classNames('navigation-title', {
-            })}
+            className='breadcrumb__title'
           >
-            {title}
+            {title1}
           </p>
-        </div>
+      </Link>
+      {title2 && (
+        <>
+        <div className="icon icon-right" />
+        <div className="breadcrumb__link">
+          <p
+            className='breadcrumb__title'
+          >
+            {title2}
+          </p>
+          </div>
+          </>
+      )}
   </div>
   )
 }
