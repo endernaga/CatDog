@@ -82,6 +82,27 @@
   &__by {
     @extend %main-text-medium;
   }
+
+  &__sos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    height: 40px;
+    width: 144px;
+    @extend %button-text-medium;
+    border-radius: 100px;
+    background-color: $color-orange;
+    border: none;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-white;
+      border: 1px solid $color-orange;
+      color: $color-orange;
+    }   
+  }
 }
 
 .social-media {

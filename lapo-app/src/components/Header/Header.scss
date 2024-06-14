@@ -1,4 +1,4 @@
-@import './../../styles/main.scss';
+@import "./../../styles/main.scss";
 
 .header {
   position: relative;
@@ -19,7 +19,7 @@
   &__logo {
     width: 223px;
     height: 19px;
-    background-image: url('../../../public/img/logo.svg');
+    background-image: url("../../../public/img/logo.svg");
   }
 
   &__left {
@@ -40,8 +40,22 @@
   }
 
   &__donate {
-    @extend %smallButton;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    height: 40px;
     width: 124px;
     @extend %button-text-medium;
+    border-radius: 100px;
+    background-color: $color-light-orange;
+    border: none;
+    color: $color-orange;
+
+    &:hover {
+      background-color: $color-white;
+      border: 1px solid $color-orange;
+    }   
   }
 }

@@ -80,23 +80,28 @@
       gap: 8px;
     }
 
-    &__circle {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background-color: $color-white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition:
-        background-color 0.3s,
-        border 0.3s;
-      color: $color-orange-hover;
-    }
-
     &__text {
       @extend %h4;
+    }
+  }
+
+  &__circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid $color-light-grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: $color-white;
+    transition: background-color 0.3s, border 0.3s;
+    color: $color-orange;
+  
+    &:hover {
+      background-color: $color-light-orange;
+      border: none;
+      color: $color-orange;
     }
   }
 }

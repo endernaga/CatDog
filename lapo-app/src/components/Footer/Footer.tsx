@@ -60,10 +60,10 @@ export const Footer = () => {
         <div className="footer__help">
           <p className="footer__title">Допомога</p>
           <ul className="footer__list">
-            <NavLink to="/about" className=" header__donate">
+            <NavLink to="/about" className="header__donate">
               Задонатити
             </NavLink>
-            <NavLink to="/reports" className="footer__item">
+            <NavLink to="/reports" className="footer__sos">
               Тварина в біді!
             </NavLink>
           </ul>

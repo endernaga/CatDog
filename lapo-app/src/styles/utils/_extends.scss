@@ -83,6 +83,9 @@
 }
 
 %smallButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   padding: 0;
   width: 81px;
