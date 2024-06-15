@@ -4,7 +4,9 @@ import React from "react";
 import classNames from "classnames";
 
 type Props = {
-  to: string;
+  to?: string;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
   text: string;
   leftIcon: boolean;
   rightIcon: boolean;
@@ -13,13 +15,15 @@ type Props = {
 
 export const BigButton: React.FC<Props> = ({
   to,
+  type,
+  onClick,
   text,
   leftIcon,
   rightIcon,
   width,
 }) => {
-  return (
-    <NavLink to={to} className="bigButton" style={{ width: `${width}px` }}>
+  const renderContent = () => (
+    <>
       {leftIcon && (
         <svg
           width="32"
@@ -49,19 +53,39 @@ export const BigButton: React.FC<Props> = ({
           />
         </svg>
       )}
-    </NavLink>
+    </>
+  );
+  return (
+    <>
+    {to ? (
+      <NavLink to={to} className='bigButton' style={{width: `${width}px`}} >
+        {renderContent()}
+      </NavLink>
+    ) : (
+          <button
+            type={type}
+            onClick={onClick}
+            className='mediumButton'
+            style={{ width: `${width}px` }}
+          >
+      {renderContent()}
+    </button>
+    )}
+  </>
   );
 };
 
 export const MediumButton: React.FC<Props> = ({
   to,
+  type,
+  onClick,
   text,
   leftIcon,
   rightIcon,
   width,
 }) => {
-  return (
-    <NavLink to={to} className="mediumButton" style={{ width: `${width}px` }}>
+  const renderContent = () => (
+    <>
       {leftIcon && (
         <svg
           width="32"
@@ -91,19 +115,38 @@ export const MediumButton: React.FC<Props> = ({
           />
         </svg>
       )}
-    </NavLink>
+    </>
+  );
+  return (
+    <>
+      {to ? (
+        <NavLink to={to} className='mediumButton' style={{width: `${width}px`}} >
+          {renderContent()}
+        </NavLink>
+      ) : (
+          <button
+            type={type}
+            onClick={onClick}
+            className='mediumButton'
+            style={{ width: `${width}px` }} >
+        {renderContent()}
+      </button>
+      )}
+    </>
   );
 };
 
 export const LargeButton: React.FC<Props> = ({
   to,
   text,
+  type,
+  onClick,
   leftIcon,
   rightIcon,
   width,
 }) => {
-  return (
-    <NavLink to={to} className="largeButton" style={{ width: `${width}px` }}>
+  const renderContent = () => (
+    <>
       {leftIcon && (
         <svg
           width="32"
@@ -133,7 +176,25 @@ export const LargeButton: React.FC<Props> = ({
           />
         </svg>
       )}
-    </NavLink>
+    </>
+  );
+  return (
+    <>
+    {to ? (
+      <NavLink to={to} className='mediumButton' style={{width: `${width}px`}} >
+        {renderContent()}
+      </NavLink>
+    ) : (
+          <button
+            type={type}
+            className='mediumButton'
+            style={{ width: `${width}px` }}
+            onClick={onClick}
+          >
+      {renderContent()}
+    </button>
+    )}
+  </>
   );
 };
 

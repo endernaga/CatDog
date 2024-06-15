@@ -2,7 +2,7 @@ import { Routes, Route, HashRouter } from 'react-router-dom';
 import App from './App';
 import { HomePage } from './pages/HomePage/HomePage';
 import { AboutUsPage } from './pages/AboutUs';
-import { Contacts, Contacts2 } from './pages/Contacts';
+import { Contacts } from './pages/Contacts';
 import { Pets } from './pages/Pets';
 import { PersonalPage } from './pages/PersonalPage';
 import { Cats } from './pages/Cats';
@@ -15,7 +15,6 @@ export const Root = () => {
           <Route index element={<HomePage />} />
           <Route path='about' element={<AboutUsPage />} />
           <Route path='contacts' element={<Contacts />} />
-          <Route path='contacts2' element={<Contacts2 />} />
           <Route path='pets'>
             <Route index element={<Pets />} />
           </Route>

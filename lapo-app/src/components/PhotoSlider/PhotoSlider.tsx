@@ -3,6 +3,7 @@ import { aboutUsPhoto } from '../../utils/aboutUsPhoto';
 import { BASE_URL } from '../../utils/fetchProducts';
 import './PhotoSlider.scss';
 import classNames from 'classnames';
+// visibleImages * (itemWidth + gap / 10)
 
 export const PhotoSlider = () => {
   const visibleImages = 2;
@@ -12,7 +13,7 @@ export const PhotoSlider = () => {
 
   const gap = 40; // Gap between images in pixels
   const itemWidth = 100 / visibleImages; // Width of each item in percentage
-  const transitionTime = 500; // Transition time in milliseconds
+  const transitionTime = 300;
   const totalImages = aboutUsPhoto.length;
 
   const nextSlide = () => {
@@ -44,7 +45,7 @@ export const PhotoSlider = () => {
           sliderRef.current.style.transition = 'none';
           sliderRef.current.style.transform = `translateX(-${totalImages * (itemWidth + gap / 10)}%)`;
         }
-      } else if (currentIndex === totalImages + visibleImages) {
+      } else if (currentIndex >= totalImages + visibleImages) {
         setCurrentIndex(visibleImages);
         if (sliderRef.current) {
           sliderRef.current.style.transition = 'none';
@@ -66,7 +67,7 @@ export const PhotoSlider = () => {
 
   useEffect(() => {
     if (!isTransitioning && sliderRef.current) {
-      sliderRef.current.style.transition = `transform ${transitionTime}ms ease-in-out`;
+      sliderRef.current.style.transition = `transform ease-in-out ${transitionTime}ms`;
     }
     if (sliderRef.current) {
       sliderRef.current.style.transform = `translateX(-${currentIndex * (itemWidth + gap / 10)}%)`;
@@ -122,9 +123,6 @@ export const PhotoSlider = () => {
         <div
           ref={sliderRef}
           className="slider__content"
-          style={{
-            transition: `transform ${isTransitioning ? transitionTime : 0}ms ease-in-out`,
-          }}
         >
           {[...aboutUsPhoto.slice(-visibleImages), ...aboutUsPhoto, ...aboutUsPhoto.slice(0, visibleImages)].map((image, index) => (
             <div key={index} className="slider__item" style={{ width: `${itemWidth}%`}}>
