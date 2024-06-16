@@ -1,0 +1,38 @@
+@import './../../styles/main.scss';
+
+.game-promo {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  justify-content: center;
+  align-items: center;
+
+  &__photos {
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    width: 824px;
+    height: 384px;
+    margin-inline: auto;
+  }
+
+    &__img {
+      border-radius: 50%;
+      border: 5px solid $color-white;
+      height: 384px;
+      width: 384px;
+      background-size: cover;
+      overflow: hidden;
+      background-image: url('../../../public/img/gamePromo/animal1.jpg');
+      background-position: 90% 50%;
+
+      &-2 {
+        background-image: url('../../../public/img/gamePromo/animal2.webp');
+        background-position: 30% 50%;
+      }
+    }
+
+    &__button {
+      align-self: center;
+    }
+}

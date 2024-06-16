@@ -1,0 +1,125 @@
+@import './../../styles/main.scss';
+
+.footer {
+  width: 100%;
+  padding-inline: 48px;
+  height: 331px;
+  background-color: $color-white;
+  z-index: 0;
+
+  &__top {
+    padding: 48px 0px;
+    @include page-grid;
+    height: 276px;
+  }
+
+  &__down {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    color: $color-dark-grey;
+  }
+
+  &__social {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &__logo {
+      width: 298px;
+      height: 26px;
+      background-image: url('../../../public/img/logo.svg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    &__medias {
+      display: flex;
+      gap: 16px;
+      height: 44px;
+    }
+  }
+
+  &__title {
+    color: $color-grey;
+    margin-bottom: 16px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    @extend %main-text-medium;
+  }
+
+  &__item {
+    color: $color-dark-grey;
+
+    &:hover {
+      color: $color-orange;
+    }
+  }
+
+  &__about {
+    grid-column: 9/13;
+    text-align: left;
+  }
+
+  &__on-site {
+    grid-column: 15/19;
+  }
+
+  &__help {
+    grid-column: -5/-1;
+  }
+
+  &__vuso {
+    @extend %button-text-medium;
+  }
+
+  &__by {
+    @extend %main-text-medium;
+  }
+
+  &__sos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    height: 40px;
+    width: 144px;
+    @extend %button-text-medium;
+    border-radius: 100px;
+    background-color: $color-orange;
+    border: none;
+    color: $color-white;
+
+    &:hover {
+      background-color: $color-white;
+      border: 1px solid $color-orange;
+      color: $color-orange;
+    }   
+  }
+}
+
+.social-media {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid $color-light-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, border 0.3s;
+  color:#333333;
+
+  &:hover {
+    background-color: $color-light-orange;
+    border: none;
+    color: $color-orange;
+  }
+}

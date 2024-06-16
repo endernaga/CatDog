@@ -1,0 +1,89 @@
+@import "./../../styles/main.scss";
+
+.window {
+  display: none;
+
+  &-open {
+    position: fixed;
+    top: 120px;
+    width: 706px;
+    height: 627px;
+    border-radius: 24px;
+    background-color: $color-white;
+    padding: 24px;
+    color: $color-black;
+    z-index: 1000;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    height: 32px;
+    border-bottom: 0.7px solid $color-smoke-grey;
+
+    &__text {
+      @extend %main-text-medium;
+    }
+  }
+
+  &__filters {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0px;
+    margin-bottom: 16px;
+    border-bottom: 0.7px solid $color-smoke-grey;
+  }
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__options {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__param {
+    @extend %h5;
+  }
+
+  &__toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 32px;
+
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      height: 32px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: $color-white;
+    border-radius: 100px;
+    border: 1px solid $color-orange;
+    cursor: pointer;
+    width: 321px;
+    height: 56px;
+
+    &__text {
+      @extend %main-text-regular;
+      color: $color-orange;
+    }
+  }
+}

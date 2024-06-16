@@ -1,0 +1,22 @@
+@import './../../styles/main.scss';
+
+.breadcrumb {
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 32px;
+  margin-top: 32px;
+
+  &__link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: $color-white;
+    @extend %main-text-medium;
+  }
+}

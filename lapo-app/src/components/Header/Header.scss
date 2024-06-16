@@ -1,0 +1,61 @@
+@import "./../../styles/main.scss";
+
+.header {
+  position: relative;
+  background-color: $color-white;
+  margin-top: 24px;
+  border-radius: 100px;
+  margin-inline: 48px;
+  z-index: 998;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 72px;
+    justify-content: space-between;
+    margin-inline: 24px;
+  }
+
+  &__logo {
+    width: 223px;
+    height: 19px;
+    background-image: url("../../../public/img/logo.svg");
+  }
+
+  &__left {
+    display: flex;
+    gap: 95px;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__right {
+    display: flex;
+    gap: 32px;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__donate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    height: 40px;
+    width: 124px;
+    @extend %button-text-medium;
+    border-radius: 100px;
+    background-color: $color-light-orange;
+    border: none;
+    color: $color-orange;
+
+    &:hover {
+      background-color: $color-white;
+      border: 1px solid $color-orange;
+    }   
+  }
+}

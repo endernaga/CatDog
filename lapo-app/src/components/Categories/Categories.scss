@@ -1,0 +1,56 @@
+@import '../../styles/main.scss';
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 128px;
+
+  &__content {
+    margin-top: 64px;
+    @include page-grid;
+    width: 100%;
+    gap: 20px;
+    height: 480px;
+  }
+
+  &__category {
+    grid-column: span 12;
+    background-color: $color-warm-yellow;
+    border-radius: 40px;
+    border: 4px solid $color-white;
+    padding: 24px;
+    padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__title {
+      @extend %h3;
+      color: $color-dark-grey;
+      text-align: center;
+    }
+
+    &__photo {
+      width: 100%;
+      height: 354px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* &__img {
+      max-width: 100%;
+      height: auto;
+    } */
+
+    &__dog {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__footer {
+    margin-top: 56px;
+  }
+}

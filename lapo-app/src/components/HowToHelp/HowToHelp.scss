@@ -1,0 +1,79 @@
+@import './../../styles/main.scss';
+
+.help {
+  display: grid;
+  gap: 56px;
+  
+  &__content {
+    @include page-grid;
+  }
+
+  &__left {
+    grid-column: span 12;
+  }
+
+  &__meme-cat {
+    position: relative;
+    top: 84px;
+    height: 515px;
+    width: 437px; 
+  }
+
+  &__meme-text {
+    background-image: url('../../../public/img/memeText.png');
+    width: 258px;
+    height: 106px;
+    position: relative;
+    left: 300px;
+    top: -406px
+  }
+
+  &__right {
+    grid-column: 13/-1;  
+    height: 599px;
+    width: 668px;
+    border: 4px solid $color-white;
+    background-color: $color-warm-yellow;
+    padding: 32px 24px;
+    border-radius: 40px;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  &__main {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__text {
+      @extend %h3;
+      color: $color-dark-grey;
+      text-align: center;
+    }
+
+    &__select {
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    &__options {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 24px;
+      row-gap: 16px;
+    }
+  }
+
+  &__footer {
+    @extend %main-text-regular;
+    color: $color-dark-grey;
+    text-align: center;
+    margin-top: 16px;
+  }
+}

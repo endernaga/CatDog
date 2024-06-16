@@ -1,0 +1,47 @@
+@import './../../styles/main.scss';
+
+.navbar {
+  display: flex;
+  gap: 8px;
+  height: 100%;
+  align-items: center;
+
+  &__link {
+    @extend %button-text-medium;
+    color: $color-dark-grey;
+    padding-inline: 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: $color-orange;
+    }
+
+    &--active {
+      color: $color-orange;
+      border-bottom: 3px solid $color-orange;
+    }
+  }
+
+  &__about {
+    cursor: pointer;
+    padding-inline: 16px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    &__text {
+      @extend %button-text-medium;
+      color: $color-dark-grey;
+
+      &:hover {
+        color: $color-orange;
+      }
+
+      &--active {
+        color: $color-orange;
+      }
+    }
+  }
+}

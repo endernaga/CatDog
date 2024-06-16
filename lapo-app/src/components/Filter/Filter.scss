@@ -1,0 +1,78 @@
+@import "../../styles/main.scss";
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 64px;
+
+  &__buttons {
+    display: flex;
+    gap: 48px;
+  }
+
+  &__types {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__dropdowns {
+    display: flex;
+    gap: 23px;
+  }
+
+  &__icon {
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    background-color: $color-warm-yellow;
+    border-radius: 16px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    background-image: url("./../../../public/img/icons/filters.svg");
+  }
+
+  &__counter {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    left: 54px;
+    top: 0px;
+    border-radius: 100px;
+    background-color: $color-orange;
+    color: $color-white;
+    @extend %secondary-text-regular;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__item {
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: 16px;
+    border-radius: 100px;
+    background-color: $color-light-green;
+
+    &__text {
+      @extend %button-text-regular;
+      color: $color-black;
+    }
+
+    &__close {
+      width: 24px;
+      height: 24px;
+      background-repeat: no-repeat;
+      background-image: url('../../../public/img/icons/close.svg');
+    }
+  }
+}
