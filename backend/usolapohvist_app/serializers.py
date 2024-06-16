@@ -65,5 +65,14 @@ class DogSerializer(serializers.ModelSerializer):
             "character",
             "sterilized",
             "vaccinated",
-            "size"
+            "size",
         )
+
+
+class DogListSerializer(DogSerializer):
+    def get_photo(self, obj):
+        return obj.photo.first().image.url
+
+    class Meta:
+        model = Dog
+        fields = ("id", "name", "photo", "sex", "age", "sterilized", "vaccinated", "size")

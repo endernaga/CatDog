@@ -7,6 +7,7 @@ from usolapohvist_app.serializers import (
     ImagesSerializer,
     CatListSerializer,
     DogSerializer,
+    DogListSerializer,
 )
 
 from usolapohvist_app.models import Cat, Dog
@@ -15,7 +16,7 @@ from usolapohvist_app.models import Cat, Dog
 class AddNewPhoto:
 
     @action(detail=True, methods=["POST"], url_path="addphoto")
-    def add_new_photo(self, request):
+    def add_new_photo(self, request, pk=None):
         animal = self.get_object()
         serializer = ImagesSerializer(data=request.data)
         if serializer.is_valid():
@@ -54,6 +55,7 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
     def get_serializer_class(self):
         if self.action == "add_new_photo":
             return ImagesSerializer
+
         if self.action == "list":
             return CatListSerializer
 
@@ -63,3 +65,12 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
 class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
+
+    def get_serializer_class(self):
+        if self.action == "add_new_photo":
+            return ImagesSerializer
+
+        if self.action == "list":
+            return DogListSerializer
+
+        return DogSerializer
