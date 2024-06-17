@@ -1,5 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from usolapohvist_app.serializers import (
@@ -11,6 +12,12 @@ from usolapohvist_app.serializers import (
 )
 
 from usolapohvist_app.models import Cat, Dog
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = "page_size"
+    max_page_size = 20
 
 
 class AddNewPhoto:
@@ -30,6 +37,7 @@ class AddNewPhoto:
 class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
     queryset = Cat.objects.all()
     serializer_class = CatSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         queryset = Cat.objects.all()
@@ -65,6 +73,7 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
 class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
     queryset = Dog.objects.all()
     serializer_class = DogSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get_serializer_class(self):
         if self.action == "add_new_photo":
