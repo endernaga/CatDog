@@ -75,6 +75,31 @@ class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
     serializer_class = DogSerializer
     pagination_class = StandardResultsSetPagination
 
+    def get_queryset(self):
+        queryset = Dog.objects.all()
+        sex = self.request.GET.get("sex")
+        age = self.request.GET.get("age")
+        vaccinated = self.request.GET.get("vaccinated")
+        sterilized = self.request.GET.get("sterilized")
+        size = self.request.GET.get("size")
+
+        if age:
+            queryset = queryset.filter(age__in=age.split(","))
+
+        if sex:
+            queryset = queryset.filter(sex=sex)
+
+        if vaccinated:
+            queryset = queryset.filter(vaccinated=vaccinated == "true")
+
+        if sterilized:
+            queryset = queryset.filter(sterilized=sterilized == "true")
+
+        if size:
+            queryset = queryset.filter(size=size)
+
+        return queryset
+
     def get_serializer_class(self):
         if self.action == "add_new_photo":
             return ImagesSerializer
