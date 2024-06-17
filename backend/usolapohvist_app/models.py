@@ -2,6 +2,7 @@ from django.db import models
 
 
 SIZE_CHOICES = (("S", "Small"), ("M", "Medium"), ("L", "Large"))
+CATEGORY_CHOICES = (("dog", "Dog"), ("cat", "Cat"))
 
 
 class ImagesForAnimals(models.Model):
@@ -19,6 +20,7 @@ class Animals(models.Model):
     description = models.TextField()
     countOfFavor = models.IntegerField(default=0)
     specifics = models.CharField(max_length=255)
+    category = models.CharField(choices=CATEGORY_CHOICES, default="cat")
     history = models.TextField()
     character = models.CharField(max_length=255, blank=True, null=True)
     sterilized = models.BooleanField(default=False)
