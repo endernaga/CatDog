@@ -3,17 +3,13 @@ import { BreadCrumb } from "../../components/BreadCrumb";
 import { BASE_URL } from "../../utils/fetchProducts";
 import {
   contactsButtons,
-  mailShare,
-  phoneShare,
-  telegramShare,
-  viberShare,
 } from "../../utils/socialMedias";
 import "./Contacts.scss";
 
 export const Contacts = () => {
   return (
     <div className="contacts">
-      <BreadCrumb title1="Контакти" />
+      <BreadCrumb />
       <BigSectionsHeader text={["Супер", "Друзі"]} />
       <div className="contacts__wrapper">
         <div className="contacts__info">

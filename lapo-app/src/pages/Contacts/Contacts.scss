@@ -6,6 +6,7 @@
   margin-bottom: 128px;
 
   &__wrapper {
+    overflow: hidden;
     display: flex;
     align-items: center;
     width: 100%;
@@ -35,6 +36,8 @@
 
   &__dog {
     object-fit: cover;
+    width: 604px;
+    height: 529px;
     position: absolute;
     right: 0;
     top: 0;
@@ -123,8 +126,12 @@
   &__call {
     position: relative;
 
+
     &__cat {
       object-fit: cover;
+      width: 437px;
+      height: 437px;
+      border-radius: 50%;
     }
 
     &__text {

@@ -6,6 +6,7 @@ import { Contacts } from './pages/Contacts';
 import { Pets } from './pages/Pets';
 import { PersonalPage } from './pages/PersonalPage';
 import { Cats } from './pages/Cats';
+import { ErrorPage } from './pages/ErrorPage';
 
 export const Root = () => {
   return (
@@ -17,11 +18,16 @@ export const Root = () => {
           <Route path='contacts' element={<Contacts />} />
           <Route path='pets'>
             <Route index element={<Pets />} />
+            <Route path='cats' element={<Cats />} >
+            <Route path=':animalId' element={<PersonalPage />} />
+            </Route>
           </Route>
-          <Route path='cats'>
+          {/*<Route path='cats'>
           <Route index element={<Cats />} />
           <Route path=':animalId' element={<PersonalPage />} />
-          </Route>
+          </Route> */}
+
+          <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>
     </HashRouter>

@@ -7,7 +7,7 @@ import './Cats.scss';
 export const Cats = () => {
   return (
     <div className="cats">
-      <BreadCrumb title1='Знайти друга' />
+      <BreadCrumb />
       <BigSectionsHeader text={['Супер', 'Друзі']} />
       <Filter />
       <PetsList />

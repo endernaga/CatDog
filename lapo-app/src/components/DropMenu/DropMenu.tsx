@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./DropMenu.scss";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";
@@ -30,6 +30,25 @@ export const DropMenu = () => {
 
   const { isDropmenuOpen, setIsDropmenuOpen } = useContext(GlobalContext);
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      !(event.target as HTMLElement).closest('.navbar__about') &&
+      !(event.target as HTMLElement).closest('.dropmenu')
+    ) {
+      setIsDropmenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropmenuOpen) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDropmenuOpen]);
+
   const style = isDropmenuOpen ? "dropmenu-open" : "dropmenu";
 
   return (
@@ -40,7 +59,7 @@ export const DropMenu = () => {
           <NavLink
             to={item.to}
             key={index}
-            className="dropmenu__item" 
+            className="dropmenu__item"
             onClick={() => setIsDropmenuOpen(false)}
           >
             <p className="dropmenu__text">{item.name}</p>

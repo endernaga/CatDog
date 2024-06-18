@@ -58,6 +58,29 @@
     }
   }
 
+  &__like {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $color-orange;
+
+      svg {
+        color: $color-white;
+      }
+    }
+
+    svg {
+      color: $color-orange;
+    }
+  }
+
   &__about {
     margin-bottom: 32px;
     display: flex;

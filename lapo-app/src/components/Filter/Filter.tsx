@@ -59,8 +59,8 @@ export const Filter = () => {
       <div className="filter__buttons">
         <div className="filter__types">
           <AnimalButton to="pets" title="Усі" />
-          <AnimalButton to="dogs" title="Песики" />
-          <AnimalButton to="cats" title="Котики" />
+          <AnimalButton to="pets/dogs" title="Песики" />
+          <AnimalButton to="pets/cats" title="Котики" />
         </div>
         <div
           className="filter__icon"

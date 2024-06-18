@@ -21,15 +21,30 @@
     object-fit: cover;
   }
 
-  &__icon {
-    width: 56px;
+  &__like {
     position: absolute;
     top: 16px;
     right: 16px;
-    aspect-ratio: 1/1;
     cursor: pointer;
-    background-image: url("../../../public/img/icons/like.svg");
-    background-size: cover;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $color-orange;
+
+      svg {
+        color: $color-white;
+      }
+    }
+
+    svg {
+      color: $color-orange;
+    }
   }
 
   &__info {

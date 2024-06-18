@@ -7,7 +7,7 @@ import { Filter } from '../../components/Filter';
 export const Pets = () => {
   return (
     <div className="pets">
-      <BreadCrumb title1='Знайти друга' />
+      <BreadCrumb />
       <BigSectionsHeader text={['Супер', 'Друзі']} />
       <Filter />
       <PetsList />

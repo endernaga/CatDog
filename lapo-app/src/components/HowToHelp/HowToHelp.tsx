@@ -13,7 +13,7 @@ export const HowToHelp = () => {
     'Інша сума',
   ];
   return (
-    <div className="help">
+    <div id='donate' className="help">
       <SectionsHeader text="Як ще можна допомогти?" />
       <div className="help__content">
         <div className="help__left">

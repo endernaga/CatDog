@@ -31,17 +31,39 @@
     gap: 4px;
     align-items: center;
 
+    &:hover {
+      .navbar__about__text {
+        color: $color-orange;
+      }
+
+      .navbar__about__icon {
+        color: $color-orange;
+      }
+    }
+
+    &--active {
+      .navbar__about__text {
+        color: $color-orange;
+      }
+
+      .navbar__about__icon {
+        color: $color-orange;
+        transform: rotate(180deg);
+      }
+    }
+
     &__text {
       @extend %button-text-medium;
       color: $color-dark-grey;
 
-      &:hover {
-        color: $color-orange;
-      }
-
       &--active {
         color: $color-orange;
       }
+    }
+
+    &__icon {
+      color: $color-black;
+      transition: transform 0.3s ease;
     }
   }
 }

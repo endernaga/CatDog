@@ -1,13 +1,19 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Footer.scss';
 import { socialMedias } from '../../utils/socialMedias';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 
 export const Footer = () => {
+  const { setIsSosFormOpen, scrollToSection } = useContext(GlobalContext);
+
   return (
     <div className="footer">
       <div className="footer__top">
         <div className="footer__social">
-          <div className="footer__social__logo" />
+          <NavLink to='/'
+            className="footer__social__logo"
+          />
           <div className="footer__social__medias">
             {socialMedias.map(media => (
               <a
@@ -60,12 +66,16 @@ export const Footer = () => {
         <div className="footer__help">
           <p className="footer__title">Допомога</p>
           <ul className="footer__list">
-            <NavLink to="/about" className="header__donate">
+            <Link
+              to="/"
+              onClick={() => scrollToSection('donate')}
+              className="header__donate"
+            >
               Задонатити
-            </NavLink>
-            <NavLink to="/reports" className="footer__sos">
+            </Link>
+            <button onClick={() => setIsSosFormOpen(true)} className="footer__sos">
               Тварина в біді!
-            </NavLink>
+            </button>
           </ul>
         </div>
       </div>

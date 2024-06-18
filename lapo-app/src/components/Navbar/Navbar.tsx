@@ -10,11 +10,6 @@ export const Navbar = () => {
       "navbar__link--active": isActive,
     });
 
-  /*const getAboutLinkClass = ({ isActive }: { isActive: boolean }) =>
-    classNames('navbar__about', {
-      'navbar__about--active': isActive,
-    }); */
-
   const { isDropmenuOpen, setIsDropmenuOpen } = useContext(GlobalContext);
 
   const toggleDropdown = () => {
@@ -23,20 +18,36 @@ export const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar__about" onClick={toggleDropdown}>
+      <div
+        className={classNames("navbar__about", {
+          "navbar__about--active": isDropmenuOpen,
+        })}
+        onClick={toggleDropdown}
+      >
         <p
-          className={classNames("navbar__about__text", {
-            "navbar__about__text--active": isDropmenuOpen,
-          })}
+          className="navbar__about__text"
         >
           Про нас
         </p>
-        <div
+        <svg
+          width="24"
+          className="navbar__about__icon"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 13.171L16.95 8.22101L18.364 9.63601L12 16L5.63599 9.63601L7.04999 8.22201L12 13.171Z"
+            fill="currentColor"
+          />
+        </svg>
+        {/*<div
           className={classNames("icon", {
-            "icon-up": isDropmenuOpen,
-            "icon-down": !isDropmenuOpen,
-          })}
-        />
+            // "icon-up": isDropmenuOpen,
+            // "icon-down": !isDropmenuOpen,
+          })} 
+        /> */}
       </div>
       <NavLink to="/pets" className={getLinkClass}>
         Знайти друга
