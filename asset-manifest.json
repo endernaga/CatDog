@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/CatDog/static/css/main.ea17632a.css",
-    "main.js": "/CatDog/static/js/main.6632df33.js",
+    "main.css": "/CatDog/static/css/main.1e6d75ea.css",
+    "main.js": "/CatDog/static/js/main.d18127ed.js",
     "static/media/animal1.jpg": "/CatDog/static/media/animal1.19563cba31da02df3b2d.jpg",
     "static/media/animal2.webp": "/CatDog/static/media/animal2.ed0dfade223b6b2581e9.webp",
     "static/media/bigPaws.svg": "/CatDog/static/media/bigPaws.16ef41fcbc18a5ffff8e.svg",
@@ -14,6 +14,9 @@
     "static/media/share.svg": "/CatDog/static/media/share.912ee27a25c2f3ec2feb.svg",
     "static/media/botLogo.svg": "/CatDog/static/media/botLogo.fd8cb23643b5e7a5f7f8.svg",
     "static/media/temper.svg": "/CatDog/static/media/temper.84a6a4a14f2f710ae035.svg",
+    "static/media/dog.svg": "/CatDog/static/media/dog.169fd0c468ac2588d3a2.svg",
+    "static/media/activeDog.svg": "/CatDog/static/media/activeDog.ba5a1ee1e4f8a7b9227e.svg",
+    "static/media/hoverDog.svg": "/CatDog/static/media/hoverDog.201de160b407eb528aee.svg",
     "static/media/filters.svg": "/CatDog/static/media/filters.bc696f1bd7b2a3825625.svg",
     "static/media/behavior.svg": "/CatDog/static/media/behavior.af0c129fda37dfaa02da.svg",
     "static/media/phone.svg": "/CatDog/static/media/phone.aed2e6a93e89a058e745.svg",
@@ -30,6 +33,7 @@
     "static/media/mail.svg": "/CatDog/static/media/mail.ad21d59751a4ff2bd7d2.svg",
     "static/media/vaccinated.svg": "/CatDog/static/media/vaccinated.6af5c766256e40f01efb.svg",
     "static/media/home.svg": "/CatDog/static/media/home.1db52049eda758108744.svg",
+    "static/media/formSuccess.svg": "/CatDog/static/media/formSuccess.46e92930c3b0e2fb6864.svg",
     "static/media/danger.svg": "/CatDog/static/media/danger.96a900ff0aea4e1ee7a3.svg",
     "static/media/close.svg": "/CatDog/static/media/close.48e0625971da91ceb7ca.svg",
     "static/media/arrowDown.svg": "/CatDog/static/media/arrowDown.8d6bc76b7eac5a6cc30e.svg",
@@ -37,11 +41,11 @@
     "static/media/arrowRight.svg": "/CatDog/static/media/arrowRight.e8e2322fe21e9c77830d.svg",
     "static/media/arrowRightHover.svg": "/CatDog/static/media/arrowRightHover.9db63a5c2f7974e5b007.svg",
     "static/media/arrowUp.svg": "/CatDog/static/media/arrowUp.600435bebac171aeeb31.svg",
-    "main.ea17632a.css.map": "/CatDog/static/css/main.ea17632a.css.map",
-    "main.6632df33.js.map": "/CatDog/static/js/main.6632df33.js.map"
+    "main.1e6d75ea.css.map": "/CatDog/static/css/main.1e6d75ea.css.map",
+    "main.d18127ed.js.map": "/CatDog/static/js/main.d18127ed.js.map"
   },
   "entrypoints": [
-    "static/css/main.ea17632a.css",
-    "static/js/main.6632df33.js"
+    "static/css/main.1e6d75ea.css",
+    "static/js/main.d18127ed.js"
   ]
 }
