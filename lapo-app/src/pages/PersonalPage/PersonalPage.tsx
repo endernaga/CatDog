@@ -109,7 +109,7 @@ export const PersonalPage = () => {
             to="/adopt"
             leftIcon={false}
             rightIcon={true}
-            text="Стати другом"
+            text="Забрати в сім'ю"
           />
         </div>
       </div>
@@ -117,7 +117,7 @@ export const PersonalPage = () => {
       <div className="personal__adopt">
         <div className="personal__adopt__left">
           <h3 className="personal__adopt__text">
-            Будь відповідальним власником!
+            Будь ласка, зверни свою увагу!
           </h3>
           <LargeButton
             leftIcon={false}

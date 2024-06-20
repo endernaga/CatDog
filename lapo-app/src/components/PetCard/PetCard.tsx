@@ -11,7 +11,7 @@ type Props = {
 export const PetCard: React.FC<Props> = ({ pet }) => {
   return (
     <div className="card">
-      <Link to={`/${pet.category}/${pet.id}`}>
+      <Link to={`${pet.category}/${pet.id}`}>
         <img
           src={`${BASE_URL}/${pet.images[0]}`}
           alt="petPhoto"

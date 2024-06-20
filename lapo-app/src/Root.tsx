@@ -18,14 +18,11 @@ export const Root = () => {
           <Route path='contacts' element={<Contacts />} />
           <Route path='pets'>
             <Route index element={<Pets />} />
-            <Route path='cats' element={<Cats />} >
+            <Route path='cats' >
+            <Route index element={<Cats />} />
             <Route path=':animalId' element={<PersonalPage />} />
             </Route>
           </Route>
-          {/*<Route path='cats'>
-          <Route index element={<Cats />} />
-          <Route path=':animalId' element={<PersonalPage />} />
-          </Route> */}
 
           <Route path='*' element={<ErrorPage />} />
         </Route>
