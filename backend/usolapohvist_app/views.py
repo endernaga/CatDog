@@ -1,5 +1,8 @@
+import random
+
+from django.db.models import Max
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
@@ -108,3 +111,43 @@ class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
             return DogListSerializer
 
         return DogSerializer
+
+
+@api_view(["GET"])
+def guess_the_sex(request):
+    dog_or_cat = random.choice(["dog", "cat"])
+    resp = {
+        "dog": {
+            "male": DogSerializer(get_male(Dog)).data,
+            "female": DogSerializer(get_female(Dog)).data
+        },
+        "cat": {
+            "male": CatSerializer(get_male(Cat)).data,
+            "female": CatSerializer(get_female(Cat)).data,
+        }
+    }
+
+    temp = list(resp[dog_or_cat].values())
+    random.shuffle(temp)
+
+    res = dict(zip(resp[dog_or_cat], temp))
+
+    return Response(res)
+
+
+def get_female(obj):
+    max_id = obj.objects.all().filter(sex="female").aggregate(max_id=Max("id"))["max_id"]
+    while True:
+        pk = random.randint(1, max_id)
+        category = obj.objects.filter(pk=pk, sex="female").first()
+        if category:
+            return category
+
+
+def get_male(obj):
+    max_id = obj.objects.all().filter(sex="male").aggregate(max_id=Max("id"))["max_id"]
+    while True:
+        pk = random.randint(1, max_id)
+        category = obj.objects.filter(pk=pk, sex="male").first()
+        if category:
+            return category
