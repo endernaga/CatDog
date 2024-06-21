@@ -119,12 +119,12 @@ def guess_the_sex(request):
     resp = {
         "dog": {
             "male": DogSerializer(get_male(Dog)).data,
-            "female": DogSerializer(get_female(Dog)).data
+            "female": DogSerializer(get_female(Dog)).data,
         },
         "cat": {
             "male": CatSerializer(get_male(Cat)).data,
             "female": CatSerializer(get_female(Cat)).data,
-        }
+        },
     }
 
     temp = list(resp[dog_or_cat].values())
@@ -136,7 +136,9 @@ def guess_the_sex(request):
 
 
 def get_female(obj):
-    max_id = obj.objects.all().filter(sex="female").aggregate(max_id=Max("id"))["max_id"]
+    max_id = (
+        obj.objects.all().filter(sex="female").aggregate(max_id=Max("id"))["max_id"]
+    )
     while True:
         pk = random.randint(1, max_id)
         category = obj.objects.filter(pk=pk, sex="female").first()
