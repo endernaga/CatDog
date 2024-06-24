@@ -66,7 +66,7 @@ export const BigButton: React.FC<Props> = ({
         <button
           type={type}
           onClick={onClick}
-          className="mediumButton"
+          className="bigButton"
           style={{ width: `${width}px` }}
         >
           {renderContent()}

@@ -3,10 +3,11 @@ import App from './App';
 import { HomePage } from './pages/HomePage/HomePage';
 import { AboutUsPage } from './pages/AboutUs';
 import { Contacts } from './pages/Contacts';
-import { Pets } from './pages/Pets';
+import { AllPetsPage } from './pages/Pets';
 import { PersonalPage } from './pages/PersonalPage';
 import { Cats } from './pages/Cats';
 import { ErrorPage } from './pages/ErrorPage';
+import { GamePage } from './pages/GamePage';
 
 export const Root = () => {
   return (
@@ -17,12 +18,13 @@ export const Root = () => {
           <Route path='about' element={<AboutUsPage />} />
           <Route path='contacts' element={<Contacts />} />
           <Route path='pets'>
-            <Route index element={<Pets />} />
+            <Route index element={<AllPetsPage />} />
             <Route path='cats' >
             <Route index element={<Cats />} />
             <Route path=':animalId' element={<PersonalPage />} />
             </Route>
           </Route>
+          <Route path='game' element={<GamePage />} />
 
           <Route path='*' element={<ErrorPage />} />
         </Route>

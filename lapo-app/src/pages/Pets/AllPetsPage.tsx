@@ -1,8 +1,8 @@
+import './AllPetsPage.scss';
 import { catData } from '../../utils/catData';
 import { CategoryPage } from '../CategoryPage';
-import './Cats.scss';
 
-export const Cats = () => {
+export const AllPetsPage = () => {
   return (
     <CategoryPage pets={catData} />
   )

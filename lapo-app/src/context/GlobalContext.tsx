@@ -1,6 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
-import { FilterType, Filters } from "../types/sortFilters";
-import { initialFilters } from "../components/ModalWindow";
+import { Filters } from "../types/sortFilters";
+
+export const initialFilters: Filters = {
+  sex: [],
+  size: [],
+  age: [],
+  sterilized: false,
+  vaccinated: false,
+};
 
 export const GlobalContext = createContext({
   isDropmenuOpen: false,
@@ -10,14 +17,12 @@ export const GlobalContext = createContext({
   scrollToSection: (id: string) => {},
   filters: initialFilters,
   setFilters: (v: any) => { },
-  handleRemoveFilter: (type: FilterType, value: string | boolean) => {},
 })
 
 export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   const [isDropmenuOpen, setIsDropmenuOpen] = useState(false);
   const [isSosFormOpen, setIsSosFormOpen] = useState(false);
   const [targetId, setTargetId] = useState<string | null>(null);
-  const [filters, setFilters] = useState<Filters>(initialFilters);
 
   useEffect(() => {
     if (targetId) {
@@ -33,18 +38,7 @@ export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
     setTargetId(id);
   };
 
-  const handleRemoveFilter = (type: FilterType, value: string | boolean) => {
-    setFilters((prevFilters) => {
-      const updatedFilters:Filters = { ...prevFilters };
-
-      if (Array.isArray(prevFilters[type])) {
-        updatedFilters[type] = (prevFilters[type] as string[]).filter((item) => item !== value) as any;
-      } else {
-        updatedFilters[type] = false as any;
-      }
-      return updatedFilters;
-    });
-  };
+  const [filters, setFilters] = useState<Filters>(initialFilters);
 
   return (
     <GlobalContext.Provider
@@ -53,7 +47,6 @@ export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
         setIsDropmenuOpen,
         filters, 
         setFilters, 
-        handleRemoveFilter, 
         isSosFormOpen,
         setIsSosFormOpen,
         scrollToSection,

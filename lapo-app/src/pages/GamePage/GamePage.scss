@@ -1,0 +1,249 @@
+@import "./../../styles/main.scss";
+
+.game {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 128px;
+
+  &__start {
+    display: flex;
+    gap: 48px;
+    flex-direction: column;
+    align-items: center;
+
+    &__title {
+      @extend %h3;
+    }
+
+    &__photos {
+      display: flex;
+      gap: 56px;
+      width: 736px;
+      height: 340px;
+    }
+
+    &__img {
+      border-radius: 50%;
+      border: 5px solid $color-white;
+      height: 100%;
+      width: 384px;
+      object-fit: cover;
+    }
+  }
+
+  &__round {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+
+    &__title {
+      @extend %h4;
+    }
+
+    &__seconds {
+      font-family: "Mariupol-Bold", sans-serif;
+      font-size: 120px;
+      line-height: 110%;
+      letter-spacing: 0;
+      color: $color-orange;
+      text-shadow:
+        -2px -2px 0 $color-white,
+        2px -2px 0 $color-white,
+        -2px 2px 0 $color-white,
+        2px 2px 0 $color-white;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__carts {
+    display: flex;
+    gap: 129px;
+    height: aut0;
+  }
+
+  &__cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 580px;
+    width: 437px;
+    border-radius: 32px;
+    background-color: $color-white;
+    padding: 16px;
+
+    &--loss {
+      height: 620px;
+
+      .game__paw {
+        color: $color-error;
+      }
+
+      .game__photo {
+        border-color: $color-error;
+      }
+
+      .game__info__result {
+        background-image: url("./../../../public/img/icons/gameError.svg");
+      }
+    }
+
+    &--success {
+      height: 620px;
+
+      .game__paw {
+        color: $color-primary-green;
+      }
+
+      .game__photo {
+        border-color: $color-primary-green;
+      }
+
+      .game__info__result {
+        background-image: url("./../../../public/img/icons/gameSuccess.svg");
+      }
+    }
+  }
+
+  &__paws {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &:first-child {
+      margin-bottom: 8px;
+
+      &.game__paws--round {
+        .game__paw {
+          animation:
+            colorChange 1s infinite,
+            pulse 2s infinite;
+
+          &:nth-child(2) {
+            animation-delay: 1.5s;
+          }
+        }
+      }
+    }
+
+    &:last-child {
+      &.game__paws--round {
+        .game__paw {
+          animation:
+            colorChange 1s infinite,
+            pulse 2s infinite;
+
+          &:nth-child(1) {
+            animation-delay: 1.5s;
+          }
+        }
+      }
+    }
+  }
+
+  &__paw {
+    color: $color-warm-yellow;
+    display: inline-block;
+    transition: all 0.1s ease;
+  }
+
+  &__photo {
+    border-radius: 50%;
+    border: 8px solid $color-warm-yellow;
+    height: 320px;
+    width: 320px;
+    object-fit: cover;
+  }
+
+  &__checkboxes {
+    display: flex;
+    gap: 64px;
+    height: 44px;
+    margin-top: 24px;
+  }
+
+  &__checkbox {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: $color-black;
+    @extend %h6;
+    line-height: 1;
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    .game__checkmark {
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      background-color: $color-white;
+      border: 1px solid $color-middle-grey;
+      border-radius: 8px;
+      display: inline-block;
+      margin-right: 16px;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        display: none;
+        width: 12.02px;
+        height: 16.97px;
+        left: 7.64px;
+        bottom: 10px;
+        border: solid $color-black;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  input[type="checkbox"]:checked + .game__checkmark {
+    border-color: $color-black;
+
+    &::after {
+      display: block;
+    }
+  }
+
+  &__info {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: center;
+
+    &__top {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      font-family: "Mariupol-Bold", sans-serif;
+      font-size: 28px;
+      line-height: 115%;
+      letter-spacing: 0;
+      color: $color-black;
+    }
+
+    &__result {
+      width: 40px;
+      height: 40px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  &__button {
+    display: none;
+    margin-top: 48px;
+  }
+}

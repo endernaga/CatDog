@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import "./BreadCrumb.scss";
+import React from "react";
 
 export const links = {
   pets: "Знайти друга",
@@ -7,13 +8,18 @@ export const links = {
   cats: "Котики",
   about: 'Про притулок',
   contacts: 'Контакти',
+  game: 'Він чи вона?'
 };
 
 export const returnName = (obj: Record<string, any>, key: string) => {
   return obj[key];
+};
+
+type Props = {
+  petName?: string,
 }
 
-export const BreadCrumb = () => {
+export const BreadCrumb:React.FC<Props> = ({petName}) => {
 
   const { pathname } = useLocation();
   const pathFull = pathname.split("/");
@@ -37,7 +43,7 @@ export const BreadCrumb = () => {
         <>
           <div className="icon icon-right" />
           <Link to={getRowLink(i + 1)} className="breadcrumb__title">
-            {returnName(links, p.split('-').join(' '))}
+            {returnName(links, p.split('-').join(' ')) || petName}
           </Link>
         </>
       ))}

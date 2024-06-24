@@ -1,108 +1,123 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./ModalWindow.scss";
-import { FilterType, Filters, ageFilter, sexFilter, sizeFilter, } from "../../types/sortFilters";
-import { useSearchParams } from "react-router-dom";
+import {
+  Filters,
+  ageFilter,
+  sexFilter,
+  sizeFilter,
+} from "../../types/sortFilters";
 import { Checkbox, ToggleBox } from "../FiltersCheck";
-import { GlobalContext } from "../../context/GlobalContext";
-import { BASE_URL } from "../../utils/fetchProducts";
+import { GlobalContext, initialFilters } from "../../context/GlobalContext";
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
+  handleUpdateParams: (newFilters: Partial<Filters>) => void;
 };
 
-export const initialFilters: Filters = {
-  sex: [],
-  size: [],
-  age: [],
-  sterilized: false,
-  vaccinated: false,
-};
+export const ModalWindow: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  handleUpdateParams,
+}) => {
+  const { filters } = useContext(GlobalContext);
 
-export const ModalWindow: React.FC<Props> = ({ isOpen, onClose }) => {
   const style = isOpen ? "window-open" : "window";
+  const [sex, setSex] = useState<string[]>([]);
+  const [age, setAge] = useState<string[]>([]);
+  const [size, setSize] = useState<string[]>([]);
+  const [sterilized, setSterilized] = useState<boolean>(false);
+  const [vaccinated, setVaccinated] = useState<boolean>(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const {filters, setFilters} = useContext(GlobalContext);
-
-  const [filteredPets, setFilteredPets] = useState([])
-
-  const onCheckboxChange = (type: FilterType, value: string, checked: boolean) => {
-    if (type === 'sterilized' || type === 'vaccinated') {
-      setFilters((prevFilters:Filters) => ({
-        ...prevFilters,
-        [type]: checked,
-      }));
+  const sexChange = (checked: boolean, value: string) => {
+    if (checked) {
+      setSex((prevSex) => [...prevSex, value]);
     } else {
-      setFilters((prevFilters:Filters) => {
-        const updatedFilters = { ...prevFilters };
-        if (checked) {
-          updatedFilters[type] = [...updatedFilters[type], value];
-        } else {
-          updatedFilters[type] = updatedFilters[type].filter((filter) => filter !== value);
-        }
-        return updatedFilters;
-      });
+      setSex((prevSex) => prevSex.filter((item) => item !== value));
     }
   };
 
-  const applyFilters = () => {
-    const newParams = new URLSearchParams();
-    (Object.entries(filters) as [keyof Filters, string[]][]).forEach(([key, values]) => {
-      if (values.length > 0) {
-        newParams.set(key, values.join(','));
-      }
-    });
-    setSearchParams(newParams);
+  const sizeChange = (checked: boolean, value: string) => {
+    if (checked) {
+      setSize(prevSize => [...prevSize, value]);
+    } else {
+      setSize((prevSize) => prevSize.filter((item) => item !== value));
+    }
+  };
 
-    fetch(`${BASE_URL}/api/filter?${newParams.toString()}`)//тут буде api від бекенду
-      .then((response) => response.json())
-      .then((data) => {
-        setFilteredPets(data);
-      });
-    
+  const ageChange = (checked: boolean, value: string) => {
+    if (checked) {
+      setAge((prevAge) => [...prevAge, value]);
+    } else {
+      setAge((prevAge) => prevAge.filter((item) => item !== value));
+    }
+  };
+
+  const handleApplyFilters = () => {
+    console.log(sterilized);
+    console.log(vaccinated);
+    handleUpdateParams({
+      sex: sex,
+      size: size,
+      age: age,
+      sterilized: sterilized,
+      vaccinated: vaccinated,
+    });
     onClose();
   };
 
-  const clearFilters = () => {
-    setFilters(initialFilters);
-    setSearchParams(new URLSearchParams());
+  useEffect(() => {
+    setSex(filters.sex);
+    setAge(filters.age);
+    setSize(filters.size);
+    setSterilized(filters.sterilized);
+    setVaccinated(filters.vaccinated);
+  }, [filters]);
 
-    fetch(`${BASE_URL}/api/filter`)//тут буде api від бекенду
-      .then((response) => response.json())
-      .then((data) => {
-        setFilteredPets(data);
-    })
-  }
 
   return (
     <>
-      {isOpen && <div className="overlay overlay-for-modal" />}
+      {isOpen && <div className="overlay" />}
       <div className={style}>
         <div className="window__header">
           <p className="window__header__text">Фільтри</p>
-          <div className="icon icon-close icon-close-form" onClick={onClose}></div>
+          <div
+            className="icon icon-close icon-close-form"
+            onClick={onClose}
+          ></div>
         </div>
 
         <div className="window__filters">
           <div className="window__filter">
             <div className="window__param">Стать</div>
             <div className="window__options">
-              <Checkbox filterData={sexFilter} filterType="sex" selectedFilters={filters.sex} onCheckboxChange={onCheckboxChange} />
+              <Checkbox
+                filterData={sexFilter}
+                filterType="sex"
+                onCheckboxChange={sexChange}
+              />
             </div>
           </div>
 
           <div className="window__filter">
             <div className="window__param">Розмір</div>
             <div className="window__options">
-              <Checkbox filterData={sizeFilter} filterType="size" selectedFilters={filters.size} onCheckboxChange={onCheckboxChange} />
+              <Checkbox
+                filterData={sizeFilter}
+                filterType="size"
+                onCheckboxChange={sizeChange}
+              />
             </div>
           </div>
 
           <div className="window__filter">
             <div className="window__param">Вік</div>
             <div className="window__options">
-              <Checkbox filterData={ageFilter} filterType="age" selectedFilters={filters.age} onCheckboxChange={onCheckboxChange} />
+              <Checkbox
+                filterData={ageFilter}
+                filterType="age"
+                onCheckboxChange={ageChange}
+              />
             </div>
           </div>
         </div>
@@ -110,24 +125,25 @@ export const ModalWindow: React.FC<Props> = ({ isOpen, onClose }) => {
         <div className="window__toggles">
           <div className="window__toggles__item">
             <p className="window__param">Стерилізовані</p>
-          <ToggleBox label="Стерилізовані" checked={filters.sterilized} onToggle={(checked) => onCheckboxChange('sterilized', '', checked)} />
+            <ToggleBox filterType="sterilized" onToggle={() => setSterilized(!sterilized)} />
           </div>
           <div className="window__toggles__item">
             <p className="window__param">Вакциновані</p>
-            <ToggleBox label="Вакциновані" checked={filters.vaccinated} onToggle={(checked) => onCheckboxChange('vaccinated', '', checked)} />
+            <ToggleBox filterType="vaccinated" onToggle={() => setVaccinated(!vaccinated)} />
           </div>
         </div>
 
         <div className="window__footer">
-          <button onClick={clearFilters} className="window__clear">
+          <button
+            onClick={() => handleUpdateParams(initialFilters)}
+            className="window__clear"
+          >
             <p className="window__clear__text">Очистити</p>
           </button>
-          <button onClick={applyFilters} className="mediumButton">
+          <button onClick={handleApplyFilters} className="mediumButton">
             <p className="text">Застосувати</p>
           </button>
         </div>
-
-      
       </div>
     </>
   );

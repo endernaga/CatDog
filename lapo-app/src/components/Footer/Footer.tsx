@@ -74,7 +74,7 @@ export const Footer = () => {
               Задонатити
             </Link>
             <button onClick={() => setIsSosFormOpen(true)} className="footer__sos">
-              Тварина в біді!
+              Тваринка в біді!
             </button>
           </ul>
         </div>

@@ -21,10 +21,6 @@
 
   &-right {
     background-image: url('../../../public/img/icons/arrowRight.svg');
-
-    &:hover {
-      background-image: url('../../../public/img/icons/arrowRightHover.svg');
-    }
   }
 
   &-up {
@@ -44,7 +40,6 @@
 
     &-form {
       background-color: $color-white;
-      background-size: 24px;
       height: 24px;
     }
 

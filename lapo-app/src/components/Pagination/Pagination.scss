@@ -1,0 +1,64 @@
+@import './../../styles/main.scss';
+
+.pagination {
+  width: 296px;
+  height: 40px;
+  display: flex;
+  gap: 16px;
+  width: auto;
+  justify-content: center;
+  margin-bottom: 128px;
+
+  &__hand {
+    width: 40px;
+    height: 40px;
+    background-color: $color-white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $color-orange;
+  
+      svg {
+        color: $color-white;
+      }
+
+    }
+  
+    svg {
+      color: $color-orange;
+      transition: fill 0.3s;
+    }
+  }
+
+  &__slider {
+    height: 100%;
+    width: 184px;
+    overflow: hidden;
+  }
+
+  &__list {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__item {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: $color-white;
+    @extend %main-text-medium;
+    color: $color-middle-grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--active {
+      background-color: $color-orange;
+      color: $color-white;
+    }
+  }
+}

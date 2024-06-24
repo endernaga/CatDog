@@ -18,5 +18,9 @@
   &__title {
     color: $color-white;
     @extend %main-text-medium;
+
+    &:last-child {
+      color: $color-light-grey;
+    }
   }
 }

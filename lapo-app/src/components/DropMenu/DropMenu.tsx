@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import "./DropMenu.scss";
 import { GlobalContext } from "../../context/GlobalContext";
 import { NavLink } from "react-router-dom";

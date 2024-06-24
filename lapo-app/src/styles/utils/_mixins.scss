@@ -33,3 +33,27 @@
     columns: 4;
   }
 }
+
+@keyframes colorChange {
+  0% {
+    color: $color-warm-yellow;
+  }
+  33% {
+    color: $color-orange;
+  }
+  66% {
+    color: $color-primary-green;
+  }
+  100% {
+    color: $color-warm-yellow;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+};

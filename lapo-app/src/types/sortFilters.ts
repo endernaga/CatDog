@@ -1,9 +1,10 @@
-export interface Filters {
+export type Filters =  {
   sex: string[];
   size: string[];
   age: string[];
   sterilized: boolean,
   vaccinated: boolean,
+  page?: number,
 };
 
 export type FilterType = keyof Filters;

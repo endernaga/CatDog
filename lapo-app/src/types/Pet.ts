@@ -4,7 +4,7 @@ export type Pet = {
   name: string,
   sex: string,
   age: string | number,
-  size?: string,
+  size?: string |  undefined,
   sterilized: string,
   vaccinated: string,
   images: string[],

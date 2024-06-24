@@ -25,7 +25,6 @@ export const FindMessage = () => {
         onClick={() => setIsSosFormOpen(true)}
       />
       {isSosFormOpen && <SosForm /> }
-
     </div>
   );
 };
