@@ -1,7 +1,11 @@
 from django.db import models
 
 
-SIZE_CHOICES = (("Маленький (до 30 см)", "small"), ("Седерній (30-50 см)", "average"), ("Великий (від 50 см)", "big"))
+SIZE_CHOICES = (
+    ("Маленький (до 30 см)", "small"),
+    ("Седерній (30-50 см)", "average"),
+    ("Великий (від 50 см)", "big"),
+)
 CATEGORY_CHOICES = (("dog", "Dog"), ("cat", "Cat"))
 
 
@@ -32,8 +36,10 @@ class Animals(models.Model):
 
 class Cat(Animals):
     photo = models.ManyToManyField(ImagesForAnimals, related_name="cat_photo")
+    category = models.CharField(choices=CATEGORY_CHOICES, default="cat")
 
 
 class Dog(Animals):
     photo = models.ManyToManyField(ImagesForAnimals, related_name="dog_photo")
     size = models.CharField(choices=SIZE_CHOICES, default="S", max_length=255)
+    category = models.CharField(choices=CATEGORY_CHOICES, default="dog")
