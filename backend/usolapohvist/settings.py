@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "usolapohvist_app",
+    "liked_animals",
     "rest_framework",
     "drf_spectacular",
     "corsheaders",
@@ -157,3 +158,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+LIKED_SESSION_ID = "LIKED_SESSION_ID"
