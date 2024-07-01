@@ -1,0 +1,32 @@
+@import './../../styles/main.scss';
+
+.loader {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: $color-primary-green;
+  background-color: $color-primary-green;
+  display: flex;
+  align-items: center;
+
+  img {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: -70px;
+    object-fit: cover;
+    animation: move 5s linear infinite;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translateX(-10px);
+  }
+  to {
+    transform: translateX(101vw);
+  }
+}

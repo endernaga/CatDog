@@ -167,7 +167,7 @@ export const GamePage = () => {
         <div className="game__content">
           {!!isRound && (
             <div className="game__round">
-              <h4 className="game__round__title">Залишилось секунд:</h4>
+              <h3 className="game__round__title">Залишилось секунд:</h3>
               <div className="game__round__seconds">{seconds}</div>
             </div>
           )}

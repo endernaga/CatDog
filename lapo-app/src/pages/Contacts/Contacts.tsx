@@ -67,7 +67,7 @@ export const Contacts = () => {
       <div className="contacts__links">
         {contactsButtons.map((button) => (
           <div className="contacts__links__item">
-            <a href={button.url} className="contacts__circle" key={button.name}>
+            <a href={button.url} target="_blank" className="contacts__circle" key={button.name}>
               <div dangerouslySetInnerHTML={{ __html: button.svg }} />
             </a>
             <p className="contacts__links__text">{button.text}</p>

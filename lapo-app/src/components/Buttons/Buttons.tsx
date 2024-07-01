@@ -12,6 +12,9 @@ type Props = {
   leftIcon: boolean;
   rightIcon: boolean;
   width?: string;
+  height?: string;
+  color?: string;
+  target?: string
 };
 
 export const BigButton: React.FC<Props> = ({
@@ -22,6 +25,7 @@ export const BigButton: React.FC<Props> = ({
   leftIcon,
   rightIcon,
   width,
+  target,
 }) => {
   const renderContent = () => (
     <>
@@ -59,7 +63,7 @@ export const BigButton: React.FC<Props> = ({
   return (
     <>
       {to ? (
-        <NavLink to={to} className="bigButton" style={{ width: `${width}px` }}>
+        <NavLink to={to} target={target} className="bigButton" style={{ width: `${width}px` }}>
           {renderContent()}
         </NavLink>
       ) : (
@@ -84,6 +88,8 @@ export const MediumButton: React.FC<Props> = ({
   leftIcon,
   rightIcon,
   width,
+  height,
+  color
 }) => {
   const renderContent = () => (
     <>
@@ -124,7 +130,11 @@ export const MediumButton: React.FC<Props> = ({
         <NavLink
           to={to}
           className="mediumButton"
-          style={{ width: `${width}px` }}
+          style={{
+            height: `${height}px`,
+            width: `${width}px`
+          }
+        }
         >
           {renderContent()}
         </NavLink>
@@ -133,7 +143,7 @@ export const MediumButton: React.FC<Props> = ({
           type={type}
           onClick={onClick}
           className="mediumButton"
-          style={{ width: `${width}px` }}
+          style={{ width: `${width}px`, height: `${height}px`, backgroundColor: `${color}` }}
         >
           {renderContent()}
         </button>

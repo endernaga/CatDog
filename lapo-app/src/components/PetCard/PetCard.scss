@@ -13,8 +13,7 @@
   position: relative;
 
   &__img {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    border-radius: 16px 16px 0 0;
     padding: 4px;
     width: 324px;
     height: 292px;

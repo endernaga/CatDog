@@ -24,7 +24,6 @@ export const FindMessage = () => {
         className="icon icon-bot"
         onClick={() => setIsSosFormOpen(true)}
       />
-      {isSosFormOpen && <SosForm /> }
     </div>
   );
 };

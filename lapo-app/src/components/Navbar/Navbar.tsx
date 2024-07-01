@@ -42,12 +42,6 @@ export const Navbar = () => {
             fill="currentColor"
           />
         </svg>
-        {/*<div
-          className={classNames("icon", {
-            // "icon-up": isDropmenuOpen,
-            // "icon-down": !isDropmenuOpen,
-          })} 
-        /> */}
       </div>
       <NavLink to="/pets" className={getLinkClass}>
         Знайти друга

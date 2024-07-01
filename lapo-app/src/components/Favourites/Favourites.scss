@@ -1,0 +1,109 @@
+@import "./../../styles/main.scss";
+
+.favs {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 485px;
+  background-color: $color-white;
+  z-index: 1000;
+  border-radius: 0 32px 32px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+
+  &__top {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 53px;
+  }
+
+  &__title {
+    @extend %h4;
+    color: $color-black;
+  }
+
+  &__empty {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+
+    &__text {
+      align-self: start;
+      @extend %button-text-medium;
+      color: $color-grey;
+    }
+  }
+
+  &__item {
+    height: 319px;
+    width: 243px;
+    border-radius: 16px;
+    border: 1px solid $color-orange;
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    &__img {
+      border-radius: 16px 16px 0 0;
+      padding: 3px;
+      width: 243px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    &__info {
+      margin-top: 8px;
+      align-self: flex-start;
+      padding-inline: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    &__name {
+      @extend %h5;
+      color: $color-black;
+      height: 32px;
+    }
+
+    &__props {
+      height: 23px;
+      @extend %button-text-regular;
+      color: $color-dark-grey;
+    }
+
+    &__footer {
+      margin-top: 16px;
+      height: 40px;
+      display: flex;
+      padding-inline: 16px;
+      gap: 16px;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid $color-orange;
+    color: $color-orange;
+
+    &:hover {
+      background-color: $color-light-orange;
+      border: none;
+    }
+  }
+}

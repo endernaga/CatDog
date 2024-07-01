@@ -26,7 +26,7 @@
       border-radius: 50%;
       border: 5px solid $color-white;
       height: 100%;
-      width: 384px;
+      width: 340px;
       object-fit: cover;
     }
   }
@@ -38,7 +38,7 @@
     align-items: center;
 
     &__title {
-      @extend %h4;
+      @extend %h3;
     }
 
     &__seconds {
@@ -72,14 +72,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 580px;
-    width: 437px;
+    height: 540px;
+    width: 380px;
     border-radius: 32px;
     background-color: $color-white;
     padding: 16px;
 
     &--loss {
-      height: 620px;
+      height: 600px;
 
       .game__paw {
         color: $color-error;
@@ -95,7 +95,7 @@
     }
 
     &--success {
-      height: 620px;
+      height: 600px;
 
       .game__paw {
         color: $color-primary-green;
@@ -156,8 +156,8 @@
   &__photo {
     border-radius: 50%;
     border: 8px solid $color-warm-yellow;
-    height: 320px;
-    width: 320px;
+    height: 280px;
+    width: 280px;
     object-fit: cover;
   }
 

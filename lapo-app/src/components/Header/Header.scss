@@ -58,4 +58,23 @@
       border: 1px solid $color-orange;
     }   
   }
+
+  &__like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+    background-color: $color-white;
+    border-radius: 50%;
+    border: 1px solid $color-orange;
+    color: $color-orange;
+
+    &:hover {
+      background-color: $color-light-orange;
+      border: none;
+    }
+  }
 }

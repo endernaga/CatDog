@@ -14,32 +14,39 @@ export const ShareModal: React.FC<Props> = ({ closeModal, pet }) => {
 
   const pageUrl = encodeURIComponent(window.location.href);
   const pageTitle = encodeURIComponent(document.title);
+  //const ngrokUrl = 'https://aafc-79-110-133-41.ngrok-free.app'; // замініть на ваш HTTPS URL від ngrok
+  //const pagePath = window.location.pathname + window.location.hash;
+  //const pageUrl = encodeURIComponent(`${ngrokUrl}${pagePath}`);
 
-  const openWindow = (url: string) => {
-    window.open(url, "_blank", "width=600, height=400");
-  };
+  console.log(pageUrl);
 
   const handleCopyLink = async (): Promise<void> => {
     try {
-      await navigator.clipboard.writeText(pageUrl);
+      await navigator.clipboard.writeText(window.location.href);
       alert("Link copied to clipboard!");
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
   };
 
+  const openWindow = (url: string) => {
+    window.open(url, "_blank", "width=600, height=400");
+  };
+
   const handleViberShare = () => {
-    const viberUrl = `https://www.viber.com/share?url=${pageUrl}&text=${pageTitle}`;
+    const viberUrl = `https://chats.viber.com/share/url?url=${pageUrl}&text=${pageTitle}`;
     openWindow(viberUrl);
   };
 
   const handleTelegramShare = () => {
-    const telegramUrl = `https://t.me/share/url?url=${pageUrl}&text=${pageTitle}`;
+    const telegramUrl = `https://t.me/share/url?url=${pageUrl}`;
+    console.log(telegramUrl);
     openWindow(telegramUrl);
   };
 
   const handleFacebookShare = () => {
-    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${pageTitle}`;
+    console.log(facebookUrl);
     openWindow(facebookUrl);
   };
 
@@ -49,8 +56,8 @@ export const ShareModal: React.FC<Props> = ({ closeModal, pet }) => {
   };
 
   const handleSmsShare = () => {
-    const smsUrl: string = `sms:?body=${pageTitle}%20${pageUrl}`;
-    window.location.href = smsUrl;
+    const smsUrl: string = `sms:?body=${pageTitle}%20${window.location.href}`;
+    openWindow(smsUrl);
   };
 
   return (

@@ -138,7 +138,7 @@ export const SosForm = () => {
   return (
     <>
       <div className="overlay" />
-      <form className="form" onSubmit={handleSubmit}>
+      <form id="sosForm" className="form" onSubmit={handleSubmit}>
         <div className="form__header">
           <div className="form__title">SOS! Тваринка у біді!</div>
           <div

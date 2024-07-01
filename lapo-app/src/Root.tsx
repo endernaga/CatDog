@@ -8,10 +8,12 @@ import { PersonalPage } from './pages/PersonalPage';
 import { Cats } from './pages/Cats';
 import { ErrorPage } from './pages/ErrorPage';
 import { GamePage } from './pages/GamePage';
+import { ScrollToTop } from './utils/scrollToTop';
 
 export const Root = () => {
   return (
     <HashRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />

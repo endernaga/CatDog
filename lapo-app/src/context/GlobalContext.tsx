@@ -17,18 +17,22 @@ export const GlobalContext = createContext({
   scrollToSection: (id: string) => {},
   filters: initialFilters,
   setFilters: (v: any) => { },
+  isLoading: false,
+  setIsLoading: (v:boolean) => {},
 })
 
 export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   const [isDropmenuOpen, setIsDropmenuOpen] = useState(false);
   const [isSosFormOpen, setIsSosFormOpen] = useState(false);
   const [targetId, setTargetId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (targetId) {
       const element = document.getElementById(targetId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', `#${targetId}`);
         setTargetId(null);
       }
     }
@@ -50,6 +54,8 @@ export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
         isSosFormOpen,
         setIsSosFormOpen,
         scrollToSection,
+        isLoading,
+        setIsLoading
       }}>
       {children}
     </GlobalContext.Provider>

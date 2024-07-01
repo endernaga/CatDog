@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import './Footer.scss';
 import { socialMedias } from '../../utils/socialMedias';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../context/GlobalContext';
 
 export const Footer = () => {
@@ -17,6 +17,7 @@ export const Footer = () => {
           <div className="footer__social__medias">
             {socialMedias.map(media => (
               <a
+                target='_blank'
                 href={media.url}
                 className="social-media"
                 key={media.name}
@@ -48,17 +49,14 @@ export const Footer = () => {
         <div className="footer__on-site">
           <p className="footer__title">На сайті</p>
           <ul className="footer__list">
-            <NavLink to="/about" className="footer__item">
-              Про притулок
+            <NavLink to="/pets" className="footer__item">
+              Знайти друга
             </NavLink>
-            <NavLink to="/reports" className="footer__item">
-              Звіти
+            <NavLink to="/contacts" className="footer__item">
+              Контакти
             </NavLink>
-            <NavLink to="/happyMoments" className="footer__item">
-              Щасливі події
-            </NavLink>
-            <NavLink to="/rulesOfAdopts" className="footer__item">
-              Правила адапції
+            <NavLink to="/game" className="footer__item">
+              Він чи вона
             </NavLink>
           </ul>
         </div>
