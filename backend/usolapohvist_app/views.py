@@ -1,11 +1,14 @@
 import random
+from itertools import chain
+from operator import attrgetter
 
 import telebot
 from django.db.models import Max
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, mixins
 from rest_framework.decorators import action, api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
 from usolapohvist import settings
 from usolapohvist_app.serializers import (
@@ -20,7 +23,7 @@ from usolapohvist_app.models import Cat, Dog
 
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 9
     page_size_query_param = "page_size"
     max_page_size = 20
 
@@ -37,6 +40,38 @@ class AddNewPhoto:
             animal.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Animals(mixins.ListModelMixin, GenericViewSet):
+    pagination_class = StandardResultsSetPagination
+    serializer_class = DogSerializer
+
+    def get_queryset(self):
+        dogs = Dog.objects.all()
+        cats = Cat.objects.all()
+
+        sex = self.request.GET.get("sex")
+        age = self.request.GET.get("age")
+        vaccinated = self.request.GET.get("vaccinated")
+        sterilized = self.request.GET.get("sterilized")
+
+        if age:
+            cats = cats.filter(age__in=age.split(","))
+            dogs = dogs.filter(age__in=age.split(","))
+
+        if sex:
+            cats = cats.filter(sex=sex)
+            dogs = dogs.filter(sex=sex)
+
+        if vaccinated:
+            cats = cats.filter(vaccinated=vaccinated == "true")
+            dogs = dogs.filter(vaccinated=vaccinated == "true")
+
+        if sterilized:
+            cats = cats.filter(sterilized=sterilized == "true")
+            dogs = dogs.filter(sterilized=sterilized == "true")
+
+        return sorted(list(chain(cats, dogs)), key=attrgetter("id"))
 
 
 class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
