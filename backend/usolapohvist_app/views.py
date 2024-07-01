@@ -1,11 +1,13 @@
 import random
 
+import telebot
 from django.db.models import Max
 from rest_framework import viewsets, status
 from rest_framework.decorators import action, api_view
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
+from usolapohvist import settings
 from usolapohvist_app.serializers import (
     CatSerializer,
     ImagesSerializer,
@@ -153,3 +155,16 @@ def get_male(obj):
         category = obj.objects.filter(pk=pk, sex="male").first()
         if category:
             return category
+
+
+@api_view(["POST"])
+def save_sos_form(request):
+    if request.method == "POST":
+        bot = telebot.TeleBot(settings.BOT_TOKEN)
+        text = f"""!!!SOS!!!
+        {request.POST.get('name')}
+        {request.POST.get('phone')}
+        {request.POST.get('text')}
+        """
+        bot.send_message("-4229249922", text)
+        return Response(status=status.HTTP_201_CREATED, data="success")
