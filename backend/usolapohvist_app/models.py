@@ -6,7 +6,7 @@ SIZE_CHOICES = (
     ("Седерній (30-50 см)", "average"),
     ("Великий (від 50 см)", "big"),
 )
-CATEGORY_CHOICES = (("dog", "Dog"), ("cat", "Cat"))
+CATEGORY_CHOICES = (("dogs", "Dog"), ("cats", "Cat"))
 
 
 class ImagesForAnimals(models.Model):
@@ -18,7 +18,7 @@ class Animals(models.Model):
     name = models.CharField(max_length=255)
     photo: models.ManyToManyField
     sex = models.TextField(
-        choices=(("male", "Male"), ("female", "Female")), default="male"
+        choices=(("Хлопчик", "Male"), ("Дівчинка", "Female")), default="male"
     )
     age = models.IntegerField()
     description = models.TextField()
