@@ -6,7 +6,7 @@ SIZE_CHOICES = (
     ("Седерній (30-50 см)", "average"),
     ("Великий (від 50 см)", "big"),
 )
-CATEGORY_CHOICES = (("dog", "Dog"), ("cat", "Cat"))
+CATEGORY_CHOICES = (("dogs", "Dog"), ("cats", "Cat"))
 
 
 class ImagesForAnimals(models.Model):
