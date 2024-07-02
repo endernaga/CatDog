@@ -18,7 +18,7 @@ class Animals(models.Model):
     name = models.CharField(max_length=255)
     photo: models.ManyToManyField
     sex = models.TextField(
-        choices=(("male", "Male"), ("female", "Female")), default="male"
+        choices=(("Хлопчик", "Male"), ("Дівчинка", "Female")), default="male"
     )
     age = models.IntegerField()
     description = models.TextField()
