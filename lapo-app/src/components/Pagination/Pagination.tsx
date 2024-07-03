@@ -12,7 +12,7 @@ type Props = {
 export const Pagination: React.FC<Props> = ({ numOfPages, updateSearchParams }) => {
   let pages = [];
   for (let i = 1; i <= numOfPages; i++) {
-    pages.push(i);
+    pages.push(i.toString());
   };
 
   const { filters } = useContext(GlobalContext);
@@ -32,7 +32,6 @@ export const Pagination: React.FC<Props> = ({ numOfPages, updateSearchParams }) 
                 fill="currentColor"
               />
             </svg>
-
           </div>
       <div className="pagination__slider">
         <li className="pagination__list">

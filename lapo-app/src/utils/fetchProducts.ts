@@ -1,14 +1,43 @@
+import { Pet } from "../types/Pet";
+
 export const BASE_URL = process.env.PUBLIC_URL;
 
-//const apiUrl = process.env.REACT_APP_BACKEND_API;
+export const API_URL = 'http://localhost:8000/api';
 
-const isDocker = process.env.DOCKER_ENV === 'docker';
+export const getCats = async (): Promise<Pet[]> => {
+  const response = await fetch(`${API_URL}/cats`, {
+    method: 'GET',
+  });
 
-// Умовний оператор для визначення урл
-const apiUrl = isDocker
-  ? 'http://backend:8000/api'   // У Docker
-  : 'http://localhost:8000/api'; // Локально
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
 
-  const backendUrl = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:8000'
-  : 'http://192.168.x.x:8000';
+  const data = await response.json();
+  const cats = data.results;
+
+  return cats;
+};
+
+export const getDogs = async (): Promise<Pet[]> => {
+  const data = await fetch(`${BASE_URL}/dogs`);
+
+  const dogs: Pet[] = await data.json();
+
+  return dogs;
+};
+
+export const getPetById = async (category: string, id: string): Promise<Pet[]> => {
+  const response = await fetch(`${API_URL}/${category}/${id}`, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  const pet = data.results;
+
+  return pet;
+};

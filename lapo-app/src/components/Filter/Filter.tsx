@@ -1,6 +1,6 @@
 import { AnimalButton } from "../Buttons";
 import "./Filter.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ModalWindow } from "../ModalWindow";
 import { GlobalContext } from "../../context/GlobalContext";
 import {
@@ -9,7 +9,6 @@ import {
   sexFilter,
   sizeFilter,
 } from "../../types/sortFilters";
-import { useSearchParams } from "react-router-dom";
 
 type Props = {
   updateSearchParams: (newFilters: Partial<Filters>) => void,
@@ -53,8 +52,6 @@ export const Filter:React.FC<Props> = ({updateSearchParams}) => {
 
     return "Вакциновані";
   };
-
-  console.log(filters);
 
   return (
     <div className="filter">

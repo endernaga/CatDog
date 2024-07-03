@@ -7,5 +7,6 @@ export type Pet = {
   size?: string |  undefined,
   sterilized: string,
   vaccinated: string,
+  photo?: string,
   images: string[],
 }

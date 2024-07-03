@@ -1,39 +1,47 @@
-import React, { useContext, useEffect } from 'react';
-import './CategoryPage.scss';
-import { Pet } from '../../types/Pet';
-import { useSearchParams } from 'react-router-dom';
-import { GlobalContext } from '../../context/GlobalContext';
-import { Filters } from '../../types/sortFilters';
-import { BreadCrumb } from '../../components/BreadCrumb';
-import { BigSectionsHeader } from '../../components/BigSectionsHeader';
-import { Filter } from '../../components/Filter';
-import { PetsList } from '../../components/PetsList';
-import { Pagination } from '../../components/Pagination';
+import React, { useContext, useEffect } from "react";
+import "./CategoryPage.scss";
+import { Pet } from "../../types/Pet";
+import { useLocation, useSearchParams } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalContext";
+import { Filters } from "../../types/sortFilters";
+import { BreadCrumb } from "../../components/BreadCrumb";
+import { BigSectionsHeader } from "../../components/BigSectionsHeader";
+import { Filter } from "../../components/Filter";
+import { PetsList } from "../../components/PetsList";
+import { Pagination } from "../../components/Pagination";
 
 type Props = {
-  pets: Pet[]
-}
+  pets: Pet[];
+};
 
-export const CategoryPage: React.FC<Props> = ({pets}) => {
+export const CategoryPage: React.FC<Props> = ({ pets }) => {
   const numOfPages = Math.ceil(pets.length / 9);
 
   const { filters, setFilters } = useContext(GlobalContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const location = useLocation();
+
   useEffect(() => {
+    const newSearchParams = new URLSearchParams(location.search);
+
+    if (!newSearchParams.has("page")) {
+      newSearchParams.set("page", "1");
+    }
     setFilters({
       sex: searchParams.get("sex")?.split(",") || [],
       size: searchParams.get("size")?.split(",") || [],
       age: searchParams.get("age")?.split(",") || [],
       sterilized: searchParams.get("sterilized") === "true",
-      vaccinated: searchParams.get("vaccinated")  === "true",
-      page: searchParams.get("page")
-        ? parseInt(searchParams.get("page") as string)
-        : 1,
+      vaccinated: searchParams.get("vaccinated") === "true",
+      page: searchParams.get("page"),
     });
-  }, [searchParams, setSearchParams]);
 
+    if (location.search !== newSearchParams.toString()) {
+      setSearchParams(newSearchParams.toString());
+    }
+  }, [location.search, setSearchParams]);
 
   const updateSearchParams = (newFilters: Partial<Filters>) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
@@ -59,10 +67,13 @@ export const CategoryPage: React.FC<Props> = ({pets}) => {
   return (
     <div className="page">
       <BreadCrumb />
-      <BigSectionsHeader text={['Супер', 'Друзі']} />
+      <BigSectionsHeader text={["Супер", "Друзі"]} />
       <Filter updateSearchParams={updateSearchParams} />
-      <PetsList />
-      <Pagination numOfPages={numOfPages} updateSearchParams={updateSearchParams} />
+      <PetsList pets={pets} />
+      <Pagination
+        numOfPages={numOfPages}
+        updateSearchParams={updateSearchParams}
+      />
     </div>
-  )
-}
+  );
+};

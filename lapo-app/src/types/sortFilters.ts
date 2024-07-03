@@ -4,7 +4,7 @@ export type Filters =  {
   age: string[];
   sterilized: boolean,
   vaccinated: boolean,
-  page?: number,
+  page: string,
 };
 
 export type FilterType = keyof Filters;

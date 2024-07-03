@@ -1,19 +1,31 @@
-import React from "react";
-import { BASE_URL } from "../../utils/fetchProducts";
+import React, { useEffect } from "react";
 import "./PetCard.scss";
 import { Pet } from "../../types/Pet";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { BASE_URL } from "../../utils/fetchProducts";
 
 type Props = {
   pet: Pet;
 };
 
 export const PetCard: React.FC<Props> = ({ pet }) => {
+  const location = useLocation();
+
+  const getAbsolutePath = (category: string, id: string) => {
+    if (location.pathname.includes(category)) {
+      return `/pets/${category}/${id}`
+    }
+    return `${category}/${id}`;
+  };
+
+  const sex = pet.sex === 'male' ? 'Хлопчик' : 'Дівчинка';
+  const years = pet.age === '1' ? '1 рік' : `${pet.age} роки`
+  
   return (
     <div className="card">
-      <Link to={`${pet.category}/${pet.id}`}>
+      <Link to={getAbsolutePath(pet.category, pet.id)}>
         <img
-          src={`${BASE_URL}/${pet.images[0]}`}
+          src={`${BASE_URL}img/animals_image/${pet.name}.png`}
           alt="petPhoto"
           className="card__img"
         />
@@ -36,8 +48,8 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
         <div className="card__info">
           <p className="card__name">{pet.name}</p>
           <div className="card__props">
-            <div className="card__prop">{pet.sex}</div>
-            <div className="card__prop">{pet.age}</div>
+            <div className="card__prop">{sex}</div>
+            <div className="card__prop">{`${years}` }</div>
             {pet.size && <div className="card__prop">{pet.size}</div>}
           </div>
         </div>

@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import "./FindMessage.scss";
-import { SosForm } from "../SosForm";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export const FindMessage = () => {
-  const [isMessageOpen, setIsMessageOpen] = useState(true);
-  const {isSosFormOpen, setIsSosFormOpen} = useContext(GlobalContext);
+  const [isMessageOpen, setIsMessageOpen] = useState(() => sessionStorage.getItem('isMessageOpen') !== 'false');
+  const { isSosFormOpen, setIsSosFormOpen } = useContext(GlobalContext);
+  
+  useEffect(() => {
+    sessionStorage.setItem('isMessageOpen', String(isMessageOpen));
+  }, [isMessageOpen])
 
   return (
     <div className="find-message">

@@ -7,6 +7,7 @@ import "./PersonalPage.scss";
 import { BigSectionsHeader } from "../../components/BigSectionsHeader";
 import { useState } from "react";
 import { ShareModal } from "../../components/ShareModal";
+import { useLocation } from "react-router-dom";
 
 export const PersonalPage = () => {
   const {
@@ -22,6 +23,9 @@ export const PersonalPage = () => {
     images,
     size,
   } = catData[0];
+  const location = useLocation();
+  const id = location.pathname;
+  console.log(id);
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [mainPhoto, setMainPhoto] = useState<string>(images[0]);
@@ -114,7 +118,7 @@ export const PersonalPage = () => {
         </div>
         <div className="personal__right">
           <div className="personal__top">
-            <h1 className="personal__name">{name}</h1>
+            <h2 className="personal__name">{name}</h2>
             <div className="personal__icons">
               <div
                 className="personal__share"
