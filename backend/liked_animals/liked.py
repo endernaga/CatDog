@@ -13,20 +13,20 @@ class Liked(object):
         self.liked = liked
 
     def __iter__(self):
-        cats = Cat.objects.filter(id__in=self.liked.get("cat")) if self.liked.get("cat") else []
-        dogs = Dog.objects.filter(id__in=self.liked.get("dog")) if self.liked.get("dog") else []
+        cats = Cat.objects.filter(id__in=self.liked.get("cats")) if self.liked.get("cats") else []
+        dogs = Dog.objects.filter(id__in=self.liked.get("dogs")) if self.liked.get("dogs") else []
         animals = list(chain(cats, dogs))
         for animal in animals:
             yield animal
 
     def get_dogs(self):
-        return Dog.objects.filter(id__in=self.liked.get("cat"))
+        return Dog.objects.filter(id__in=self.liked.get("cats"))
 
     def get_cats(self):
-        return Cat.objects.filter(id__in=self.liked.get("dog"))
+        return Cat.objects.filter(id__in=self.liked.get("dogs"))
 
     def __len__(self):
-        return sum(self.liked.get("cat"), self.liked.get("dog"))
+        return sum(self.liked.get("cats"), self.liked.get("dogs"))
 
     def add(self, kind: str, animal_id: int):
         if kind not in self.liked:
