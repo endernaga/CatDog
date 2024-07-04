@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
 import { BreadCrumb } from "../../components/BreadCrumb";
 import { LargeButton } from "../../components/Buttons";
-import { BASE_URL } from "../../utils/fetchProducts";
+import { BASE_URL, getPetsForGame } from "../../utils/fetchProducts";
 import "./GamePage.scss";
-import { pet1, pet2 } from "../../utils/JUSTFORDEVELOP/petsForGame";
 import classNames from "classnames";
+import { Pet } from "../../types/Pet";
 
 export const GamePage = () => {
   const [isStartPageVisible, setIsStartPageVisible] = useState(true);
   const [isRound, setIsRound] = useState(false);
   const [seconds, setSeconds] = useState(10);
-  const firstPet = pet1;
-  const secondPet = pet2;
-  const pets = [firstPet, secondPet];
+  const [pets, setPets] = useState<Pet[]>([]);
+  const firstPet = pets[0];
+  const secondPet = pets[1];
   const [firstItemChoice, setFirstItemChoice] = useState<string>("");
   const [secondItemChoice, setSecondItemChoice] = useState<string>("");
   const [isFirstTrue, setIsFirstTrue] = useState<boolean>(false);
   const [isSecondTrue, setIsSecondTrue] = useState<boolean>(false);
+
+  useEffect(() => {
+    getPetsForGame()
+      .then((data) => setPets(data.results))
+      .catch((error) => console.error("fetching error", error))
+    .finally(() => console.log(pets))
+  }, [isRound]);
 
   const isSelect = (v: string, index: number) => {
     let select = false;
@@ -86,7 +93,7 @@ export const GamePage = () => {
     document.querySelectorAll(".game__cart").forEach((cart) => {
       cart.className = "game__cart";
     });
-  }
+  };
 
   useEffect(() => {
     if (!isRound) {
@@ -174,9 +181,11 @@ export const GamePage = () => {
           <div className="game__carts">
             {pets.map((pet, index) => (
               <div className="game__cart" id={index.toString()}>
-                <div className={classNames("game__paws", {
-                  "game__paws--round": isRound,
-                })}>
+                <div
+                  className={classNames("game__paws", {
+                    "game__paws--round": isRound,
+                  })}
+                >
                   <svg
                     className="game__paw"
                     width="64"
@@ -205,7 +214,7 @@ export const GamePage = () => {
                   </svg>
                 </div>
                 <img
-                  src={`${BASE_URL}/${pet.images[0]}`}
+                  src={`${BASE_URL}/${pet.photo}`}
                   alt={pet.id}
                   className="game__photo"
                 />
@@ -250,9 +259,11 @@ export const GamePage = () => {
                     to={`/pets/${pet.category}/${pet.id}`}
                   />
                 </div>
-                <div className={classNames("game__paws", {
-                  "game__paws--round": isRound,
-                })}>
+                <div
+                  className={classNames("game__paws", {
+                    "game__paws--round": isRound,
+                  })}
+                >
                   <svg
                     className="game__paw"
                     width="64"
