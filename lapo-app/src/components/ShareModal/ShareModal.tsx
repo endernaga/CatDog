@@ -6,10 +6,11 @@ import { BASE_URL } from "../../utils/fetchProducts";
 type Props = {
   closeModal: () => void;
   pet: Pet;
+  images: string[],
 };
 
-export const ShareModal: React.FC<Props> = ({ closeModal, pet }) => {
-  const { name, sex, size, age, images } = pet;
+export const ShareModal: React.FC<Props> = ({ closeModal, pet, images }) => {
+  const { name, sex, size, age } = pet;
   const params = size ? [name, sex, age, size] : [name, sex, age];
 
   const pageUrl = encodeURIComponent(window.location.href);

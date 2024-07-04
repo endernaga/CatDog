@@ -24,6 +24,16 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s linear;
+
+    &:hover {
+      background-color: $color-orange-hover;
+
+      .categories__category__title {
+        color: $color-white;
+      }
+    }
 
     &__title {
       @extend %h3;
@@ -39,12 +49,7 @@
       justify-content: center;
     }
 
-    /* &__img {
-      max-width: 100%;
-      height: auto;
-    } */
-
-    &__dog {
+    &__dogs {
       max-width: 100%;
       height: auto;
     }

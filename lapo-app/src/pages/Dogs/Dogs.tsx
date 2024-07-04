@@ -1,24 +1,23 @@
 import { useContext, useEffect, useState } from 'react';
-import { CategoryPage } from '../CategoryPage';
-import './Cats.scss';
+import './Dogs.scss';
 import { GlobalContext } from '../../context/GlobalContext';
 import { Pet } from '../../types/Pet';
-import { getCats } from '../../utils/fetchProducts';
-import { Loader } from '../../components/Loader';
+import { getDogs } from '../../utils/fetchProducts';
+import { CategoryPage } from '../CategoryPage';
 import { useSearchParams } from 'react-router-dom';
 
-export const Cats = () => {
-  const { isLoading, setIsLoading } = useContext(GlobalContext);
-  const [cats, setCats] = useState<Pet[]>([]);
+export const Dogs = () => {
+  const { setIsLoading } = useContext(GlobalContext);
+  const [dogs, setDogs] = useState<Pet[]>([]);
   const [count, setCount] = useState(0);
+
   const [searchParams] = useSearchParams();
 
   const fetchData = () => {
     setIsLoading(true);
-    console.log(searchParams.toString());
-    getCats(searchParams.toString())
+    getDogs(searchParams.toString())
       .then((data) => {
-        setCats(data.results);
+        setDogs(data.results);
         setCount(data.count);
       })
       .catch((error) => {
@@ -32,6 +31,6 @@ export const Cats = () => {
   }, [searchParams]);
 
   return (
-      <CategoryPage pets={cats} count={count} fetchData={fetchData} />
-    )
+    <CategoryPage pets={dogs} count={count} fetchData={fetchData} />
+  )
 }

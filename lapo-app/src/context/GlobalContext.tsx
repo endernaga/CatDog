@@ -1,7 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Filters } from "../types/sortFilters";
-import { getCats, getDogs } from "../utils/fetchProducts";
-import { Pet } from "../types/Pet";
 
 export const initialFilters: Filters = {
   sex: [],
@@ -29,8 +27,6 @@ export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   const [isSosFormOpen, setIsSosFormOpen] = useState(false);
   const [targetId, setTargetId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [cats, setCats] = useState<Pet[]>([]);
-  const [dogs, setDogs] = useState<Pet[]>([]);
 
   useEffect(() => {
     if (targetId) {
@@ -48,19 +44,6 @@ export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   };
 
   const [filters, setFilters] = useState<Filters>(initialFilters);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getCats().then(data => setCats(data)).catch(error => {
-      console.error('Error fetching cats:', error);
-    });
-
-    getDogs().then(data => setDogs(data)).catch(error => {
-      console.error('Error fetching dogs:', error);
-    });
-    setIsLoading(false);
-
-  }, []);
 
   return (
     <GlobalContext.Provider

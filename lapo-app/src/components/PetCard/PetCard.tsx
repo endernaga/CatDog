@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./PetCard.scss";
 import { Pet } from "../../types/Pet";
 import { Link, useLocation } from "react-router-dom";

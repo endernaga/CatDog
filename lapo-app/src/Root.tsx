@@ -9,6 +9,7 @@ import { Cats } from './pages/Cats';
 import { ErrorPage } from './pages/ErrorPage';
 import { GamePage } from './pages/GamePage';
 import { ScrollToTop } from './utils/scrollToTop';
+import { Dogs } from './pages/Dogs';
 
 export const Root = () => {
   return (
@@ -23,7 +24,11 @@ export const Root = () => {
             <Route index element={<AllPetsPage />} />
             <Route path='cats' >
             <Route index element={<Cats />} />
-            <Route path=':animalId' element={<PersonalPage />} />
+            <Route path=':petId' element={<PersonalPage />} />
+            </Route>
+            <Route path='dogs' >
+            <Route index element={<Dogs />} />
+            <Route path=':petId' element={<PersonalPage />} />
             </Route>
           </Route>
           <Route path='game' element={<GamePage />} />

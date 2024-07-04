@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./CategoryPage.scss";
 import { Pet } from "../../types/Pet";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -12,36 +12,16 @@ import { Pagination } from "../../components/Pagination";
 
 type Props = {
   pets: Pet[];
+  count: number;
+  fetchData: () => void;
 };
 
-export const CategoryPage: React.FC<Props> = ({ pets }) => {
-  const numOfPages = Math.ceil(pets.length / 9);
-
+export const CategoryPage:React.FC<Props> = ({ pets, count, fetchData}) => {
   const { filters, setFilters } = useContext(GlobalContext);
-
   const [searchParams, setSearchParams] = useSearchParams();
+  const numOfPages = Math.ceil(count / 9);
 
   const location = useLocation();
-
-  useEffect(() => {
-    const newSearchParams = new URLSearchParams(location.search);
-
-    if (!newSearchParams.has("page")) {
-      newSearchParams.set("page", "1");
-    }
-    setFilters({
-      sex: searchParams.get("sex")?.split(",") || [],
-      size: searchParams.get("size")?.split(",") || [],
-      age: searchParams.get("age")?.split(",") || [],
-      sterilized: searchParams.get("sterilized") === "true",
-      vaccinated: searchParams.get("vaccinated") === "true",
-      page: searchParams.get("page"),
-    });
-
-    if (location.search !== newSearchParams.toString()) {
-      setSearchParams(newSearchParams.toString());
-    }
-  }, [location.search, setSearchParams]);
 
   const updateSearchParams = (newFilters: Partial<Filters>) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
@@ -64,6 +44,26 @@ export const CategoryPage: React.FC<Props> = ({ pets }) => {
 
     setSearchParams(updatedSearchParams);
   };
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(location.search);
+    if (!newSearchParams.has("page")) {
+      newSearchParams.set("page", "1");
+    }
+    setFilters({
+      sex: searchParams.get("sex")?.split(",") || [],
+      size: searchParams.get("size")?.split(",") || [],
+      age: searchParams.get("age")?.split(",") || [],
+      sterilized: searchParams.get("sterilized") === "true",
+      vaccinated: searchParams.get("vaccinated") === "true",
+      page: searchParams.get("page"),
+    });
+
+    if (location.search !== newSearchParams.toString()) {
+      setSearchParams(newSearchParams.toString());
+    }
+  }, [location.search, setSearchParams, setFilters]);
+
   return (
     <div className="page">
       <BreadCrumb />

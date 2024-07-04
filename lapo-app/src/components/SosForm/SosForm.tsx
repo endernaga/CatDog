@@ -3,6 +3,7 @@ import "./SosForm.scss";
 import { MediumButton } from "../Buttons";
 import classNames from "classnames";
 import { GlobalContext } from "../../context/GlobalContext";
+import { API_URL } from "../../utils/fetchProducts";
 
 export const SosForm = () => {
   const { setIsSosFormOpen } = useContext(GlobalContext);
@@ -28,7 +29,7 @@ export const SosForm = () => {
       e.target.closest(".form__content__input");
     const formItem = input?.closest(".form__content__item");
     const icon = formItem?.querySelector(".form__icon");
-    console.log(e.target.value.replace(/[\(\)\-\s]/g, '').length);
+    console.log(e.target.value.replace(/[\(\)\-\s]/g, "").length);
 
     if (input?.getAttribute("data-custom") === "name") {
       if (e.target.value.trim().length > 2) {
@@ -38,7 +39,7 @@ export const SosForm = () => {
         input?.classList.remove("form__content__input--success");
       }
     } else {
-      if (e.target.value.replace(/[\(\)\-\s]/g, '').length === 10) {
+      if (e.target.value.replace(/[\(\)\-\s]/g, "").length === 10) {
         input?.classList.add("form__content__input--success");
         icon?.classList.add("form__icon--success");
       } else {
@@ -68,37 +69,62 @@ export const SosForm = () => {
     }
   };
 
-  const formatPhoneNumber = () => {
-    const input = document.getElementById('phone');
-    if (input instanceof HTMLInputElement) {
-      const phoneNumber = input.value.replace(/\D/g, '');
-      let formattedPhoneNumber = '';
-      if (phoneNumber.length >= 1) {
-        formattedPhoneNumber = '(' + phoneNumber.substring(0, 3);
-      }
-      if (phoneNumber.length > 3) {
-        formattedPhoneNumber += ') ' + phoneNumber.substring(3, 6);
-      }
-      if (phoneNumber.length > 6) {
-        formattedPhoneNumber += '-' + phoneNumber.substring(6, 8);
-      }
-      if (phoneNumber.length > 8) {
-        formattedPhoneNumber += '-' + phoneNumber.substring(8, 10);
-      }
-      input.value = formattedPhoneNumber;
-     }
-  }
+  const formatPhoneNumber = (phoneNumber: string) => {
+    const digits = phoneNumber.replace(/\D/g, "");
+    let formattedPhoneNumber = "";
 
-  const reset = () => {
-    setName((prevName) => ({ ...prevName, value: "" }));
-    setPhone((prevName) => ({ ...prevName, value: "" }));
-    setText((prevName) => ({ ...prevName, value: "" }));
+    if (digits.length >= 1) {
+      formattedPhoneNumber = "(" + digits.substring(0, 3);
+    }
+    if (digits.length > 3) {
+      formattedPhoneNumber += ") " + digits.substring(3, 6);
+    }
+    if (digits.length > 6) {
+      formattedPhoneNumber += "-" + digits.substring(6, 8);
+    }
+    if (digits.length > 8) {
+      formattedPhoneNumber += "-" + digits.substring(8, 10);
+    }
+
+    return formattedPhoneNumber;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    const formattedInput = formatPhoneNumber(input);
+    setPhone({ hasError: false, value: formattedInput });
   };
 
   const handleClearForm = () => {
     setName({ value: "", hasError: false });
     setPhone({ value: "", hasError: false });
     setText({ value: "", hasError: false });
+  };
+
+  const postForm = async (message: {
+    name: string;
+    phone: string;
+    text: string;
+  }) => {
+    try {
+      const response = await fetch(`${API_URL}/sos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok" + response.statusText);
+      }
+
+      const responseData = await response.json();
+      return responseData;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      throw error;
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -132,13 +158,16 @@ export const SosForm = () => {
       text: text.value.trim(),
     };
 
-    setIsFormSent(true);
+    postForm(newMessage)
+      .then(() => console.log("success post form"))
+      .catch(() => console.log("form wasn`t post"))
+      .finally(() => setIsFormSent(true));
   };
 
   return (
     <>
       <div className="overlay" />
-      <form id="sosForm" className="form" onSubmit={handleSubmit}>
+      <form id="sosForm" className="form" method="post" onSubmit={handleSubmit}>
         <div className="form__header">
           <div className="form__title">SOS! Тваринка у біді!</div>
           <div
@@ -154,6 +183,7 @@ export const SosForm = () => {
                 <div className="form__content__item">
                   <label className="form__text">Ваше ім'я</label>
                   <input
+                    name="name"
                     type="text"
                     data-custom="name"
                     value={name.value}
@@ -197,9 +227,7 @@ export const SosForm = () => {
                       onBlur={handleBlurForInput}
                       pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{2}-[0-9]{2}"
                       placeholder="(000) 000-00-00"
-                      onChange={(e) =>
-                        setPhone({ hasError: false, value: e.target.value })
-                      }
+                      onChange={handlePhoneChange}
                     />
                     <div
                       className={classNames("form__icon", {

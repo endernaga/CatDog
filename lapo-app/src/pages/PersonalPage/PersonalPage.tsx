@@ -1,36 +1,78 @@
 import classNames from "classnames";
 import { BreadCrumb } from "../../components/BreadCrumb";
 import { LargeButton } from "../../components/Buttons";
-import { catData } from "../../utils/catData";
-import { BASE_URL } from "../../utils/fetchProducts";
+import { BASE_URL, getPetById } from "../../utils/fetchProducts";
 import "./PersonalPage.scss";
 import { BigSectionsHeader } from "../../components/BigSectionsHeader";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShareModal } from "../../components/ShareModal";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { Pet } from "../../types/Pet";
+import { GlobalContext } from "../../context/GlobalContext";
+import { Loader } from "../../components/Loader";
 
 export const PersonalPage = () => {
+  const { pathname } = useLocation();
+  const category = pathname.split("/").at(2);
+  const { petId } = useParams();
+
+  const [pet, setPet] = useState<Pet | null>(null);
+  const { setIsLoading } = useContext(GlobalContext);
+
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+  const images = [
+    `img/${category}/${petId}/1.jpg`,
+    `img/${category}/${petId}/2.jpg`,
+    `img/${category}/${petId}/3.jpg`,
+    `img/${category}/${petId}/4.jpg`,
+  ];
+
+  const [mainPhoto, setMainPhoto] = useState<string>(images[0]);
+  const [currentImage, setCurrentImage] = useState(1);
+  const [vaccinated, setVaccinated] = useState('');
+  const [sterilized, setSterilized] = useState('');
+
+  useEffect(() => {
+    if (pet && pet.sex === 'Дівчинка') {
+      setVaccinated(pet.vaccinated === 'true' ? 'Вакцинована' : 'Не вакцинована');
+      setSterilized(pet.sterilized === 'true' ? 'Стерилізована' : 'Не стерилізована');
+    } else if (pet && pet.sex === 'Хлопчик') {
+      setVaccinated(pet.vaccinated === 'true' ? 'Вакцинований' : 'Не вакцинований');
+      setSterilized(pet.sterilized === 'true' ? 'Стерилізований' : 'Не стерилізований');
+    }
+  }, [pet]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsLoading(true);
+    if (petId && category) {
+      getPetById(category, petId)
+        .then((data) => setPet(data))
+        .catch((error) => console.error("fetching error", error))
+        .finally(() => setIsLoading(false));
+    }
+  }, [category, petId]);
+
+  if (!pet) {
+    return <div>(<Loader />)</div>;
+  }
+
+  if (Object.keys(pet).length === 0) {
+    return <div>Pet not found</div>;
+  }
+
   const {
     name,
     sex,
     age,
-    sterilized,
-    vaccinated,
-    temper,
-    behavior,
-    about,
+    character,
     specifics,
-    images,
     size,
-  } = catData[0];
-  const location = useLocation();
-  const id = location.pathname;
-  console.log(id);
+    description,
+    history,
+  } = pet;
 
-  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const [mainPhoto, setMainPhoto] = useState<string>(images[0]);
-
-  const [currentImage, setCurrentImage] = useState(1);
   const photoWidth = 106;
   const gap = 16;
   const visibleImages = 3;
@@ -55,10 +97,13 @@ export const PersonalPage = () => {
 
   return (
     <div className="personal">
-      {isShareModalOpen && <ShareModal
-        closeModal={() => setIsShareModalOpen(false)}
-        pet={catData[0]}
-      />}
+      {isShareModalOpen && (
+        <ShareModal
+          closeModal={() => setIsShareModalOpen(false)}
+          pet={pet}
+          images={images}
+        />
+      )}
       <BreadCrumb petName={name} />
       <div className="personal__content">
         <div className="personal__left">
@@ -163,9 +208,15 @@ export const PersonalPage = () => {
               ></div>
               <p className="personal__param__text">{sex}</p>
             </div>
+            {size && (
+               <div className="personal__param">
+               <div className="personal__icon personal__icon-size"></div>
+               <p className="personal__param__text">{size}</p>
+             </div>
+            )}
             <div className="personal__param">
               <div className="personal__icon personal__icon-age"></div>
-              <p className="personal__param__text">{age}</p>
+              <p className="personal__param__text">{`Років: ${age}`}</p>
             </div>
             <div className="personal__param">
               <div className="personal__icon personal__icon-vaccinated"></div>
@@ -177,17 +228,17 @@ export const PersonalPage = () => {
             </div>
             <div className="personal__param">
               <div className="personal__icon personal__icon-temper"></div>
-              <p className="personal__param__text">{temper}</p>
+              <p className="personal__param__text">{description}</p>
             </div>
             <div className="personal__param">
               <div className="personal__icon personal__icon-behavior"></div>
-              <p className="personal__param__text">{behavior}</p>
+              <p className="personal__param__text">{character}</p>
             </div>
           </div>
 
           <div className="personal__about">
             <h4 className="personal__title">Про мене:</h4>
-            <div className="personal__text">{about}</div>
+            <div className="personal__text">{history}</div>
           </div>
 
           <div className="personal__about">
