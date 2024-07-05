@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
-import './Dogs.scss';
-import { GlobalContext } from '../../context/GlobalContext';
-import { Pet } from '../../types/Pet';
-import { getDogs } from '../../utils/fetchProducts';
-import { CategoryPage } from '../CategoryPage';
-import { useSearchParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import "./Dogs.scss";
+import { GlobalContext } from "../../context/GlobalContext";
+import { Pet } from "../../types/Pet";
+import { getDogs } from "../../utils/fetchProducts";
+import { CategoryPage } from "../CategoryPage";
+import { useSearchParams } from "react-router-dom";
 
 export const Dogs = () => {
   const { setIsLoading } = useContext(GlobalContext);
@@ -15,22 +15,26 @@ export const Dogs = () => {
 
   const fetchData = () => {
     setIsLoading(true);
-    getDogs(searchParams.toString())
+
+    const fetchPromise = getDogs(searchParams.toString())
       .then((data) => {
         setDogs(data.results);
         setCount(data.count);
       })
       .catch((error) => {
         console.error("Error fetching cats:", error);
-      })
-      .finally(() => setIsLoading(false));
-  }
+      });
+
+    const delayPromise = new Promise((resolve) => setTimeout(resolve, 1000));
+
+    Promise.all([fetchPromise, delayPromise]).finally(() =>
+      setIsLoading(false)
+    );
+  };
 
   useEffect(() => {
     fetchData();
   }, [searchParams]);
 
-  return (
-    <CategoryPage pets={dogs} count={count} fetchData={fetchData} />
-  )
-}
+  return <CategoryPage pets={dogs} count={count} fetchData={fetchData} />;
+};

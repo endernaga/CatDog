@@ -50,7 +50,7 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
           <div className="card__props">
             <div className="card__prop">{sex}</div>
             <div className="card__prop">{`${years}` }</div>
-            {pet.size && <div className="card__prop">{pet.size}</div>}
+            {pet.size && <div className="card__prop">{pet.size.split(' ')[0]}</div>}
           </div>
         </div>
       </Link>

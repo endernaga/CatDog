@@ -17,6 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     &:hover {
       background-color: $color-orange;
@@ -35,7 +36,7 @@
 
   &__slider {
     height: 100%;
-    width: 184px;
+    width: auto;
     overflow: hidden;
   }
 

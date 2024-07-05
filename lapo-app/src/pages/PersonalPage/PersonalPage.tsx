@@ -47,9 +47,13 @@ export const PersonalPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setIsLoading(true);
     if (petId && category) {
-      getPetById(category, petId)
+      const fetchPromise = getPetById(category, petId)
         .then((data) => setPet(data))
-        .catch((error) => console.error("fetching error", error))
+        .catch((error) => console.error("fetching error", error));
+  
+      const delayPromise = new Promise((resolve) => setTimeout(resolve, 700));
+  
+      Promise.all([fetchPromise, delayPromise])
         .finally(() => setIsLoading(false));
     }
   }, [category, petId]);

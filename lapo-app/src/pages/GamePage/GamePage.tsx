@@ -11,6 +11,9 @@ export const GamePage = () => {
   const [isRound, setIsRound] = useState(false);
   const [seconds, setSeconds] = useState(10);
   const [pets, setPets] = useState<Pet[]>([]);
+  //const firstPet = pets[0];
+  //const secondPet = pets[1];
+ // const [pets, setPets] = useState([pet1, pet2]);
   const firstPet = pets[0];
   const secondPet = pets[1];
   const [firstItemChoice, setFirstItemChoice] = useState<string>("");
@@ -18,7 +21,7 @@ export const GamePage = () => {
   const [isFirstTrue, setIsFirstTrue] = useState<boolean>(false);
   const [isSecondTrue, setIsSecondTrue] = useState<boolean>(false);
 
-  useEffect(() => {
+   useEffect(() => {
     getPetsForGame()
       .then((data) => setPets(data.results))
       .catch((error) => console.error("fetching error", error))

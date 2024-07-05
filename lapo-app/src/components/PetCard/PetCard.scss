@@ -12,6 +12,11 @@
   gap: 8px;
   position: relative;
 
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s linear;
+  }
+
   &__img {
     border-radius: 16px 16px 0 0;
     padding: 4px;
