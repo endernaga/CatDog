@@ -3,7 +3,7 @@ from django.db import models
 
 SIZE_CHOICES = (
     ("Маленький (до 30 см)", "small"),
-    ("Седерній (30-50 см)", "average"),
+    ("Середній (30-50 см)", "average"),
     ("Великий (від 50 см)", "big"),
 )
 CATEGORY_CHOICES = (("dogs", "Dog"), ("cats", "Cat"))
