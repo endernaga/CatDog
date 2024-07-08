@@ -44,7 +44,7 @@ class AddNewPhoto:
 
 class Animals(mixins.ListModelMixin, GenericViewSet):
     pagination_class = StandardResultsSetPagination
-    serializer_class = DogSerializer
+    serializer_class = DogListSerializer
 
     def get_queryset(self):
         dogs = Dog.objects.all()

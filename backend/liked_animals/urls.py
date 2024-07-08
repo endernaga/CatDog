@@ -1,5 +1,4 @@
 from django.urls import path
-
 from liked_animals.views import (
     liked_animals,
     liked_cats,
