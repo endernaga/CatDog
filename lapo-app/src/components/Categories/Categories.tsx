@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { SectionsHeader } from '../SectionsHeader';
 import './Categories.scss';
 import { BASE_URL } from '../../utils/fetchProducts';
@@ -9,12 +9,12 @@ export const Categories = () => {
     {
       title: 'Песики',
       img: 'img/dogCategory.png',
-      class: 'dog',
+      class: 'dogs',
     }, 
     {
       title: 'Котики',
       img: 'img/catCategory.png',
-      class: 'cat',
+      class: 'cats',
     }
   ]
   return (
@@ -22,12 +22,12 @@ export const Categories = () => {
       <SectionsHeader text='Вони дуже чекають на тебе' />
       <div className="categories__content">
         {categories.map(category => (
-          <div className="categories__category">
+          <Link to={`/pets/${category.class}`}  className="categories__category">
             <div className="categories__category__title">{category.title}</div>
             <div className="categories__category__photo">
               <img src={`${BASE_URL}/${category.img}`} alt="categoryImg" className={`categories__category__${category.class}`} />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className="categories__footer">

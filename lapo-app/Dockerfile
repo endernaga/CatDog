@@ -1,13 +1,29 @@
-# Stage 1: Build the frontend
-FROM node:20 AS build
+# Вказуємо базовий образ з Node.js
+FROM node:16 as builder
+
+# Встановлюємо робочу директорію всередині контейнера
 WORKDIR /app
+
+# Копіюємо package.json та package-lock.json (якщо він є)
 COPY package*.json ./
+
+# Встановлюємо залежності
 RUN npm install
+
+# Копіюємо решту файлів додатку
 COPY . .
+
+# Будуємо додаток
 RUN npm run build
 
-# Stage 2: Serve the frontend with nginx
-FROM nginx:1.21
-COPY --from=build /app/build /usr/share/nginx/html
+# Встановлюємо Nginx для сервінгу статичних файлів
+FROM nginx:alpine
+
+# Копіюємо побудовані файли у відповідну директорію Nginx
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Відкриваємо порт 80
 EXPOSE 80
+
+# Запускаємо Nginx
 CMD ["nginx", "-g", "daemon off;"]

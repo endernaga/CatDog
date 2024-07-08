@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./FindMessage.scss";
-import { SosForm } from "../SosForm";
+import { GlobalContext } from "../../context/GlobalContext";
 
 export const FindMessage = () => {
-  const [isMessageOpen, setIsMessageOpen] = useState(true);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const handleCloseForm = () => {
-    setIsFormOpen(false);
-  };
+  const [isMessageOpen, setIsMessageOpen] = useState(() => sessionStorage.getItem('isMessageOpen') !== 'false');
+  const { isSosFormOpen, setIsSosFormOpen } = useContext(GlobalContext);
+  
+  useEffect(() => {
+    sessionStorage.setItem('isMessageOpen', String(isMessageOpen));
+  }, [isMessageOpen])
 
   return (
     <div className="find-message">
@@ -25,10 +25,8 @@ export const FindMessage = () => {
       )}
       <div
         className="icon icon-bot"
-        onClick={() => setIsFormOpen(true)}
+        onClick={() => setIsSosFormOpen(true)}
       />
-      {isFormOpen && <SosForm handleCloseForm={handleCloseForm} /> }
-
     </div>
   );
 };

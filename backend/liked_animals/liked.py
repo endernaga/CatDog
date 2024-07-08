@@ -13,17 +13,45 @@ class Liked(object):
         self.liked = liked
 
     def __iter__(self):
+<<<<<<< HEAD
         cats = Cat.objects.filter(id__in=self.liked.get("cats")) if self.liked.get("cats") else []
         dogs = Dog.objects.filter(id__in=self.liked.get("dogs")) if self.liked.get("dogs") else []
+=======
+        cats = (
+            Cat.objects.filter(id__in=self.liked.get("cats"))
+            if self.liked.get("cats")
+            else []
+        )
+        dogs = (
+            Dog.objects.filter(id__in=self.liked.get("dogs"))
+            if self.liked.get("dogs")
+            else []
+        )
+>>>>>>> origin/developers
         animals = list(chain(cats, dogs))
         for animal in animals:
             yield animal
 
     def get_dogs(self):
+<<<<<<< HEAD
         return Dog.objects.filter(id__in=self.liked.get("cats"))
 
     def get_cats(self):
         return Cat.objects.filter(id__in=self.liked.get("dogs"))
+=======
+        return (
+            Dog.objects.filter(id__in=self.liked.get("dogs"))
+            if self.liked.get("dogs")
+            else []
+        )
+
+    def get_cats(self):
+        return (
+            Cat.objects.filter(id__in=self.liked.get("cats"))
+            if (self.liked.get("cats"))
+            else []
+        )
+>>>>>>> origin/developers
 
     def __len__(self):
         return sum(self.liked.get("cats"), self.liked.get("dogs"))
@@ -38,9 +66,14 @@ class Liked(object):
     def save(self):
         self.session.modified = True
 
+<<<<<<< HEAD
     def remove(self, kind: str, animal_id: int):
         if animal_id in self.liked[kind]:
             print(animal_id)
+=======
+    def remove(self, kind: str, animal_id: str):
+        if animal_id in self.liked[kind]:
+>>>>>>> origin/developers
             self.liked[kind].remove(animal_id)
             self.save()
 

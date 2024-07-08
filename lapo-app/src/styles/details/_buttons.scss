@@ -43,6 +43,11 @@
     color: $color-black;
     border: 1px solid $color-black;
     @extend %button-text-regular;
+
+    &:hover {
+      border: 1px solid $color-orange;
+      color: $color-orange;
+    }
   }
 
   &-continue {

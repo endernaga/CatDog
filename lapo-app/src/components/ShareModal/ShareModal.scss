@@ -1,0 +1,98 @@
+@import './../../styles/main.scss';
+
+.share {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 596px;
+    height: 424px;
+    border-radius: 24px;
+    background-color: $color-white;
+    padding: 24px;
+    color: $color-black;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      height: 32px;
+      border-bottom: 0.7px solid $color-smoke-grey;
+  
+      &__text {
+        @extend %main-text-medium;
+      }
+    }
+
+    &__info {
+      display: flex;
+      gap: 16px;
+      height: 96px;
+      width: 100%;
+
+      &__photo {
+        width: 96px;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      &__params {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8.5px;
+      }
+
+      &__text {
+        @extend %h5;
+      }
+
+      &__dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: $color-black;
+
+        &:last-child {
+          display: none;
+        }
+      }
+    }
+
+    &__links {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 16px;
+    }
+
+    &__item {
+      padding-left: 16px;
+      cursor: pointer;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 8px;
+      width: 264px;
+      height: 56px;
+      border-radius: 100px;
+      border: 1px solid $color-orange-hover;
+      color: $color-orange-hover;
+      background-color: $color-white;
+
+      &:hover {
+        background-color: $color-orange;
+        border: none;
+        color: $color-white;
+      }
+
+      &__text {
+        @extend %main-text-medium;
+      }
+    }
+}

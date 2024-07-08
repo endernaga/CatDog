@@ -1,25 +1,23 @@
 import { AnimalButton } from "../Buttons";
 import "./Filter.scss";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalWindow } from "../ModalWindow";
 import { GlobalContext } from "../../context/GlobalContext";
-import { useSearchParams } from "react-router-dom";
-import { FilterType, ageFilter, sexFilter, sizeFilter } from "../../types/sortFilters";
+import {
+  Filters,
+  ageFilter,
+  sexFilter,
+  sizeFilter,
+} from "../../types/sortFilters";
+import { useLocation, useSearchParams } from "react-router-dom";
 
-export const Filter = () => {
+type Props = {
+  updateSearchParams: (newFilters: Partial<Filters>) => void,
+}
+
+export const Filter:React.FC<Props> = ({updateSearchParams}) => {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const { filters, setFilters, handleRemoveFilter } = useContext(GlobalContext);
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    setFilters({
-      sex: searchParams.get("sex")?.split(",") || [],
-      size: searchParams.get("size")?.split(",") || [],
-      age: searchParams.get("age")?.split(",") || [],
-      sterilized: searchParams.get("sterilization") === "true",
-      vaccinated: searchParams.get("vaccination") === "true",
-    });
-  }, [setFilters]);
+  const { filters, setFilters } = useContext(GlobalContext);
 
   let numOfFilters = 0;
 
@@ -32,7 +30,9 @@ export const Filter = () => {
   });
 
   const sortFilters = {
-    sexFilter, ageFilter, sizeFilter
+    sexFilter,
+    ageFilter,
+    sizeFilter,
   };
 
   const findParam = (v: string) => {
@@ -47,55 +47,62 @@ export const Filter = () => {
   };
 
   const giveParamForBoolean = (k: string) => {
-    if (k === 'sterilized') {
-      return 'Стерилозовані'
+    if (k === "sterilized") {
+      return "Стерилозовані";
     }
 
-    return 'Вакциновані'
-  }
+    return "Вакциновані";
+  };
 
   return (
     <div className="filter">
       <div className="filter__buttons">
         <div className="filter__types">
           <AnimalButton to="pets" title="Усі" />
-          <AnimalButton to="dogs" title="Песики" />
-          <AnimalButton to="cats" title="Котики" />
+          <AnimalButton to="pets/dogs" title="Песики" />
+          <AnimalButton to="pets/cats" title="Котики" />
         </div>
         <div
           className="filter__icon"
           onClick={() => setIsFiltersOpen(!isFiltersOpen)}
         >
-          
-            <div className="filter__counter">{numOfFilters}</div>
+          <div className="filter__counter">{numOfFilters}</div>
         </div>
         <ModalWindow
           isOpen={isFiltersOpen}
           onClose={() => setIsFiltersOpen(false)}
+          handleUpdateParams={updateSearchParams}
         />
       </div>
 
-      
       {numOfFilters > 0 && (
         <div className="filter__list">
-        {Object.entries(filters).map(([key, value]) => {
-          if (Array.isArray(value) && value.length > 0) {
-            return value.map((item) => (
-              <div className="filter__item" key={`${key}-${item}`}>
-                <p className="filter__item__text">{findParam(`${item}`)}</p>
-                <div className="icon icon-close" onClick={() => handleRemoveFilter(key as FilterType, item)}></div>
-              </div>
-            ));
-          } else if (typeof value === 'boolean' && value) {
-            return (
-              <div className="filter__item" key={key}>
-                <p className="filter__item__text">{giveParamForBoolean(`${key}`)}</p>
-                <div className="icon icon-close" onClick={() => handleRemoveFilter(key as FilterType, true)}></div>
-              </div>
-            );
-          }
-          return null;
-        })}
+          {Object.entries(filters).map(([key, value]) => {
+            if (Array.isArray(value) && value.length > 0) {
+              return value.map((item) => (
+                <div className="filter__item" key={`${key}-${item}`} >
+                  <p className="filter__item__text">{findParam(`${item}`)}</p>
+                  <div
+                    className="icon icon-close"
+                    onClick={() => updateSearchParams({ [key]: value.filter(param => param !== item) })}
+                  ></div>
+                </div>
+              ));
+            } else if (typeof value === "boolean" && value === true) {
+              return (
+                <div className="filter__item" key={key}>
+                  <p className="filter__item__text">
+                    {giveParamForBoolean(`${key}`)}
+                  </p>
+                  <div
+                    className="icon icon-close"
+                    onClick={() => updateSearchParams({ [key]: false })}
+                  ></div>
+                </div>
+              );
+            }
+            return null;
+          })}
         </div>
       )}
     </div>

@@ -1,1 +1,1 @@
-export * from './Pets';
+export * from './AllPetsPage';

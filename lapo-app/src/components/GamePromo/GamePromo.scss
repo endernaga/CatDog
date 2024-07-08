@@ -21,15 +21,7 @@
       border: 5px solid $color-white;
       height: 384px;
       width: 384px;
-      background-size: cover;
-      overflow: hidden;
-      background-image: url('../../../public/img/gamePromo/animal1.jpg');
-      background-position: 90% 50%;
-
-      &-2 {
-        background-image: url('../../../public/img/gamePromo/animal2.webp');
-        background-position: 30% 50%;
-      }
+      object-fit: cover;
     }
 
     &__button {

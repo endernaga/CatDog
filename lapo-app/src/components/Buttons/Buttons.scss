@@ -131,8 +131,12 @@
     background-color: $color-white;
     border: 1px solid $color-orange;
 
-    svg {
+    .cat {
       color: $color-orange;
+    }
+
+    .dog {
+      background-image: url('../../../public/img/icons/hoverDog.svg');
     }
 
     .text {
@@ -145,7 +149,15 @@
     gap: 8px;
   }
 
-  svg {
+  .dog {
+    width: 32px;
+    height: 32px;
+    background-image: url('../../../public/img/icons/dog.svg');
+    background-size: 32px 32px;
+    background-repeat: no-repeat;
+  }
+
+  .cat {
     color: $color-dark-grey;
     transition: fill 0.3s;
   }
@@ -158,8 +170,12 @@
   &--active {
     background-color: $color-orange;
 
-    svg {
+    .cat {
       color: $color-white;
+    }
+
+    .dog {
+      background-image: url('../../../public/img/icons/activeDog.svg');
     }
 
     .text {

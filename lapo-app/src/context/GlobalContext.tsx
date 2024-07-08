@@ -1,34 +1,63 @@
-import React, { createContext, useState } from "react";
-import { FilterType, Filters } from "../types/sortFilters";
-import { initialFilters } from "../components/ModalWindow";
+import React, { createContext, useEffect, useState } from "react";
+import { Filters } from "../types/sortFilters";
+
+export const initialFilters: Filters = {
+  sex: [],
+  size: [],
+  age: [],
+  sterilized: false,
+  vaccinated: false,
+  page: '1',
+};
 
 export const GlobalContext = createContext({
   isDropmenuOpen: false,
   setIsDropmenuOpen: (v: boolean) => { },
+  isSosFormOpen: false,
+  setIsSosFormOpen: (v: boolean) => { },
+  scrollToSection: (id: string) => {},
   filters: initialFilters,
   setFilters: (v: any) => { },
-  handleRemoveFilter: (type: FilterType, value: string | boolean) => {},
+  isLoading: false,
+  setIsLoading: (v: boolean) => { },
 })
 
 export const GlobalProvider = ({children}: {children: React.ReactNode}) => {
   const [isDropmenuOpen, setIsDropmenuOpen] = useState(false);
-  const [filters, setFilters] = useState<Filters>(initialFilters);
+  const [isSosFormOpen, setIsSosFormOpen] = useState(false);
+  const [targetId, setTargetId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleRemoveFilter = (type: FilterType, value: string | boolean) => {
-    setFilters((prevFilters) => {
-      const updatedFilters:Filters = { ...prevFilters };
-
-      if (Array.isArray(prevFilters[type])) {
-        updatedFilters[type] = (prevFilters[type] as string[]).filter((item) => item !== value) as any;
-      } else {
-        updatedFilters[type] = false as any;
+  useEffect(() => {
+    if (targetId) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', `#${targetId}`);
+        setTargetId(null);
       }
-      return updatedFilters;
-    });
+    }
+  }, [targetId]);
+
+  const scrollToSection = (id: string) => {
+    setTargetId(id);
   };
 
+  const [filters, setFilters] = useState<Filters>(initialFilters);
+
   return (
-    <GlobalContext.Provider value={{ isDropmenuOpen, setIsDropmenuOpen, filters, setFilters, handleRemoveFilter }}>
+    <GlobalContext.Provider
+      value={{ 
+        isDropmenuOpen, 
+        setIsDropmenuOpen,
+        filters, 
+        setFilters, 
+        isSosFormOpen,
+        setIsSosFormOpen,
+        scrollToSection,
+        isLoading,
+        setIsLoading
+      }}>
       {children}
     </GlobalContext.Provider>
   )

@@ -1,0 +1,38 @@
+@import './../../styles/main.scss';
+
+.error {
+  display: flex;
+  gap: 128px;
+  height: 494px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 80px;
+
+  &__img {
+    width: 494px;
+    height: 100%;
+    border-radius: 50% 50%;
+    border: 3px solid $color-white;
+    object-fit: cover;
+  }
+
+  &__right {
+    width: 607px;
+  }
+
+  &__texts {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  &__title {
+    @extend %h2;
+  }
+
+  &__description {
+    @extend %h5;
+  }
+}
