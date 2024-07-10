@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { BreadCrumb } from "../../components/BreadCrumb";
 import { LargeButton } from "../../components/Buttons";
-import { BASE_URL, getPetById } from "../../utils/fetchProducts";
+import { BASE_URL, getPetById, MEDIA_URL } from "../../utils/fetchProducts";
 import "./PersonalPage.scss";
 import { BigSectionsHeader } from "../../components/BigSectionsHeader";
 import { useContext, useEffect, useState } from "react";
@@ -71,6 +71,7 @@ export const PersonalPage = () => {
     size,
     description,
     history,
+    photo,
   } = pet;
 
   const photoWidth = 106;
@@ -132,11 +133,11 @@ export const PersonalPage = () => {
                 className="personal__slider__list"
                 style={{ transform: `translateX(-${transformValue}px)` }}
               >
-                {images.map((image, index) => (
+                {Array.isArray(photo) && photo.map((image, index) => (
                   <li key={index}>
                     <img
                       key={image}
-                      src={`${BASE_URL}/${image}`}
+                      src={`${MEDIA_URL}${image}`}
                       alt={`${index} + 1`}
                       onClick={() => setMainPhoto(image)}
                       className="personal__photo personal__photo-small"

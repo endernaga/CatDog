@@ -244,10 +244,10 @@ export const AnimalButton: React.FC<AnimalProps> = ({ to, title }) => {
       })}
     >
       <div className="animalButton__animals">
-        {to !== 'cats' && (
+        {!to.endsWith('cats') && (
           <div className="dog" />
         )}
-        {to !== "dogs" && (
+        { !to.endsWith("dogs") && (
           <svg
             className="cat"
             width="32"

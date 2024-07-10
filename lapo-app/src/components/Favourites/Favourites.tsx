@@ -11,7 +11,7 @@ type Props = {
 export const Favourites: React.FC<Props> = ({ closeBar }) => {
   const favs = [pet1];
   return (
-    <>
+    <aside>
       <div className="overlay" />
       <div className="favs">
         <div className="favs__top">
@@ -90,6 +90,6 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
           )}
         </div>
       </div>
-    </>
+    </aside>
   );
 };

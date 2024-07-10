@@ -11,5 +11,5 @@ export type Pet = {
   specifics: string,
   sterilized: string,
   vaccinated: string,
-  photo?: string,
+  photo: string | string[],
 }

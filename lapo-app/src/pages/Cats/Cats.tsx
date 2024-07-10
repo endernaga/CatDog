@@ -4,7 +4,6 @@ import './Cats.scss';
 import { GlobalContext } from '../../context/GlobalContext';
 import { Pet } from '../../types/Pet';
 import { getCats } from '../../utils/fetchProducts';
-import { Loader } from '../../components/Loader';
 import { useSearchParams } from 'react-router-dom';
 
 export const Cats = () => {
@@ -15,7 +14,6 @@ export const Cats = () => {
 
   const fetchData = () => {
     setIsLoading(true);
-    console.log(searchParams.toString());
     getCats(searchParams.toString())
       .then((data) => {
         setCats(data.results);

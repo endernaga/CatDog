@@ -59,7 +59,6 @@ export const SosForm = () => {
     const formItem = textarea?.closest(".form__content__big-item");
 
     const icon = formItem?.querySelector(".form__icon");
-    console.log(e.target.value.trim().length);
 
     if (e.target.value.trim().length >= 5) {
       textarea?.classList.add("form__content__textarea--success");

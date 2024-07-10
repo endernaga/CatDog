@@ -8,6 +8,7 @@ import {
 } from "../../types/sortFilters";
 import { Checkbox, ToggleBox } from "../FiltersCheck";
 import { GlobalContext, initialFilters } from "../../context/GlobalContext";
+import { useLocation } from "react-router-dom";
 
 type Props = {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export const ModalWindow: React.FC<Props> = ({
   handleUpdateParams,
 }) => {
   const { filters } = useContext(GlobalContext);
+  const { pathname } = useLocation();
 
   const style = isOpen ? "window-open" : "window";
   const [sex, setSex] = useState<string[]>([]);
@@ -54,8 +56,6 @@ export const ModalWindow: React.FC<Props> = ({
   };
 
   const handleApplyFilters = () => {
-    console.log(sterilized);
-    console.log(vaccinated);
     handleUpdateParams({
       sex: sex,
       size: size,
@@ -99,7 +99,8 @@ export const ModalWindow: React.FC<Props> = ({
             </div>
           </div>
 
-          <div className="window__filter">
+          {!pathname.endsWith('cats') && (
+            <div className="window__filter">
             <div className="window__param">Розмір</div>
             <div className="window__options">
               <Checkbox
@@ -109,6 +110,7 @@ export const ModalWindow: React.FC<Props> = ({
               />
             </div>
           </div>
+          )}
 
           <div className="window__filter">
             <div className="window__param">Вік</div>
