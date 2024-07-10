@@ -41,6 +41,13 @@ class Liked(object):
             else []
         )
 
+    @staticmethod
+    def get_pets(kind: str, id: int):
+        if kind == "cats":
+            return Cat.objects.get(id=id)
+        if kind == "dogs":
+            return Dog.objects.get(id=id)
+
     def __len__(self):
         return sum(self.liked.get("cats"), self.liked.get("dogs"))
 

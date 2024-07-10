@@ -41,7 +41,7 @@ def liked_animals(request):
         if not animal_id:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"id": "this field is required"})
         liked.add(kind=animal_kind, animal_id=animal_id)
-        return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_201_CREATED, data=DogSerializer(liked.get_pets(kind=animal_kind, id=animal_id)).data)
 
 
 @extend_schema(methods=["GET"], responses={200: DogSerializer(many=True)})
