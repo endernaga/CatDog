@@ -178,20 +178,20 @@ def guess_the_sex(request):
 
 def get_female(obj):
     max_id = (
-        obj.objects.all().filter(sex="female").aggregate(max_id=Max("id"))["max_id"]
+        obj.objects.all().filter(sex="Дівчинка").aggregate(max_id=Max("id"))["max_id"]
     )
     while True:
         pk = random.randint(1, max_id)
-        category = obj.objects.filter(pk=pk, sex="female").first()
+        category = obj.objects.filter(pk=pk, sex="Дівчинка").first()
         if category:
             return category
 
 
 def get_male(obj):
-    max_id = obj.objects.all().filter(sex="male").aggregate(max_id=Max("id"))["max_id"]
+    max_id = obj.objects.all().filter(sex="Хлопчик").aggregate(max_id=Max("id"))["max_id"]
     while True:
         pk = random.randint(1, max_id)
-        category = obj.objects.filter(pk=pk, sex="male").first()
+        category = obj.objects.filter(pk=pk, sex="Хлопчик").first()
         if category:
             return category
 
