@@ -38,8 +38,14 @@ class Cat(Animals):
     photo = models.ManyToManyField(ImagesForAnimals, related_name="cat_photo")
     category = models.CharField(choices=CATEGORY_CHOICES, default="cat")
 
+    class Meta:
+        ordering = ["id"]
+
 
 class Dog(Animals):
     photo = models.ManyToManyField(ImagesForAnimals, related_name="dog_photo")
     size = models.CharField(choices=SIZE_CHOICES, default="S", max_length=255)
     category = models.CharField(choices=CATEGORY_CHOICES, default="dog")
+
+    class Meta:
+        ordering = ["id"]
