@@ -12,15 +12,8 @@ from rest_framework.response import Response
 from liked_animals.liked import Liked
 from usolapohvist_app.serializers import DogSerializer
 
-@extend_schema(
-    methods=["GET"],
-    responses={200: DogSerializer(many=True)}
-)
-@extend_schema(
-    methods=["DELETE"],
-    responses={204: None},
-    description="<h1>Delete an liked animal , you should send in body a kind as string and id as integer</h1>",
-)
+
+@extend_schema(methods=["GET"], responses={200: DogSerializer(many=True)})
 @extend_schema(
     methods=["POST", "DELETE"],
     responses={201: None},
@@ -30,7 +23,7 @@ from usolapohvist_app.serializers import DogSerializer
     ),
     examples=[OpenApiExample(name="Examples", value={"kind": "string", "id": 0})],
 )
-@api_view(["GET", "POST", "DELETE"])
+@api_view(["GET", "POST"])
 def liked_animals(request):
     if request.method == "GET":
         pagination = PageNumberPagination()
@@ -43,37 +36,47 @@ def liked_animals(request):
         liked = Liked(request)
         animal_kind = request.POST.get("kind")
         animal_id = request.POST.get("id")
-        liked.add(animal_kind, animal_id)
-        return Response(status=status.HTTP_201_CREATED)
+        if not animal_kind:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"kind": "this field is required"})
+        if not animal_id:
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"id": "this field is required"})
+        liked.add(kind=animal_kind, animal_id=animal_id)
+        return Response(status=status.HTTP_201_CREATED, data=DogSerializer(liked.get_pets(kind=animal_kind, id=animal_id)).data)
+
+
+@extend_schema(methods=["GET"], responses={200: DogSerializer(many=True)})
+@api_view(["GET"])
+def liked_cats(request):
+    if request.method == "GET":
+        pagination = PageNumberPagination()
+        pagination.page_size = 10
+        animals = list(Liked(request).get_cats())
+        result_page = pagination.paginate_queryset(queryset=animals, request=request)
+        animal_serializer = DogSerializer(result_page, many=True)
+        return pagination.get_paginated_response(animal_serializer.data)
+
+
+@extend_schema(methods=["GET"], responses={200: DogSerializer(many=True)})
+@api_view(["GET"])
+def liked_dogs(request):
+    if request.method == "GET":
+        pagination = PageNumberPagination()
+        pagination.page_size = 10
+        animals = Liked(request).get_dogs()
+        result_page = pagination.paginate_queryset(queryset=animals, request=request)
+        animal_serializer = DogSerializer(result_page, many=True)
+        return pagination.get_paginated_response(animal_serializer.data)
+
+
+@api_view(["DELETE"])
+def delete_liked_dog(request, pk):
     if request.method == "DELETE":
-        liked = Liked(request)
-        animal_kind = request.POST.get("kind")
-        animal_id = request.POST.get("id")
-        liked.remove(animal_kind, animal_id)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        Liked(request).remove("dogs", pk)
+        return Response(data="success", status=status.HTTP_204_NO_CONTENT)
 
-@extend_schema(
-    methods=["GET"],
-    responses={200: DogSerializer(many=True)}
-)
-@api_view(["GET"])
-def get_liked_cats(request):
-    pagination = PageNumberPagination()
-    pagination.page_size = 10
-    animals = list(Liked(request).get_cats())
-    result_page = pagination.paginate_queryset(queryset=animals, request=request)
-    animal_serializer = DogSerializer(result_page, many=True)
-    return pagination.get_paginated_response(animal_serializer.data)
 
-@extend_schema(
-    methods=["GET"],
-    responses={200: DogSerializer(many=True)}
-)
-@api_view(["GET"])
-def get_liked_dogs(request):
-    pagination = PageNumberPagination()
-    pagination.page_size = 10
-    animals = Liked(request).get_dogs()
-    result_page = pagination.paginate_queryset(queryset=animals, request=request)
-    animal_serializer = DogSerializer(result_page, many=True)
-    return pagination.get_paginated_response(animal_serializer.data)
+@api_view(["DELETE"])
+def delete_liked_cat(request, pk):
+    if request.method == "DELETE":
+        Liked(request).remove("cats", str(pk))
+        return Response(data="success")

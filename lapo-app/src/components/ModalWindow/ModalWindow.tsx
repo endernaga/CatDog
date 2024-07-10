@@ -24,6 +24,8 @@ export const ModalWindow: React.FC<Props> = ({
   const { filters } = useContext(GlobalContext);
   const { pathname } = useLocation();
 
+  const category = pathname.split("/").at(2);
+
   const style = isOpen ? "window-open" : "window";
   const [sex, setSex] = useState<string[]>([]);
   const [age, setAge] = useState<string[]>([]);

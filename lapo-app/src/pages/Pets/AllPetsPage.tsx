@@ -14,16 +14,22 @@ export const AllPetsPage = () => {
 
   const fetchData = () => {
     setIsLoading(true);
-    getAnimals(searchParams.toString())
+
+    const fetchPromise = getAnimals(searchParams.toString())
       .then((data) => {
         setAnimals(data.results);
         setCount(data.count);
       })
       .catch((error) => {
         console.error("Error fetching cats:", error);
-      })
-      .finally(() => setIsLoading(false));
-  }
+      });
+
+    const delayPromise = new Promise((resolve) => setTimeout(resolve, 1000));
+
+    Promise.all([fetchPromise, delayPromise]).finally(() =>
+      setIsLoading(false)
+    );
+  };
 
   useEffect(() => {
     fetchData();

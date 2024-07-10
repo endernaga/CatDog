@@ -106,7 +106,7 @@ export const SosForm = () => {
     text: string;
   }) => {
     try {
-      const response = await fetch(`${API_URL}/sos`, {
+      const response = await fetch(`${API_URL}/sos/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

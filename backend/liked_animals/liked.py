@@ -13,17 +13,40 @@ class Liked(object):
         self.liked = liked
 
     def __iter__(self):
-        cats = Cat.objects.filter(id__in=self.liked.get("cats")) if self.liked.get("cats") else []
-        dogs = Dog.objects.filter(id__in=self.liked.get("dogs")) if self.liked.get("dogs") else []
+        cats = (
+            Cat.objects.filter(id__in=self.liked.get("cats"))
+            if self.liked.get("cats")
+            else []
+        )
+        dogs = (
+            Dog.objects.filter(id__in=self.liked.get("dogs"))
+            if self.liked.get("dogs")
+            else []
+        )
         animals = list(chain(cats, dogs))
         for animal in animals:
             yield animal
 
     def get_dogs(self):
-        return Dog.objects.filter(id__in=self.liked.get("cats"))
+        return (
+            Dog.objects.filter(id__in=self.liked.get("dogs"))
+            if self.liked.get("dogs")
+            else []
+        )
 
     def get_cats(self):
-        return Cat.objects.filter(id__in=self.liked.get("dogs"))
+        return (
+            Cat.objects.filter(id__in=self.liked.get("cats"))
+            if (self.liked.get("cats"))
+            else []
+        )
+
+    @staticmethod
+    def get_pets(kind: str, id: int):
+        if kind == "cats":
+            return Cat.objects.get(id=id)
+        if kind == "dogs":
+            return Dog.objects.get(id=id)
 
     def __len__(self):
         return sum(self.liked.get("cats"), self.liked.get("dogs"))
@@ -38,9 +61,8 @@ class Liked(object):
     def save(self):
         self.session.modified = True
 
-    def remove(self, kind: str, animal_id: int):
+    def remove(self, kind: str, animal_id: str):
         if animal_id in self.liked[kind]:
-            print(animal_id)
             self.liked[kind].remove(animal_id)
             self.save()
 

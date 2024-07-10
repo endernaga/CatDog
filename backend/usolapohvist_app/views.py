@@ -44,7 +44,7 @@ class AddNewPhoto:
 
 class Animals(mixins.ListModelMixin, GenericViewSet):
     pagination_class = StandardResultsSetPagination
-    serializer_class = DogSerializer
+    serializer_class = DogListSerializer
 
     def get_queryset(self):
         dogs = Dog.objects.all()
@@ -54,6 +54,7 @@ class Animals(mixins.ListModelMixin, GenericViewSet):
         age = self.request.GET.get("age")
         vaccinated = self.request.GET.get("vaccinated")
         sterilized = self.request.GET.get("sterilized")
+        size = self.request.GET.get("size")
 
         if age:
             cats = cats.filter(age__in=age.split(","))
@@ -70,6 +71,9 @@ class Animals(mixins.ListModelMixin, GenericViewSet):
         if sterilized:
             cats = cats.filter(sterilized=sterilized == "true")
             dogs = dogs.filter(sterilized=sterilized == "true")
+
+        if size:
+            dogs = dogs.filter(size=size)
 
         return sorted(list(chain(cats, dogs)), key=attrgetter("id"))
 
@@ -195,6 +199,11 @@ def get_male(obj):
 @api_view(["POST"])
 def save_sos_form(request):
     if request.method == "POST":
+        if not settings.BOT_TOKEN:
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"error": "BOT_TOKEN is required"},
+            )
         bot = telebot.TeleBot(settings.BOT_TOKEN)
         text = f"""!!!SOS!!!
         {request.POST.get('name')}
