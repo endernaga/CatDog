@@ -3,9 +3,8 @@ import "./PetCard.scss";
 import { Pet } from "../../types/Pet";
 import { Link, useLocation } from "react-router-dom";
 import {
-  addAnimalToLiked,
-  BASE_URL,
   MEDIA_URL,
+  postAnimalToLiked,
 } from "../../utils/fetchProducts";
 
 type Props = {
@@ -62,7 +61,7 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
 
       <button
         className="card__like"
-        onClick={() => addAnimalToLiked(pet.category, pet.id)}
+        onClick={() => postAnimalToLiked(pet.category, pet.id)}
       >
         <svg
           width="24"
