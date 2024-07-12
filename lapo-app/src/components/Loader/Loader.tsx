@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import { BASE_URL } from "../../utils/fetchProducts";
 import "./Loader.scss";
-import { GlobalContext } from "../../context/GlobalContext";
 
 export const Loader = () => {
   return (

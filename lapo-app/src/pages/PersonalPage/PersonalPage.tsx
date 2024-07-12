@@ -20,15 +20,8 @@ export const PersonalPage = () => {
   const { setIsLoading } = useContext(GlobalContext);
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [mainPhoto, setMainPhoto] = useState('');
 
-  const images = [
-    `img/${category}/${petId}/1.jpg`,
-    `img/${category}/${petId}/2.jpg`,
-    `img/${category}/${petId}/3.jpg`,
-    `img/${category}/${petId}/4.jpg`,
-  ];
-
-  const [mainPhoto, setMainPhoto] = useState<string>(images[0]);
   const [currentImage, setCurrentImage] = useState(1);
   const [vaccinated, setVaccinated] = useState('');
   const [sterilized, setSterilized] = useState('');
@@ -48,7 +41,7 @@ export const PersonalPage = () => {
     setIsLoading(true);
     if (petId && category) {
       const fetchPromise = getPetById(category, petId)
-        .then((data) => setPet(data))
+        .then((data) => { setPet(data); setMainPhoto(data.photo[0]) })
         .catch((error) => console.error("fetching error", error));
   
       const delayPromise = new Promise((resolve) => setTimeout(resolve, 700));
@@ -84,7 +77,7 @@ export const PersonalPage = () => {
   const transformValue = (currentImage - 1) * (photoWidth + gap);
 
   const rightSlide = () => {
-    if (currentImage >= images.length - visibleImages + 1) {
+    if (currentImage >= photo.length - visibleImages + 1) {
       setCurrentImage(1);
 
       return;
@@ -94,7 +87,7 @@ export const PersonalPage = () => {
 
   const leftSlide = () => {
     if (currentImage === 1) {
-      setCurrentImage(images.length - visibleImages + 1);
+      setCurrentImage(photo.length - visibleImages + 1);
       return;
     }
     setCurrentImage(currentImage - 1);
@@ -106,14 +99,14 @@ export const PersonalPage = () => {
         <ShareModal
           closeModal={() => setIsShareModalOpen(false)}
           pet={pet}
-          images={images}
+          images={photo}
         />
       )}
       <BreadCrumb petName={name} />
       <div className="personal__content">
         <div className="personal__left">
           <img
-            src={`${BASE_URL}/${mainPhoto}`}
+            src={`${MEDIA_URL}${mainPhoto}`}
             alt="main-photo"
             className="personal__photo personal__photo-main"
           />

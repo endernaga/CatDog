@@ -6,7 +6,6 @@
   height: calc(100vh - 100px);
   left: 0;
   right: 0;
-  z-index: 1000;
   color: $color-primary-green;
   background-color: $color-primary-green;
   display: flex;
@@ -18,7 +17,7 @@
     height: 300px;
     left: -70px;
     object-fit: cover;
-    animation: move 5s linear infinite;
+    animation: move 4s linear infinite;
   }
 }
 

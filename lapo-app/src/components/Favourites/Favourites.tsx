@@ -1,15 +1,18 @@
 import React from "react";
 import { MediumButton } from "../Buttons";
 import "./Favourites.scss";
-import { pet1 } from "../../utils/JUSTFORDEVELOP/petsForGame";
 import { BASE_URL } from "../../utils/fetchProducts";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
 
 type Props = {
   closeBar: () => void;
 };
 
 export const Favourites: React.FC<Props> = ({ closeBar }) => {
-  const favs = [pet1];
+  const dispatch = useAppDispatch();
+  const { pets } =
+    useAppSelector((state) => state.likedPets);
+
   return (
     <aside>
       <div className="overlay" />
@@ -32,12 +35,12 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
           </div>
         </div>
         <div className="favs__content">
-          {favs.length > 0 ? (
+          {pets.length > 0 ? (
             <ul className="favs__items">
-              {favs.map((pet) => (
+              {pets.map((pet) => (
                 <li className="favs__item">
                   <img
-                    src={`${BASE_URL}/${pet.images[0]}`}
+                    src={`${BASE_URL}/${pet.photo[0]}`}
                     alt="petPhoto"
                     className="favs__item__img"
                   />
