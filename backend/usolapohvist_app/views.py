@@ -61,6 +61,12 @@ class Animals(mixins.ListModelMixin, GenericViewSet):
             dogs = dogs.filter(age__in=age.split(","))
 
         if sex:
+            if sex == "male":
+                sex = "Хлопчик"
+
+            if sex == "female":
+                sex = "Дівчинка"
+
             cats = cats.filter(sex=sex)
             dogs = dogs.filter(sex=sex)
 
@@ -94,6 +100,12 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
             queryset = queryset.filter(age__in=age.split(","))
 
         if sex:
+            if sex == "male":
+                sex = "Хлопчик"
+
+            if sex == "female":
+                sex = "Дівчинка"
+
             queryset = queryset.filter(sex=sex)
 
         if vaccinated:
@@ -131,6 +143,12 @@ class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
             queryset = queryset.filter(age__in=age.split(","))
 
         if sex:
+            if sex == "male":
+                sex = "Хлопчик"
+
+            if sex == "female":
+                sex = "Дівчинка"
+
             queryset = queryset.filter(sex=sex)
 
         if vaccinated:
@@ -188,7 +206,9 @@ def get_female(obj):
 
 
 def get_male(obj):
-    max_id = obj.objects.all().filter(sex="Хлопчик").aggregate(max_id=Max("id"))["max_id"]
+    max_id = (
+        obj.objects.all().filter(sex="Хлопчик").aggregate(max_id=Max("id"))["max_id"]
+    )
     while True:
         pk = random.randint(1, max_id)
         category = obj.objects.filter(pk=pk, sex="Хлопчик").first()
