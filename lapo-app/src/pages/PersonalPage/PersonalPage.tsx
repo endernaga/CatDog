@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { BreadCrumb } from "../../components/BreadCrumb";
 import { LargeButton } from "../../components/Buttons";
-import { BASE_URL, getPetById, MEDIA_URL } from "../../utils/fetchProducts";
+import { BASE_URL, MEDIA_URL } from "../../utils/fetchProducts";
 import "./PersonalPage.scss";
 import { BigSectionsHeader } from "../../components/BigSectionsHeader";
 import { useContext, useEffect, useState } from "react";
@@ -10,6 +10,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { Pet } from "../../types/Pet";
 import { GlobalContext } from "../../context/GlobalContext";
 import { Loader } from "../../components/Loader";
+import { getAnimalById } from "../../api/animalApi";
 
 export const PersonalPage = () => {
   const { pathname } = useLocation();
@@ -40,7 +41,7 @@ export const PersonalPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setIsLoading(true);
     if (petId && category) {
-      const fetchPromise = getPetById(category, petId)
+      const fetchPromise = getAnimalById(category, petId)
         .then((data) => { setPet(data); setMainPhoto(data.photo[0]) })
         .catch((error) => console.error("fetching error", error));
   
