@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
 import { BreadCrumb } from "../../components/BreadCrumb";
 import { LargeButton } from "../../components/Buttons";
-import { BASE_URL, getPetsForGame } from "../../utils/fetchProducts";
+import { BASE_URL, MEDIA_URL } from "../../utils/fetchProducts";
 import "./GamePage.scss";
 import classNames from "classnames";
 import { Pet } from "../../types/Pet";
+import { getPetsForGame } from "../../api/gameApi";
 
 export const GamePage = () => {
   const [isStartPageVisible, setIsStartPageVisible] = useState(true);
   const [isRound, setIsRound] = useState(false);
   const [seconds, setSeconds] = useState(10);
-  const [pets, setPets] = useState<Pet[]>([]);
-  //const firstPet = pets[0];
-  //const secondPet = pets[1];
- // const [pets, setPets] = useState([pet1, pet2]);
-  const firstPet = pets[0];
-  const secondPet = pets[1];
+  const [pets, setPets] = useState<Pet[] | null>(null);
+  const firstPet = pets && pets[0];
+  const secondPet = pets && pets[1];
   const [firstItemChoice, setFirstItemChoice] = useState<string>("");
   const [secondItemChoice, setSecondItemChoice] = useState<string>("");
   const [isFirstTrue, setIsFirstTrue] = useState<boolean>(false);
   const [isSecondTrue, setIsSecondTrue] = useState<boolean>(false);
 
-   useEffect(() => {
-    getPetsForGame()
-      .then((data) => setPets(data.results))
+  useEffect(() => {
+    if (isRound) {
+      getPetsForGame()
+      .then((data) => setPets(Object.values(data)))
       .catch((error) => console.error("fetching error", error))
-    .finally(() => console.log(pets))
+      .finally(() => console.log(pets));
+    }
   }, [isRound]);
 
   const isSelect = (v: string, index: number) => {
@@ -57,7 +57,7 @@ export const GamePage = () => {
   };
 
   const firstItemCheck = () => {
-    if (firstItemChoice === firstPet.sex) {
+    if (firstItemChoice === firstPet?.sex) {
       setIsFirstTrue(true);
       document.getElementById("0")?.classList.add("game__cart--success");
     } else {
@@ -66,7 +66,7 @@ export const GamePage = () => {
   };
 
   const secondItemCheck = () => {
-    if (secondItemChoice === secondPet.sex) {
+    if (secondItemChoice === secondPet?.sex) {
       setIsSecondTrue(true);
       document.getElementById("1")?.classList.add("game__cart--success");
     } else {
@@ -173,7 +173,7 @@ export const GamePage = () => {
           />
         </div>
       )}
-      {!isStartPageVisible && (
+      {!isStartPageVisible && pets && (
         <div className="game__content">
           {!!isRound && (
             <div className="game__round">
@@ -217,7 +217,7 @@ export const GamePage = () => {
                   </svg>
                 </div>
                 <img
-                  src={`${BASE_URL}/${pet.photo}`}
+                  src={`${MEDIA_URL}${pet.photo[0]}`}
                   alt={pet.id}
                   className="game__photo"
                 />

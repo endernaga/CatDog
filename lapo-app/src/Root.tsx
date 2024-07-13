@@ -3,14 +3,12 @@ import App from './App';
 import { HomePage } from './pages/HomePage/HomePage';
 import { AboutUsPage } from './pages/AboutUs';
 import { Contacts } from './pages/Contacts';
-import { AllPetsPage } from './pages/Pets';
 import { PersonalPage } from './pages/PersonalPage';
-import { Cats } from './pages/Cats';
 import { ErrorPage } from './pages/ErrorPage';
 import { GamePage } from './pages/GamePage';
 import { ScrollToTop } from './utils/scrollToTop';
-import { Dogs } from './pages/Dogs';
-
+import { CategoryPage } from './pages/CategoryPage';
+ 
 export const Root = () => {
   return (
     <HashRouter>
@@ -21,13 +19,13 @@ export const Root = () => {
           <Route path='about' element={<AboutUsPage />} />
           <Route path='contacts' element={<Contacts />} />
           <Route path='pets'>
-            <Route index element={<AllPetsPage />} />
+            <Route index element={<CategoryPage />} />
             <Route path='cats' >
-            <Route index element={<Cats />} />
+            <Route index element={<CategoryPage />} />
             <Route path=':petId' element={<PersonalPage />} />
             </Route>
             <Route path='dogs' >
-            <Route index element={<Dogs />} />
+            <Route index element={<CategoryPage />} />
             <Route path=':petId' element={<PersonalPage />} />
             </Route>
           </Route>

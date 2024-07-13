@@ -15,6 +15,11 @@ export const Pagination: React.FC<Props> = ({ numOfPages, updateSearchParams }) 
     pages.push(i.toString());
   };
 
+  const handlePageChange = (pageNum: string) => {
+    window.scrollTo(0, 0);
+    updateSearchParams({ page: pageNum });
+  }
+
   const { filters } = useContext(GlobalContext);
 
   return (
@@ -41,7 +46,7 @@ export const Pagination: React.FC<Props> = ({ numOfPages, updateSearchParams }) 
                 'pagination__item--active': page === filters.page,
               })}
               key={page}
-              onClick={() => updateSearchParams({page: page})}
+              onClick={() => handlePageChange(page)}
             >
               {page}
             </li>

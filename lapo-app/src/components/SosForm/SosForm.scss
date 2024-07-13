@@ -104,7 +104,7 @@
       height: 72px;
       border-radius: 8px;
       @extend %button-text-regular;
-      padding-inline: 16px;
+      padding: 8px 16px;
 
       &--danger {
         border: 1.2px solid $color-error;

@@ -23,6 +23,7 @@ export const ModalWindow: React.FC<Props> = ({
 }) => {
   const { filters } = useContext(GlobalContext);
   const { pathname } = useLocation();
+
   const category = pathname.split("/").at(2);
 
   const style = isOpen ? "window-open" : "window";
@@ -100,7 +101,7 @@ export const ModalWindow: React.FC<Props> = ({
             </div>
           </div>
 
-          {category === 'dogs' && (
+          {!pathname.endsWith('cats') && (
             <div className="window__filter">
             <div className="window__param">Розмір</div>
             <div className="window__options">

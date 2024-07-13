@@ -6,7 +6,7 @@ import { BASE_URL } from "../../utils/fetchProducts";
 type Props = {
   closeModal: () => void;
   pet: Pet;
-  images: string[],
+  images: string[] | string,
 };
 
 export const ShareModal: React.FC<Props> = ({ closeModal, pet, images }) => {

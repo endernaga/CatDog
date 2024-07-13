@@ -9,19 +9,34 @@ import { BigSectionsHeader } from "../../components/BigSectionsHeader";
 import { Filter } from "../../components/Filter";
 import { PetsList } from "../../components/PetsList";
 import { Pagination } from "../../components/Pagination";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import * as animalActions from "../../features/animalSlice";
+import { Loader } from "../../components/Loader";
 
-type Props = {
-  pets: Pet[];
-  count: number;
-  fetchData: () => void;
-};
-
-export const CategoryPage:React.FC<Props> = ({ pets, count, fetchData}) => {
-  const { filters, setFilters } = useContext(GlobalContext);
+export const CategoryPage = () => {
+  const { setFilters, setIsLoading, isLoading } =
+    useContext(GlobalContext);
   const [searchParams, setSearchParams] = useSearchParams();
-  const numOfPages = Math.ceil(count / 9);
-
   const location = useLocation();
+
+  const dispatch = useAppDispatch();
+  const { cats, catsCount, dogs, dogsCount, pets, petsCount } =
+    useAppSelector((state) => state.animals);
+
+  let petsList: Pet[] = [];
+  let count = 0;
+
+  if (location.pathname === "/pets/cats") {
+    petsList = cats;
+    count = catsCount;
+  } else if (location.pathname === "/pets/dogs") {
+    petsList = dogs;
+    count = dogsCount;
+  } else {
+    petsList = pets;
+    count = petsCount;
+  }
+  const numOfPages = Math.ceil(count / 9);
 
   const updateSearchParams = (newFilters: Partial<Filters>) => {
     const updatedSearchParams = new URLSearchParams(searchParams);
@@ -64,16 +79,36 @@ export const CategoryPage:React.FC<Props> = ({ pets, count, fetchData}) => {
     }
   }, [location.search, setSearchParams, setFilters]);
 
+  useEffect(() => {
+    setIsLoading(true);
+    console.log(location.search);
+    if (location.pathname === "/pets/cats") {
+      dispatch(animalActions.fetchCats(location.search.toString()));
+    } else if (location.pathname === "/pets/dogs") {
+      dispatch(animalActions.fetchDogs(location.search.toString()));
+    } else {
+      dispatch(animalActions.fetchAnimals(location.search.toString()));
+    }
+    const delayPromise = new Promise((resolve) => setTimeout(resolve, 1000));
+    Promise.all([delayPromise]).finally(() => setIsLoading(false));
+  }, [location.pathname, location.search, dispatch]);
+
   return (
-    <div className="page">
-      <BreadCrumb />
-      <BigSectionsHeader text={["Супер", "Друзі"]} />
-      <Filter updateSearchParams={updateSearchParams} />
-      <PetsList pets={pets} />
-      <Pagination
-        numOfPages={numOfPages}
-        updateSearchParams={updateSearchParams}
-      />
-    </div>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="page">
+          <BreadCrumb />
+          <BigSectionsHeader text={["Супер", "Друзі"]} />
+          <Filter updateSearchParams={updateSearchParams} />
+          <PetsList pets={petsList} />
+          <Pagination
+            numOfPages={numOfPages}
+            updateSearchParams={updateSearchParams}
+          />
+        </div>
+      )}
+    </>
   );
 };
