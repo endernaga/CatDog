@@ -21,7 +21,7 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
     return `${category}/${id}`;
   };
 
-  const sex = pet.sex === "male" ? "Хлопчик" : "Дівчинка";
+  //const sex = pet.sex === "male" ? "Хлопчик" : "Дівчинка";
   const years = pet.age === "1" ? "1 рік" : `${pet.age} роки`;
 
   return (
@@ -55,7 +55,7 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
       <div className="card__info">
         <p className="card__name">{pet.name}</p>
         <div className="card__props">
-          <div className="card__prop">{sex}</div>
+          <div className="card__prop">{pet.sex}</div>
           <div className="card__prop">{`${years}`}</div>
           {pet.size && <div className="card__prop">{pet.size.split(' ')[0]}</div>}
         </div>
