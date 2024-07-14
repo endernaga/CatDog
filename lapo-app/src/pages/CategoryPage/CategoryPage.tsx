@@ -81,7 +81,6 @@ export const CategoryPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log(location.search);
     if (location.pathname === "/pets/cats") {
       dispatch(animalActions.fetchCats(location.search.toString()));
     } else if (location.pathname === "/pets/dogs") {

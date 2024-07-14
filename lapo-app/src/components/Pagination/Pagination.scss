@@ -1,4 +1,4 @@
-@import './../../styles/main.scss';
+@import "./../../styles/main.scss";
 
 .pagination {
   width: 296px;
@@ -19,15 +19,20 @@
     justify-content: center;
     cursor: pointer;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: $color-orange;
-  
+
       svg {
         color: $color-white;
       }
-
     }
-  
+
+    &:disabled {
+      svg {
+        color: $color-light-grey;
+      }
+    }
+
     svg {
       color: $color-orange;
       transition: fill 0.3s;

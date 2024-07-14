@@ -1,17 +1,17 @@
 import React from "react";
 import "./ShareModal.scss";
 import { Pet } from "../../types/Pet";
-import { BASE_URL } from "../../utils/fetchProducts";
+import { MEDIA_URL } from "../../utils/fetchProducts";
 
 type Props = {
   closeModal: () => void;
   pet: Pet;
-  images: string[] | string,
+  photo: string[] | string,
 };
 
-export const ShareModal: React.FC<Props> = ({ closeModal, pet, images }) => {
+export const ShareModal: React.FC<Props> = ({ closeModal, pet, photo }) => {
   const { name, sex, size, age } = pet;
-  const params = size ? [name, sex, age, size] : [name, sex, age];
+  const params = size ? [name, sex, `${age} роки`, size.split(' ')[0]] : [name, sex, age];
 
   const pageUrl = encodeURIComponent(window.location.href);
   const pageTitle = encodeURIComponent(document.title);
@@ -76,7 +76,7 @@ export const ShareModal: React.FC<Props> = ({ closeModal, pet, images }) => {
         <div className="share__info">
           <img
             className="share__info__photo"
-            src={`${BASE_URL}/${images[0]}`}
+            src={`${MEDIA_URL}${photo[0]}`}
             alt="pet-photo"
           />
           <div className="share__info__params">

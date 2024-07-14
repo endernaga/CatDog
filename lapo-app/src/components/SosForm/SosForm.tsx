@@ -29,7 +29,6 @@ export const SosForm = () => {
       e.target.closest(".form__content__input");
     const formItem = input?.closest(".form__content__item");
     const icon = formItem?.querySelector(".form__icon");
-    console.log(e.target.value.replace(/[\(\)\-\s]/g, "").length);
 
     if (input?.getAttribute("data-custom") === "name") {
       if (e.target.value.trim().length > 2) {
