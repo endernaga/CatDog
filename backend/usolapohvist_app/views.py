@@ -3,7 +3,7 @@ from itertools import chain
 from operator import attrgetter
 
 import telebot
-from django.db.models import Max
+from django.db.models import Max, QuerySet
 from rest_framework import viewsets, status, mixins
 from rest_framework.decorators import action, api_view
 from rest_framework.pagination import PageNumberPagination
@@ -20,6 +20,54 @@ from usolapohvist_app.serializers import (
 )
 
 from usolapohvist_app.models import Cat, Dog
+
+
+def filter_queryset(
+    qs: QuerySet,
+    sex: str = None,
+    age: str = None,
+    vaccinated: str = None,
+    sterilized: str = None,
+    size: str = None,
+) -> QuerySet:
+    if sex:
+        if sex == "male":
+            sex = "Хлопчик"
+
+        if sex == "female":
+            sex = "Дівчинка"
+
+        qs = qs.filter(sex=sex)
+
+    if size:
+        if size == "small":
+            size = "Маленький (до 30 см)"
+
+        if size == "average":
+            size = "Середній (30-50 см)"
+
+        if size == "big":
+            size = "Великий (від 50 см)"
+
+        qs = qs.filter(size=size)
+
+    if age:
+        if age == "young":
+            qs = qs.filter(age=1)
+
+        if age == "teenager":
+            qs = qs.filter(age__in=[2, 3, 4, 5])
+
+        if age == "old":
+            qs = qs.filter(age__gt=5)
+
+    if vaccinated:
+        qs = qs.filter(vaccinated=vaccinated == "true")
+
+    if sterilized:
+        qs = qs.filter(sterilized=sterilized == "true")
+
+    return qs
 
 
 class StandardResultsSetPagination(PageNumberPagination):
@@ -56,30 +104,8 @@ class Animals(mixins.ListModelMixin, GenericViewSet):
         sterilized = self.request.GET.get("sterilized")
         size = self.request.GET.get("size")
 
-        if age:
-            cats = cats.filter(age__in=age.split(","))
-            dogs = dogs.filter(age__in=age.split(","))
-
-        if sex:
-            if sex == "male":
-                sex = "Хлопчик"
-
-            if sex == "female":
-                sex = "Дівчинка"
-
-            cats = cats.filter(sex=sex)
-            dogs = dogs.filter(sex=sex)
-
-        if vaccinated:
-            cats = cats.filter(vaccinated=vaccinated == "true")
-            dogs = dogs.filter(vaccinated=vaccinated == "true")
-
-        if sterilized:
-            cats = cats.filter(sterilized=sterilized == "true")
-            dogs = dogs.filter(sterilized=sterilized == "true")
-
-        if size:
-            dogs = dogs.filter(size=size)
+        cats = filter_queryset(cats, sex, age, vaccinated, sterilized)
+        dogs = filter_queryset(dogs, sex, age, vaccinated, sterilized, size)
 
         return sorted(list(chain(cats, dogs)), key=attrgetter("id"))
 
@@ -96,25 +122,7 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
         vaccinated = self.request.GET.get("vaccinated")
         sterilized = self.request.GET.get("sterilized")
 
-        if age:
-            queryset = queryset.filter(age__in=age.split(","))
-
-        if sex:
-            if sex == "male":
-                sex = "Хлопчик"
-
-            if sex == "female":
-                sex = "Дівчинка"
-
-            queryset = queryset.filter(sex=sex)
-
-        if vaccinated:
-            queryset = queryset.filter(vaccinated=vaccinated == "true")
-
-        if sterilized:
-            queryset = queryset.filter(sterilized=sterilized == "true")
-
-        return queryset
+        return filter_queryset(queryset, sex, age, vaccinated, sterilized)
 
     def get_serializer_class(self):
         if self.action == "add_new_photo":
@@ -139,28 +147,7 @@ class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
         sterilized = self.request.GET.get("sterilized")
         size = self.request.GET.get("size")
 
-        if age:
-            queryset = queryset.filter(age__in=age.split(","))
-
-        if sex:
-            if sex == "male":
-                sex = "Хлопчик"
-
-            if sex == "female":
-                sex = "Дівчинка"
-
-            queryset = queryset.filter(sex=sex)
-
-        if vaccinated:
-            queryset = queryset.filter(vaccinated=vaccinated == "true")
-
-        if sterilized:
-            queryset = queryset.filter(sterilized=sterilized == "true")
-
-        if size:
-            queryset = queryset.filter(size=size)
-
-        return queryset
+        return filter_queryset(queryset, sex, age, vaccinated, sterilized, size)
 
     def get_serializer_class(self):
         if self.action == "add_new_photo":
