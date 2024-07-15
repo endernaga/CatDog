@@ -66,5 +66,9 @@
       background-color: $color-orange;
       color: $color-white;
     }
+
+    &:hover {
+      color: $color-orange;
+    }
   }
 }

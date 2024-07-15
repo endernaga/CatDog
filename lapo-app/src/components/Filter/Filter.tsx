@@ -1,6 +1,6 @@
 import { AnimalButton } from "../Buttons";
 import "./Filter.scss";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ModalWindow } from "../ModalWindow";
 import { GlobalContext } from "../../context/GlobalContext";
 import {
@@ -9,7 +9,6 @@ import {
   sexFilter,
   sizeFilter,
 } from "../../types/sortFilters";
-import { useLocation, useSearchParams } from "react-router-dom";
 
 type Props = {
   updateSearchParams: (newFilters: Partial<Filters>) => void,
@@ -17,7 +16,7 @@ type Props = {
 
 export const Filter:React.FC<Props> = ({updateSearchParams}) => {
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const { filters, setFilters } = useContext(GlobalContext);
+  const { filters } = useContext(GlobalContext);
 
   let numOfFilters = 0;
 
@@ -48,7 +47,7 @@ export const Filter:React.FC<Props> = ({updateSearchParams}) => {
 
   const giveParamForBoolean = (k: string) => {
     if (k === "sterilized") {
-      return "Стерилозовані";
+      return "Стерилізовані";
     }
 
     return "Вакциновані";

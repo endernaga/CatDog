@@ -130,6 +130,7 @@ export const MediumButton: React.FC<Props> = ({
         <NavLink
           to={to}
           className="mediumButton"
+          onClick={onClick}
           style={{
             height: `${height}px`,
             width: `${width}px`

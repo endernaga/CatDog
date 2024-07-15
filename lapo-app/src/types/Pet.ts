@@ -9,7 +9,7 @@ export type Pet = {
   description: string,
   history: string,
   specifics: string,
-  sterilized: string,
-  vaccinated: string,
+  sterilized: boolean,
+  vaccinated: boolean,
   photo: string | string[],
 }

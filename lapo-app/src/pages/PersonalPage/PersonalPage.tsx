@@ -29,11 +29,11 @@ export const PersonalPage = () => {
 
   useEffect(() => {
     if (pet && pet.sex === 'Дівчинка') {
-      setVaccinated(pet.vaccinated === 'true' ? 'Вакцинована' : 'Не вакцинована');
-      setSterilized(pet.sterilized === 'true' ? 'Стерилізована' : 'Не стерилізована');
+      setVaccinated(pet.vaccinated === true ? 'Вакцинована' : 'Не вакцинована');
+      setSterilized(pet.sterilized === true ? 'Стерилізована' : 'Не стерилізована');
     } else if (pet && pet.sex === 'Хлопчик') {
-      setVaccinated(pet.vaccinated === 'true' ? 'Вакцинований' : 'Не вакцинований');
-      setSterilized(pet.sterilized === 'true' ? 'Стерилізований' : 'Не стерилізований');
+      setVaccinated(pet.vaccinated === true ? 'Вакцинований' : 'Не вакцинований');
+      setSterilized(pet.sterilized === true ? 'Стерилізований' : 'Не стерилізований');
     }
   }, [pet]);
 

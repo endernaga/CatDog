@@ -33,7 +33,11 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <div className="pagination">
-      <button className="pagination__hand" disabled={currentPage === '1'}>
+      <button
+        className="pagination__hand"
+        disabled={currentPage === "1"}
+        onClick={() => handlePageChange((+currentPage - 1).toString())}
+      >
         <svg
           width="32"
           height="32"
@@ -62,7 +66,11 @@ export const Pagination: React.FC<Props> = ({
           ))}
         </li>
       </div>
-      <button className="pagination__hand" disabled={currentPage === pages[pages.length - 1]}>
+      <button
+        className="pagination__hand"
+        disabled={currentPage === pages[pages.length - 1]}
+        onClick={() => handlePageChange((+currentPage + 1).toString())}
+      >
         <svg
           width="32"
           height="32"
