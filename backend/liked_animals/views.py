@@ -34,8 +34,8 @@ def liked_animals(request):
         return pagination.get_paginated_response(animal_serializer.data)
     if request.method == "POST":
         liked = Liked(request)
-        animal_kind = request.POST.get("kind")
-        animal_id = request.POST.get("id")
+        animal_kind = request.data.get("kind")
+        animal_id = request.data.get("id")
         if not animal_kind:
             return Response(status=status.HTTP_400_BAD_REQUEST, data={"kind": "this field is required"})
         if not animal_id:
