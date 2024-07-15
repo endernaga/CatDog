@@ -100,7 +100,7 @@ export const PersonalPage = () => {
         <ShareModal
           closeModal={() => setIsShareModalOpen(false)}
           pet={pet}
-          images={photo}
+          photo={photo}
         />
       )}
       <BreadCrumb petName={name} />
@@ -215,7 +215,7 @@ export const PersonalPage = () => {
             )}
             <div className="personal__param">
               <div className="personal__icon personal__icon-age"></div>
-              <p className="personal__param__text">{`Років: ${age}`}</p>
+              <p className="personal__param__text">{age}</p>
             </div>
             <div className="personal__param">
               <div className="personal__icon personal__icon-vaccinated"></div>
