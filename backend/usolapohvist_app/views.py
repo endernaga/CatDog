@@ -213,9 +213,9 @@ def save_sos_form(request):
             )
         bot = telebot.TeleBot(settings.BOT_TOKEN)
         text = f"""!!!SOS!!!
-        {request.POST.get('name')}
-        {request.POST.get('phone')}
-        {request.POST.get('text')}
+        {request.data.get('name')}
+        {request.data.get('phone')}
+        {request.data.get('text')}
         """
         bot.send_message("-4229249922", text)
         return Response(status=status.HTTP_201_CREATED, data="success")
