@@ -27,7 +27,7 @@ export const fetchLikedAnimals = createAsyncThunk('liked/fetch', () => {
   return getLikedAnimals();
 })
 
-export const removeAnimal = createAsyncThunk('liked/delete', async ({category, animalId}: AnimalArgs) => {
+export const removeAnimalFromLiked = createAsyncThunk('liked/delete', async ({category, animalId}: AnimalArgs) => {
   await removeFromLiked(category, animalId);
   return animalId;
 })
@@ -67,16 +67,16 @@ const likedSlice = createSlice({
       state.hasError = true;
     })
 
-    builder.addCase(removeAnimal.pending, state => {
+    builder.addCase(removeAnimalFromLiked.pending, state => {
       state.loading = true;
     })
 
-    builder.addCase(removeAnimal.fulfilled, (state, action) => {
+    builder.addCase(removeAnimalFromLiked.fulfilled, (state, action) => {
       state.loading = false;
       state.pets = [...state.pets.filter(pet => pet.id !== action.payload)]
     })
 
-    builder.addCase(removeAnimal.rejected, (state) => {
+    builder.addCase(removeAnimalFromLiked.rejected, (state) => {
       state.loading = false;
       state.hasError = true;
     })

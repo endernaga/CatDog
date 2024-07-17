@@ -61,12 +61,12 @@ export const Filter:React.FC<Props> = ({updateSearchParams}) => {
           <AnimalButton to="pets/dogs" title="Песики" />
           <AnimalButton to="pets/cats" title="Котики" />
         </div>
-        <div
+        <button
           className="filter__icon"
           onClick={() => setIsFiltersOpen(!isFiltersOpen)}
         >
           <div className="filter__counter">{numOfFilters}</div>
-        </div>
+        </button>
         <ModalWindow
           isOpen={isFiltersOpen}
           onClose={() => setIsFiltersOpen(false)}

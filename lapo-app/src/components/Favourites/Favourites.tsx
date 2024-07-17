@@ -1,8 +1,9 @@
 import React from "react";
 import { MediumButton } from "../Buttons";
 import "./Favourites.scss";
-import { BASE_URL } from "../../utils/fetchProducts";
+import { BASE_URL, MEDIA_URL } from "../../utils/fetchProducts";
 import { useAppDispatch, useAppSelector } from "../../app/hook";
+import * as likedActions from '../../features/likedSlice';
 
 type Props = {
   closeBar: () => void;
@@ -19,7 +20,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
       <div className="favs">
         <div className="favs__top">
           <h4 className="favs__title">Обрані хвостики</h4>
-          <div className="favs__icon" onClick={closeBar}>
+          <button className="favs__icon" onClick={closeBar}>
             <svg
               width="18"
               height="18"
@@ -32,7 +33,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
                 fill="#FF5631"
               />
             </svg>
-          </div>
+          </button>
         </div>
         <div className="favs__content">
           {pets.length > 0 ? (
@@ -40,7 +41,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
               {pets.map((pet) => (
                 <li className="favs__item">
                   <img
-                    src={`${BASE_URL}/${pet.photo[0]}`}
+                    src={`${MEDIA_URL}${pet.photo[0]}`}
                     alt="petPhoto"
                     className="favs__item__img"
                   />
@@ -58,7 +59,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
                       height="40"
                       width="155"
                     />
-                    <div className="favs__icon">
+                    <button className="favs__icon" onClick={() => dispatch(likedActions.removeAnimalFromLiked({ category: pet.category, animalId: pet.id }))}>
                       <svg
                         width="24"
                         height="24"
@@ -71,7 +72,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
                           fill="currentColor"
                         />
                       </svg>
-                    </div>
+                    </button>
                   </div>
                 </li>
               ))}

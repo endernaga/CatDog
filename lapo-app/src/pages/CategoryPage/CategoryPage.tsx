@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect} from "react";
 import "./CategoryPage.scss";
-import { Pet } from "../../types/Pet";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalContext";
 import { Filters } from "../../types/sortFilters";

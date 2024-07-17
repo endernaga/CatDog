@@ -91,7 +91,7 @@
   }
 
   &__icon {
-    cursor: pointer;
+    //cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,6 +100,7 @@
     border-radius: 50%;
     border: 1px solid $color-orange;
     color: $color-orange;
+    background-color: $color-white;
 
     &:hover {
       background-color: $color-light-orange;

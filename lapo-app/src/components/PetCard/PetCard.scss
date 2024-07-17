@@ -12,17 +12,18 @@
   gap: 8px;
   position: relative;
 
-  &:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s linear;
-  }
-
   &__img {
     border-radius: 16px 16px 0 0;
     padding: 4px;
     width: 324px;
     height: 292px;
     object-fit: cover;
+    transition: transform 0.3s linear;
+
+    &:hover {
+      transform: scale(1.05);
+      border: 1px solid $color-white;
+    }
   }
 
   &__like {
@@ -38,16 +39,23 @@
     align-items: center;
     justify-content: center;
 
+    svg {
+      color: $color-orange;
+    }
+
     &:hover {
-      background-color: $color-orange;
+      background-color: $color-light-orange;
 
       svg {
-        color: $color-white;
+        color: $color-orange;
       }
     }
 
-    svg {
-      color: $color-orange;
+    &:active {
+      background-color: $color-white;
+      svg {
+        color: $color-orange;
+      }
     }
   }
 

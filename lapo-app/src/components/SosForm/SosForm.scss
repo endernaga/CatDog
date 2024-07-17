@@ -30,10 +30,103 @@
     color: $color-black;
   }
 
-  &__text {
+  &__label {
     height: 22px;
     @extend %button-text-regular;
     margin-bottom: 8px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    width: 267px;
+    height: 100%;
+    position: relative;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    padding-inline: 16px;
+    @extend %button-text-regular;
+    width: 100%;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid $color-middle-grey;
+
+    &--danger {
+      border: 1.2px solid $color-error;
+    }
+
+    &--success {
+      border: 1.2px solid $color-success;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1.2px solid $color-black;
+
+      + .form__icon {
+        display: none;
+      }
+    }
+
+    &-prefix {
+      @extend %button-text-regular;
+      background-color: $color-white;
+      border: none;
+      width: 29px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-phone {
+      flex: 1;
+    }
+  }
+
+  &__input-phone {
+    outline: none;
+    border: none;
+    height: 100%;
+    @extend %button-text-regular;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 72px;
+    border-radius: 8px;
+    @extend %button-text-regular;
+    padding: 8px 16px;
+
+    &--danger {
+      border: 1.2px solid $color-error;
+    }
+
+    &--success {
+      border: 1.2px solid $color-success;
+    }
+
+    &:focus {
+      outline: none;
+      border: 1.2px solid $color-black;
+    }
+  }
+
+  &__big-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 127px;
+    position: relative;
+  }
+
+  &__error {
+    @extend %secondary-text-regular;
+    color: $color-error;
+    margin-top: 4px;
   }
 
   &__content {
@@ -47,83 +140,6 @@
       display: flex;
       gap: 16px;
       height: 99px;
-    }
-
-    &__item {
-      display: flex;
-      flex-direction: column;
-      width: 267px;
-      height: 100%;
-      position: relative;
-    }
-
-    &__big-item {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 127px;
-      position: relative;
-    }
-
-    &__input {
-      padding-inline: 16px;
-      @extend %button-text-regular;
-      width: 100%;
-      height: 44px;
-      border-radius: 8px;
-      border: 1px solid $color-middle-grey;
-
-      &--danger {
-        border: 1.2px solid $color-error;
-      }
-
-      &--success {
-        border: 1.2px solid $color-success;
-      }
-
-      &--focus {
-        outline: none;
-        border: 1px solid $color-black;
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid $color-black;
-      }
-    }
-
-    &__input-phone {
-      outline: none;
-      border: none;
-      height: 100%;
-      @extend %button-text-regular;
-    }
-
-    &__textarea {
-      width: 100%;
-      height: 72px;
-      border-radius: 8px;
-      @extend %button-text-regular;
-      padding: 8px 16px;
-
-      &--danger {
-        border: 1.2px solid $color-error;
-      }
-
-      &--success {
-        border: 1.2px solid $color-success;
-      }
-
-      &:focus {
-        outline: none;
-        border: 1px solid $color-black;
-      }
-    }
-
-    &__error {
-      @extend %secondary-text-regular;
-      color: $color-error;
-      margin-top: 4px;
     }
   }
 
