@@ -37,11 +37,20 @@ def liked_animals(request):
         animal_kind = request.data.get("kind")
         animal_id = request.data.get("id")
         if not animal_kind:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"kind": "this field is required"})
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"kind": "this field is required"},
+            )
         if not animal_id:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data={"id": "this field is required"})
+            return Response(
+                status=status.HTTP_400_BAD_REQUEST,
+                data={"id": "this field is required"},
+            )
         liked.add(kind=animal_kind, animal_id=animal_id)
-        return Response(status=status.HTTP_201_CREATED, data=DogSerializer(liked.get_pets(kind=animal_kind, id=animal_id)).data)
+        return Response(
+            status=status.HTTP_201_CREATED,
+            data=DogSerializer(liked.get_pets(kind=animal_kind, id=animal_id)).data,
+        )
 
 
 @extend_schema(methods=["GET"], responses={200: DogSerializer(many=True)})
@@ -71,12 +80,22 @@ def liked_dogs(request):
 @api_view(["DELETE"])
 def delete_liked_dog(request, pk):
     if request.method == "DELETE":
-        Liked(request).remove("dogs", pk)
+        try:
+            Liked(request).remove("cats", str(pk))
+        except KeyError:
+            return Response(
+                data="No animals this kind added yet", status=status.HTTP_404_NOT_FOUND
+            )
         return Response(data="success", status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(["DELETE"])
 def delete_liked_cat(request, pk):
     if request.method == "DELETE":
-        Liked(request).remove("cats", str(pk))
+        try:
+            Liked(request).remove("cats", str(pk))
+        except KeyError:
+            return Response(
+                data="No animals this kind added yet", status=status.HTTP_404_NOT_FOUND
+            )
         return Response(data="success")

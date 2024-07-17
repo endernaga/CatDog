@@ -62,6 +62,9 @@ class Liked(object):
         self.session.modified = True
 
     def remove(self, kind: str, animal_id: str):
+        if kind not in self.liked:
+            raise KeyError(f"Kind not added to session")
+
         if animal_id in self.liked[kind]:
             self.liked[kind].remove(animal_id)
             self.save()
