@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "user",
     "usolapohvist_app",
     "liked_animals",
     "rest_framework",
+    "rest_framework.authtoken",
     "drf_spectacular",
     "corsheaders",
 ]
@@ -164,3 +166,5 @@ CORS_ALLOW_HEADERS = ["*"]
 LIKED_SESSION_ID = "LIKED_SESSION_ID"
 
 BOT_TOKEN = os.environ["BOT_TOKEN"]
+
+AUTH_USER_MODEL = "user.User"
