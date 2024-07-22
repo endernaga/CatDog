@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Pet } from "../types/Pet"
-import { addAnimalToLiked, getLikedAnimals, removeFromLiked} from "../api/likedApi"
 
 type likedState = {
   pets: Pet[],
@@ -8,79 +7,40 @@ type likedState = {
   hasError: boolean,
 }
 
-interface AnimalArgs {
-  category: string;
-  animalId: string;
-}
+const loadStateFromLocalStorage = (): likedState => {
+  const pets = JSON.parse(localStorage.getItem('pets') || '[]');
+  return {
+    pets,
+    loading: false,
+    hasError: false,
+  };
+};
 
-const initialState: likedState = {
-  pets: [],
-  loading: false,
-  hasError: false
-}
-
-export const postAnimalToLiked = createAsyncThunk('liked/post', ({ category, animalId }: AnimalArgs) => {
-  return addAnimalToLiked(category, animalId);
-});
-
-export const fetchLikedAnimals = createAsyncThunk('liked/fetch', () => {
-  return getLikedAnimals();
-})
-
-export const removeAnimalFromLiked = createAsyncThunk('liked/delete', async ({category, animalId}: AnimalArgs) => {
-  await removeFromLiked(category, animalId);
-  return animalId;
-})
+const initialState: likedState = loadStateFromLocalStorage();
 
 const likedSlice = createSlice({
-  name: 'pets',
+  name: 'liked',
   initialState: initialState,
-  reducers: {},
-  extraReducers(builder) {
-    builder.addCase(fetchLikedAnimals.pending, state => {
-      state.loading = true;
-      state.hasError = false;
-    });
-
-    builder.addCase(fetchLikedAnimals.fulfilled, (state, action) => {
-      state.loading = false;
-      state.pets = action.payload;
-    })
-
-    builder.addCase(fetchLikedAnimals.rejected, (state) => {
-      state.loading = false;
-      state.hasError = true;
-    })
-
-    builder.addCase(postAnimalToLiked.pending, (state) => {
-      state.loading = true;
-      state.hasError = false;
-    })
-
-    builder.addCase(postAnimalToLiked.fulfilled, (state, action: PayloadAction<Pet>) => {
-      state.loading = false;
+  reducers: {
+    addPet(state, action: PayloadAction<Pet>) {
       state.pets.push(action.payload);
-    })
-
-    builder.addCase(postAnimalToLiked.rejected, (state) => {
-      state.loading = false;
-      state.hasError = true;
-    })
-
-    builder.addCase(removeAnimalFromLiked.pending, state => {
-      state.loading = true;
-    })
-
-    builder.addCase(removeAnimalFromLiked.fulfilled, (state, action) => {
-      state.loading = false;
-      state.pets = [...state.pets.filter(pet => pet.id !== action.payload)]
-    })
-
-    builder.addCase(removeAnimalFromLiked.rejected, (state) => {
-      state.loading = false;
-      state.hasError = true;
-    })
+      localStorage.setItem('pets', JSON.stringify(state.pets));
+    },
+    removePet(state, action: PayloadAction<Pet>) {
+      state.pets = state.pets.filter(pet => pet.id !== action.payload.id || pet.category !== action.payload.category);
+      localStorage.setItem('pets', JSON.stringify(state.pets));
+    },
+    getPets(state) {
+      const pets = JSON.parse(localStorage.getItem('pets') || '[]');
+      state.pets = pets;
+    }
   },
-})
+});
 
 export default likedSlice.reducer;
+
+export const {
+  addPet,
+  removePet,
+  getPets
+} = likedSlice.actions;

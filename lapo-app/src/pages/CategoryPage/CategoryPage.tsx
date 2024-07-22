@@ -18,7 +18,7 @@ export const CategoryPage = () => {
   const location = useLocation();
 
   const dispatch = useAppDispatch();
-  const { cats, catsCount, dogs, dogsCount, pets, petsCount } = useAppSelector(
+  const { cats, catsCount, dogs, dogsCount, pets, petsCount, loading } = useAppSelector(
     (state) => state.animals
   );
 

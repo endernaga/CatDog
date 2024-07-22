@@ -14,6 +14,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
   const { pets } =
     useAppSelector((state) => state.likedPets);
 
+
   return (
     <aside>
       <div className="overlay" />
@@ -59,7 +60,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
                       height="40"
                       width="155"
                     />
-                    <button className="favs__icon" onClick={() => dispatch(likedActions.removeAnimalFromLiked({ category: pet.category, animalId: pet.id }))}>
+                    <button className="favs__icon" onClick={() => dispatch(likedActions.removePet(pet))}>
                       <svg
                         width="24"
                         height="24"

@@ -27,9 +27,9 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
 
   const handleLikeClick = () => {
     if (!isLiked) {
-      dispatch(likedActions.postAnimalToLiked({category: pet.category, animalId: pet.id}))
+      dispatch(likedActions.addPet(pet))
     } else {
-      dispatch(likedActions.removeAnimalFromLiked({category: pet.category, animalId: pet.id}))
+      dispatch(likedActions.removePet(pet))
     }
   }
 

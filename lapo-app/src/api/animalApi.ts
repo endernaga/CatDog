@@ -9,15 +9,15 @@ export interface ApiResponse<T> {
 }
 
 export const getAnimals = (query: string) => {
-  return client.get<ApiResponse<Pet>>(`/animals${query}`)
+  return client.get<ApiResponse<Pet>>(`/animals/${query}`)
 };
 
 export const getCats = (query: string) => {
-  return client.get<ApiResponse<Pet>>(`/cats${query}`);
+  return client.get<ApiResponse<Pet>>(`/cats/${query}`);
 };
 
 export const getDogs = (query: string) => {
-  return client.get<ApiResponse<Pet>>(`/dogs${query}`)
+  return client.get<ApiResponse<Pet>>(`/dogs/${query}`)
 };
 
 export const getAnimalById = (category: string, id: string) => {

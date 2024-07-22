@@ -94,7 +94,7 @@ export const PersonalPage = () => {
     history,
     photo,
   } = pet;
-
+  
   const photoWidth = 106;
   const gap = 16;
   const visibleImages = 3;
