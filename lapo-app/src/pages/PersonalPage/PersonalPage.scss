@@ -1,6 +1,7 @@
 @import "./../../styles/main.scss";
 
 .personal {
+  margin-bottom: 128px;
   &__content {
     @include page-grid;
     margin-bottom: 128px;
@@ -262,6 +263,18 @@
       position: absolute;
       left: 264px;
       bottom: 0;
+    }
+  }
+
+  &__similar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__list {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+      margin-bottom: 40px;
     }
   }
 }

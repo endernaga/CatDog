@@ -22,7 +22,7 @@ export const Categories = () => {
       <SectionsHeader text='Вони дуже чекають на тебе' />
       <div className="categories__content">
         {categories.map(category => (
-          <Link to={`/pets/${category.class}`}  className="categories__category">
+          <Link to={`/pets/${category.class}`} className="categories__category" key={category.title} >
             <div className="categories__category__title">{category.title}</div>
             <div className="categories__category__photo">
               <img src={`${BASE_URL}/${category.img}`} alt="categoryImg" className={`categories__category__${category.class}`} />

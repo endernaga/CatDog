@@ -90,7 +90,8 @@ export const CategoryPage = () => {
     fetchApi();
     const delayPromise = new Promise((resolve) => setTimeout(resolve, 1000));
     Promise.all([delayPromise]).finally(() => setIsLoading(false));
-  }, [location.pathname, location.search, dispatch]); 
+   }, [location.pathname, location.search, dispatch]); 
+  
 
   return (
     <>

@@ -17,8 +17,7 @@
     background-color: $color-white;
     @extend %secondary-text-regular;
     color: $color-dark-grey;
-    display: flex;
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    padding: 10px 16px;
   }
 }

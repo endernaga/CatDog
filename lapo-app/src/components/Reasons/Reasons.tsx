@@ -28,6 +28,7 @@ export const Reasons = () => {
       <div className="reasons__content">
         {reasons.map((reason, index) => (
           <div
+            key={reason.text}
             className={classNames('reasons__wrapper', {
               'reasons__wrapper--right': index % 2 !== 0,
             })}

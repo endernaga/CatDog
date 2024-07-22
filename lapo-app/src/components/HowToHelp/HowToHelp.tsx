@@ -97,6 +97,7 @@ export const HowToHelp = () => {
               <div className="help__main__options">
                 {donate.map((option) => (
                   <div
+                    key={option.sum}
                     className={classNames("help__main__sum", {
                       "help__main__sum--active": selectSum === option.sum,
                       "help__main__sum--disabled": option.sum === 'Інша сума' && paymentType === 'subscribe',

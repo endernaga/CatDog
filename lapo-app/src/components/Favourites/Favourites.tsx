@@ -39,7 +39,7 @@ export const Favourites: React.FC<Props> = ({ closeBar }) => {
           {pets.length > 0 ? (
             <ul className="favs__items">
               {pets.map((pet) => (
-                <li className="favs__item">
+                <li className="favs__item" key={pet.name}>
                   <img
                     src={`${MEDIA_URL}${pet.photo[0]}`}
                     alt="petPhoto"

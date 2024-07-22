@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { BreadCrumb } from "../../components/BreadCrumb";
-import { LargeButton } from "../../components/Buttons";
+import { BigButton, LargeButton } from "../../components/Buttons";
 import { BASE_URL, MEDIA_URL } from "../../utils/fetchProducts";
 import "./PersonalPage.scss";
 import { BigSectionsHeader } from "../../components/BigSectionsHeader";
@@ -11,6 +11,9 @@ import { Pet } from "../../types/Pet";
 import { GlobalContext } from "../../context/GlobalContext";
 import { Loader } from "../../components/Loader";
 import { getAnimalById } from "../../api/animalApi";
+import { useAppDispatch, useAppSelector } from "../../app/hook";
+import { PetCard } from "../../components/PetCard";
+import * as animalActions from "../../features/animalSlice";
 
 export const PersonalPage = () => {
   const { pathname } = useLocation();
@@ -19,6 +22,8 @@ export const PersonalPage = () => {
 
   const [pet, setPet] = useState<Pet | null>(null);
   const { setIsLoading } = useContext(GlobalContext);
+  const { pets, cats, dogs } = useAppSelector(state => state.animals);
+  const dispatch = useAppDispatch();
 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [mainPhoto, setMainPhoto] = useState('');
@@ -28,6 +33,7 @@ export const PersonalPage = () => {
   const [sterilized, setSterilized] = useState('');
 
   useEffect(() => {
+    fetchApi();
     if (pet && pet.sex === 'Дівчинка') {
       setVaccinated(pet.vaccinated === true ? 'Вакцинована' : 'Не вакцинована');
       setSterilized(pet.sterilized === true ? 'Стерилізована' : 'Не стерилізована');
@@ -36,6 +42,23 @@ export const PersonalPage = () => {
       setSterilized(pet.sterilized === true ? 'Стерилізований' : 'Не стерилізований');
     }
   }, [pet]);
+
+   const fetchApi = () => {
+    if (category === "cats") {
+      dispatch(animalActions.fetchCats(`?sex=${pet?.sex}`));
+     };
+     if (category === "dogs") {
+      dispatch(animalActions.fetchDogs(`?sex=${sex}`));
+    } 
+   };
+  
+   const { similar } = (() => {
+    if (category === "cats") {
+      return { similar: cats };
+    } else {
+      return { similar: dogs };
+     }
+  })();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -280,7 +303,15 @@ export const PersonalPage = () => {
         </div>
       </div>
 
-      <BigSectionsHeader text={["Шукають", "Родину"]} />
+      <section className="personal__similar">
+        <BigSectionsHeader text={["Шукають", "Родину"]} />
+        <ul className="personal__similar__list">
+          {similar.slice(0,4).map(pet => (
+              <PetCard pet={pet} />
+          ))}
+        </ul>
+        <BigButton to='/pets' leftIcon={false} rightIcon={true} text='Дивитися усіх' />
+      </section>
     </div>
   );
 };

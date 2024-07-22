@@ -1,6 +1,7 @@
 import { Pet } from "../types/Pet"
 import { client } from "../utils/fetchProducts"
 
+
 export const getLikedAnimals = () => {
   return client.get<Pet[]>('/liked_animals/')
 };

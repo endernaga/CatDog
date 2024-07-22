@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Pet } from "../types/Pet";
-import { ApiResponse, getAnimalById, getAnimals, getCats, getDogs } from "../api/animalApi";
+import { ApiResponse, getAnimals, getCats, getDogs } from "../api/animalApi";
 
 type animalState = {
   pets: Pet[],
@@ -50,12 +50,14 @@ const animalSlice = createSlice({
     });
 
     builder.addCase(fetchAnimals.fulfilled, (state, action: PayloadAction<ApiResponse<Pet>>) => {
+      console.log('success');
       state.loading = false;
       state.pets = action.payload.results;
       state.petsCount = action.payload.count;
     });
 
     builder.addCase(fetchAnimals.rejected, state => {
+      console.log('fail');
       state.loading = false;
       state.hasError = true;
     });

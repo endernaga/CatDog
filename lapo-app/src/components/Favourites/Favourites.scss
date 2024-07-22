@@ -5,14 +5,14 @@
   left: 0;
   bottom: 0;
   top: 0;
-  width: 485px;
+  width: 558px;
   background-color: $color-white;
   z-index: 1000;
   border-radius: 0 32px 32px 0;
   display: flex;
   flex-direction: column;
   padding: 24px;
-  gap: 16px;
+  overflow-y: auto;
 
   &__top {
     display: flex;
@@ -39,6 +39,13 @@
       @extend %button-text-medium;
       color: $color-grey;
     }
+  }
+
+  &__items {
+    margin-top: 32px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
   }
 
   &__item {
@@ -91,7 +98,6 @@
   }
 
   &__icon {
-    //cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

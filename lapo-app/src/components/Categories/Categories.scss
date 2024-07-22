@@ -15,6 +15,7 @@
   }
 
   &__category {
+    overflow: hidden;
     grid-column: span 12;
     background-color: $color-warm-yellow;
     border-radius: 40px;
@@ -28,10 +29,13 @@
     transition: background-color 0.3s linear;
 
     &:hover {
-      background-color: $color-orange-hover;
+     // background-color: $color-orange-hover;
 
-      .categories__category__title {
-        color: $color-white;
+     // .categories__category__title {
+    //    color: $color-white;
+    //  }
+      .categories__category__photo {
+        transform: scale(1.1);
       }
     }
 
@@ -47,6 +51,7 @@
       overflow: hidden;
       display: flex;
       justify-content: center;
+      transition: transform 2s ease;
     }
 
     &__dogs {

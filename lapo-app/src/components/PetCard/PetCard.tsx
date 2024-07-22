@@ -43,7 +43,7 @@ export const PetCard: React.FC<Props> = ({ pet }) => {
   const years = pet.age === "1" ? "1 рік" : `${pet.age} роки`;
 
   return (
-    <div className="card">
+    <div className="card" key={pet.name}>
       <Link to={getAbsolutePath(pet.category, pet.id)}>
         <img
           src={`${MEDIA_URL}${pet.photo}`}

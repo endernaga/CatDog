@@ -41,13 +41,13 @@ export const PhotoSlider = () => {
       if (currentIndex === 0) {
         setCurrentIndex(totalImages);
         if (sliderRef.current) {
-          sliderRef.current.style.transition = "none";
+          sliderRef.current.style.transition = "transform 500ms ease-in-out";
           sliderRef.current.style.transform = `translateX(-${totalImages * (itemWidth + gap / 10)}%)`;
         }
       } else if (currentIndex >= totalImages + visibleImages) {
         setCurrentIndex(visibleImages);
         if (sliderRef.current) {
-          sliderRef.current.style.transition = "none";
+          sliderRef.current.style.transition = "transform 500ms ease-in-out";
           sliderRef.current.style.transform = `translateX(-${visibleImages * (itemWidth + gap / 10)}%)`;
         }
       }
@@ -69,7 +69,7 @@ export const PhotoSlider = () => {
 
   useEffect(() => {
     if (!isTransitioning && sliderRef.current) {
-      sliderRef.current.style.transition = `transform ease-in-out ${transitionTime}ms`;
+      sliderRef.current.style.transition = `transform 500ms ease-in-out`;
     }
     if (sliderRef.current) {
       sliderRef.current.style.transform = `translateX(-${currentIndex * (itemWidth + gap / 10)}%)`;
