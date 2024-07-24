@@ -24,10 +24,3 @@ services:
       - "5433:5432"
     env_file:
       - ./backend/.env
-
-  frontend:
-    build:
-      context: ./lapo-app
-      dockerfile: Dockerfile
-    ports:
-      - "8080:80"
