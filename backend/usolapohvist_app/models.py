@@ -12,6 +12,9 @@ CATEGORY_CHOICES = (("dogs", "Dog"), ("cats", "Cat"))
 class ImagesForAnimals(models.Model):
     image = models.ImageField(upload_to="animals_image/%Y/%m/%d/")
 
+    def __str__(self):
+        return str(self.image)
+
 
 # Create your models here.
 class Animals(models.Model):

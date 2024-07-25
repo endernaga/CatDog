@@ -40,6 +40,23 @@ class CatSerializer(serializers.ModelSerializer):
         return Cat.objects.create(**validated_data, category="cat")
 
 
+class CatDetailSerializer(CatSerializer):
+    age = serializers.SerializerMethodField(method_name="get_age")
+
+    def get_age(self, obj):
+        age = obj.age
+        if age == 1:
+            return "1 рік"
+
+        if 1 < age < 5:
+            return f"{age} роки"
+
+        if age >= 5:
+            return f"{age} років"
+
+    class Meta(CatSerializer.Meta): ...
+
+
 class CatListSerializer(CatSerializer):
 
     def get_photo(self, obj):
@@ -86,6 +103,34 @@ class DogSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Dog.objects.create(**validated_data, category="dog")
+
+
+class DogDetailSerializer(DogSerializer):
+    age = serializers.SerializerMethodField(method_name="get_age")
+    size = serializers.SerializerMethodField(method_name="get_size")
+
+    def get_size(self, obj):
+        if obj.sex == "Дівчинка":
+            if obj.size == "Маленький (до 30 см)":
+                return "Маленька (до 30 см)"
+            if obj.size == "Середній (30-50 см)":
+                return "Середня (30-50 см)"
+            if obj.size == "Великий (від 50 см)":
+                return "Велика (від 50 см)"
+        return obj.size
+
+    def get_age(self, obj):
+        age = obj.age
+        if age == 1:
+            return "1 рік"
+
+        if 1 < age < 5:
+            return f"{age} роки"
+
+        if age >= 5:
+            return f"{age} років"
+
+    class Meta(DogSerializer.Meta): ...
 
 
 class DogListSerializer(DogSerializer):

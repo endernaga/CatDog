@@ -17,6 +17,8 @@ from usolapohvist_app.serializers import (
     CatListSerializer,
     DogSerializer,
     DogListSerializer,
+    CatDetailSerializer,
+    DogDetailSerializer,
 )
 
 from usolapohvist_app.models import Cat, Dog
@@ -131,6 +133,9 @@ class CatViewSet(viewsets.ModelViewSet, AddNewPhoto):
         if self.action == "list":
             return CatListSerializer
 
+        if self.action == "retrieve":
+            return CatDetailSerializer
+
         return CatSerializer
 
 
@@ -155,6 +160,9 @@ class DogViewSet(viewsets.ModelViewSet, AddNewPhoto):
 
         if self.action == "list":
             return DogListSerializer
+
+        if self.action == "retrieve":
+            return DogDetailSerializer
 
         return DogSerializer
 
