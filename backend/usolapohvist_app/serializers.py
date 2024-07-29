@@ -58,6 +58,18 @@ class CatDetailSerializer(CatSerializer):
 
 
 class CatListSerializer(CatSerializer):
+    age = serializers.SerializerMethodField(method_name="get_age")
+
+    def get_age(self, obj):
+        age = obj.age
+        if age == 1:
+            return "1 рік"
+
+        if 1 < age < 5:
+            return f"{age} роки"
+
+        if age >= 5:
+            return f"{age} років"
 
     def get_photo(self, obj):
         return obj.photo.first().image.url if obj.photo.first() else None
@@ -134,6 +146,19 @@ class DogDetailSerializer(DogSerializer):
 
 
 class DogListSerializer(DogSerializer):
+    age = serializers.SerializerMethodField(method_name="get_age")
+
+    def get_age(self, obj):
+        age = obj.age
+        if age == 1:
+            return "1 рік"
+
+        if 1 < age < 5:
+            return f"{age} роки"
+
+        if age >= 5:
+            return f"{age} років"
+
     def get_photo(self, obj):
         return obj.photo.first().image.url if obj.photo.first() else None
 
